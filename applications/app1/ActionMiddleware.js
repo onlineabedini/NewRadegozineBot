@@ -4,7 +4,7 @@ const {
   sendQuestionText,
   sendMessageDetails,
 } = require("./SessionMiddleware");
-const { confidenceBtn, cancelAdviserAnswerBtn } = require("./ButtonManager");
+const { confidenceBtn, cancelAdviserAnswerBtn } = require("./buttons/ButtonManager");
 const {
   ENTERANSWER,
   DELETEMESSAGEWASSUCCESSFUL,

@@ -19,7 +19,7 @@ const {
   AdminsStartBtns,
   AdvisersStartBtns,
   StudentsStartBtns,
-} = require("./ButtonManager");
+} = require("./buttons/ButtonManager");
 const {
   STARTMESSAGEFORADMIN,
   STARTMESSAGEFORADVISER,

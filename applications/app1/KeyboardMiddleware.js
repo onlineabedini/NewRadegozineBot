@@ -13,7 +13,7 @@ const {
   removeAdviserCancelBtn,
   plansBtn,
   contactWithAdminBtn,
-} = require("./ButtonManager");
+} = require("./buttons/ButtonManager");
 
 const {
   adminInfoMessage,

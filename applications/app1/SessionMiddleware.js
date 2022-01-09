@@ -1,10 +1,16 @@
-const Admin = require("../Admin");
-const Adviser = require("../Adviser");
-const Student = require("../Student");
-const Users = require("../User");
+const Admin = require("./models/Admin");
+const Adviser = require("./models/Adviser");
+const Student = require("./models/Student");
+const Users = require("./models/User");
 const config = require("config");
 let QuestionText;
 let MessageDatails;
+
+
+const mainInfo = {
+  "MainAdminUsername": "radegozine_manager",
+  "ChannelChatId": -1001312069430
+}
 
 const {
   MAIN_BUTTONS_TEXT,
@@ -372,7 +378,7 @@ const EventListener = {
       );
     } else if (ctx.message?.voice) {
       await ctx.telegram.sendVoice(
-        config.get("ChannelChatId"),
+        mainInfo.ChannelChatId,
         ctx.message.voice.file_id,
         { caption: voiceCaption(QuestionText[0]) }
       );

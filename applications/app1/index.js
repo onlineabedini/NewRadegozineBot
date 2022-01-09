@@ -3,6 +3,17 @@ const LocalSession = require("telegraf-session-local");
 const SessionMiddleware = require("./SessionMiddleware");
 const KeyboardMiddleware = require("./KeyboardMiddleware");
 const ActionMiddleware = require("./ActionMiddleware");
+
+// onlineabedini
+// bot token 
+const BOT_TOKEN = '5016211213:AAHPhaaTRo-ezEOoieUfTSWcNwdNUM8gX3s'
+const mainInfo = {
+  "MainAdminUsername": "radegozine_manager",
+  "ChannelChatId": -1001312069430
+}
+
+
+
 //const Middleware = require("./Middleware")
 const {
   AdminsStartBtns,
@@ -14,14 +25,14 @@ const {
   STARTMESSAGEFORADVISER,
   STARTMESSAGEFORSTUDENT,
 } = require("./MessageHandler");
-const Admin = require("../Admin");
-const Adviser = require("../Adviser");
-const User = require("../User");
-const config = require("config");
+const Admin = require("./models/Admin.js");
+const Adviser = require("./models/Adviser");
+const User = require("./models/User");
+const config = require("./config/default.json");
 let bot;
 
 async function startBot() {
-  bot = new Telegraf(process.env.BOT_TOKEN);
+  bot = new Telegraf(BOT_TOKEN);
   await bot.launch();
   bot.use(new LocalSession({ database: "session.json" }));
 
@@ -38,7 +49,7 @@ async function startBot() {
       const AdminsUsernames = AdminData.map((element) => element.Username);
       const AdviserData = await Adviser.find();
       const AdvisersUsernames = AdviserData.map((element) => element.Username);
-      if (ctx.message.from.username === config.get("MainAdminUsername")) {
+      if (ctx.message.from.username === mainInfo.MainAdminUsername) {
         const mainAdmin = await Admin.findOne({
           Username: ctx.message.from.username,
         });

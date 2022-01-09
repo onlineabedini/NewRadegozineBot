@@ -40,9 +40,9 @@ const {
 } = require("./MessageHandler");
 const { STATE_LIST } = require("./SessionMiddleware");
 
-const Admin = require("../Admin");
-const Adviser = require("../Adviser");
-const Student = require("../Student");
+const Admin = require("./models/Admin");
+const Adviser = require("./models/Adviser");
+const Student = require("./models/Student");
 const config = require("config");
 let MessageIds;
 

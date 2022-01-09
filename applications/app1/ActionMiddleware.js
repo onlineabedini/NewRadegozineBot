@@ -1,4 +1,4 @@
-const Student = require("../Student");
+const Student = require("./models/Student");
 const {
   STATE_LIST,
   sendQuestionText,

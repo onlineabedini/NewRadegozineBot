@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { startBot } = require("./bot/index");
+const { startBot } = require("./app1/index");
 
 class Application {
   constructor() {

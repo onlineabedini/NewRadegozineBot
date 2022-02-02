@@ -237,7 +237,7 @@ EventListener = {
   [MAIN_BUTTONS_TEXT.BOTDEVELOPERS]: async (ctx) => {
     ctx.session.state = undefined;
     await ctx.replyWithPhoto(
-      { source: "./img/irnode.jpg" },
+      { source: "static/img/irnode.jpg" },
       {
         caption: BOTDEVELOPERSCAPTION,
       }

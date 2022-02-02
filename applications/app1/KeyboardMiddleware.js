@@ -43,7 +43,6 @@ const { STATE_LIST } = require("./SessionMiddleware");
 const Admin = require("./models/Admin");
 const Adviser = require("./models/Adviser");
 const Student = require("./models/Student");
-const config = require("config");
 let MessageIds;
 
 module.exports = (ctx, next) => {
@@ -199,10 +198,7 @@ EventListener = {
     const adviser = await Adviser.findOne({
       Username: ctx.message.chat.username,
     });
-    if (
-      admin ||
-      ctx.message.from.username === config.get("MainAdminUsername")
-    ) {
+    if (admin ||'radegozine_manager') {
       await ctx.reply(REQUESTCANCELED, AdminsStartBtns);
     } else if (adviser) {
       await ctx.reply(REQUESTCANCELED, AdvisersStartBtns);

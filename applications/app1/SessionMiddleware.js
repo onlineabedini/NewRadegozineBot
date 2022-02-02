@@ -2,7 +2,7 @@ const Admin = require("./models/Admin");
 const Adviser = require("./models/Adviser");
 const Student = require("./models/Student");
 const Users = require("./models/User");
-const config = require("config");
+
 let QuestionText;
 let MessageDatails;
 

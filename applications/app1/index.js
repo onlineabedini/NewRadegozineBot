@@ -12,8 +12,6 @@ const mainInfo = {
   "ChannelChatId": -1001312069430
 }
 
-
-
 //const Middleware = require("./Middleware")
 const {
   AdminsStartBtns,
@@ -28,7 +26,6 @@ const {
 const Admin = require("./models/Admin.js");
 const Adviser = require("./models/Adviser");
 const User = require("./models/User");
-const config = require("./config/default.json");
 let bot;
 
 async function startBot() {

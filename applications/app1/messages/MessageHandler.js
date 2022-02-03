@@ -1,5 +1,5 @@
 // follow the same way like this
-module.exports = STARTMESSAGEFORADMIN = `
+module.exports.STARTMESSAGEFORADMIN = `
 🌺 سلام مدیر گرامی به ربات رد گزینه خوش آمدید 🌺
 🔹 برای بهره مندی از خدمات این بات لطفا از منوی زیر یک گزینه را به دلخواه
         انتخاب نمایید:

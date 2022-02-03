@@ -1,9 +1,5 @@
 const Student = require("../models/Student");
-const {
-  STATE_LIST,
-  sendQuestionText,
-  sendMessageDetails,
-} = require("./SessionMiddleware");
+const { STATE_LIST,sendQuestionText,sendMessageDetails} = require("./SessionMiddleware");
 const { confidenceBtn, cancelAdviserAnswerBtn } = require("../buttons/ButtonManager");
 const {
   ENTERANSWER,

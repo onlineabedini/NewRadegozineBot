@@ -4,7 +4,6 @@ const SessionMiddleware = require("./middleware/SessionMiddleware");
 const KeyboardMiddleware = require("./middleware/KeyboardMiddleware");
 const ActionMiddleware = require("./middleware/ActionMiddleware");
 
-// onlineabedini
 // bot token 
 const BOT_TOKEN = '5016211213:AAHPhaaTRo-ezEOoieUfTSWcNwdNUM8gX3s'
 const mainInfo = {
@@ -12,7 +11,6 @@ const mainInfo = {
   "ChannelChatId": -1001312069430
 }
 
-//const Middleware = require("./Middleware")
 const {
   AdminsStartBtns,
   AdvisersStartBtns,

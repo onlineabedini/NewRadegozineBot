@@ -5,6 +5,8 @@
  export moduls like this for all buttons
 
 */
+// use this for application
+
 
 // buttons text
 AdminMainMenu = {

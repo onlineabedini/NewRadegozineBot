@@ -1,10 +1,10 @@
-const Student = require("./models/Student");
+const Student = require("../models/Student");
 const {
   STATE_LIST,
   sendQuestionText,
   sendMessageDetails,
 } = require("./SessionMiddleware");
-const { confidenceBtn, cancelAdviserAnswerBtn } = require("./buttons/ButtonManager");
+const { confidenceBtn, cancelAdviserAnswerBtn } = require("../buttons/ButtonManager");
 const {
   ENTERANSWER,
   DELETEMESSAGEWASSUCCESSFUL,
@@ -12,7 +12,7 @@ const {
   DELETEMESSAGECONFIDENCE,
   THISMESSAGEHASBEENDELETED,
   DELETETIP,
-} = require("./MessageHandler");
+} = require("../messages/MessageHandler");
 
 const ActionMap = {
   ANSWER: /^ANSWER/,

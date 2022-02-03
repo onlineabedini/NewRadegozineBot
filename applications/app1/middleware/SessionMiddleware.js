@@ -1,7 +1,7 @@
-const Admin = require("./models/Admin");
-const Adviser = require("./models/Adviser");
-const Student = require("./models/Student");
-const Users = require("./models/User");
+const Admin = require("../models/Admin");
+const Adviser = require("../models/Adviser");
+const Student = require("../models/Student");
+const Users = require("../models/User");
 
 let QuestionText;
 let MessageDatails;
@@ -19,7 +19,7 @@ const {
   StudentsStartBtns,
   manageAdminsBtns,
   manageAdvisersBtns,
-} = require("./buttons/ButtonManager");
+} = require("../buttons/ButtonManager");
 const {
   ENTERADMINFULLNAME,
   ENTERADVISERFULLNAME,
@@ -48,7 +48,7 @@ const {
   voiceCaption,
   SOMETHINGWENTWORNG,
   INVALIDUSERNAME,
-} = require("./MessageHandler");
+} = require("../messages/MessageHandler");
 
 const STATE_LIST = {
   ADDADMIN: "addadmin",

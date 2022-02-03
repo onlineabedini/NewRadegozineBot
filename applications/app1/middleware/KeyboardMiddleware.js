@@ -13,7 +13,7 @@ const {
   removeAdviserCancelBtn,
   plansBtn,
   contactWithAdminBtn,
-} = require("./buttons/ButtonManager");
+} = require("../buttons/ButtonManager");
 
 const {
   adminInfoMessage,
@@ -37,12 +37,12 @@ const {
   CONTACTWITHADMIN,
   BOTDEVELOPERSCAPTION,
   ADVISERSAUTHENTICATION,
-} = require("./MessageHandler");
+} = require("../messages/MessageHandler");
 const { STATE_LIST } = require("./SessionMiddleware");
 
-const Admin = require("./models/Admin");
-const Adviser = require("./models/Adviser");
-const Student = require("./models/Student");
+const Admin = require("../models/Admin");
+const Adviser = require("../models/Adviser");
+const Student = require("../models/Student");
 let MessageIds;
 
 module.exports = (ctx, next) => {

@@ -1,8 +1,8 @@
 const { Telegraf } = require("telegraf");
 const LocalSession = require("telegraf-session-local");
-const SessionMiddleware = require("./SessionMiddleware");
-const KeyboardMiddleware = require("./KeyboardMiddleware");
-const ActionMiddleware = require("./ActionMiddleware");
+const SessionMiddleware = require("./middleware/SessionMiddleware");
+const KeyboardMiddleware = require("./middleware/KeyboardMiddleware");
+const ActionMiddleware = require("./middleware/ActionMiddleware");
 
 // onlineabedini
 // bot token 
@@ -22,7 +22,7 @@ const {
   STARTMESSAGEFORADMIN,
   STARTMESSAGEFORADVISER,
   STARTMESSAGEFORSTUDENT,
-} = require("./MessageHandler");
+} = require("./messages/MessageHandler");
 const Admin = require("./models/Admin.js");
 const Adviser = require("./models/Adviser");
 const User = require("./models/User");

@@ -1,27 +1,28 @@
-MAIN_BUTTONS_TEXT = {
-  MANAGEADMINS: "👤  مدیریت مدیران",
-  MANAGEADVISERS: "🗣  مدیریت مشاوران",
-  ADDADMIN: "➕  افزودن مدیر",
-  REMOVEADMIN: "❌  حذف مدیر",
-  ADMINSLIST: "👤  نمایش لیست مدیران",
-  ADDADVISER: "➕  افزودن مشاور",
-  REMOVEADVISER: "❌  حذف مشاور",
-  ADVISERSLIST: "🗣  نمایش لیست مشاوران",
-  SENDMESSAGEFORADMINS: "📤  ارسال پیام برای مدیران",
-  SENDMESSAGEFORADVISERS: "📤  ارسال پیام برای مشاوران",
-  SENDMESSAGEFORSTUDENTS: "📤  ارسال پیام برای دانش آموزان",
-  ADVISERSQUESTIONSLIST: "📥  پیام های مشاوران",
-  STUDENTSQUESTIONSLIST: "📥  لیست سوالات دانش آموزان",
-  ASKQUESTIONS: "⁉️  سوال از مشاورین  ⁉️",
-  PLANS: "🗂  طرح ها  🗂",
-  CONTACTWITHADMIN: "👤  ارتباط با مدیر  👤",
-  BOTDEVELOPERS: "👨🏻‍💻  تیم توسعه و طراحی بات  👨🏻‍💻",
-  CANCEL: "❌        لغو        ❌",
-  ADDADMINCANCEL: "❌        لغو افزودن مدیر        ❌",
-  REMOVEADMINCANCEL: "❌        لغو حذف مدیر        ❌",
-  ADDADVISERCANCEL: "❌        لغو افزودن مشاور        ❌",
-  REMOVEADVISERCANCEL: "❌        لغو حذف مشاور        ❌",
-  BACK: "↩️  بازگشت",
+mainButtonsText = {
+  manageAdmins: "👤  مدیریت مدیران",
+  manageAdvisers: "🗣  مدیریت مشاوران",
+  addAdmin: "➕  افزودن مدیر",
+  removeAdmin: "❌  حذف مدیر",
+  getAdminsList: "👤  نمایش لیست مدیران",
+  addAdviser: "➕  افزودن مشاور",
+  removeAdviser: "❌  حذف مشاور",
+  getAdvisersList: "🗣  نمایش لیست مشاوران",
+  sendMessageForAdmins: "📤  ارسال پیام برای مدیران",
+  sendMessageForAdvisers: "📤  ارسال پیام برای مشاوران",
+  sendMessageForStudents: "📤  ارسال پیام برای دانش آموزان",
+  getAdvisersQuestionsList: "📥  پیام های مشاوران",
+  getStudentsQuestionsListForAdmins: "📥  نمایش لیست سوالات دانش آموزان",
+  getStudentsQuestionsList: "📥  لیست سوالات دانش آموزان",
+  askQuestion: "⁉️  سوال از مشاورین  ⁉️",
+  showPlans: "🗂  طرح ها  🗂",
+  contactWithAdmin: "👤  ارتباط با مدیر  👤",
+  botDevelopers: "👨🏻‍💻  تیم توسعه و طراحی بات  👨🏻‍💻",
+  cancel: "❌        لغو        ❌",
+  addAdminCancel: "❌        لغو افزودن مدیر        ❌",
+  removeAdminCancel: "❌        لغو حذف مدیر        ❌",
+  addAdviserCancel: "❌        لغو افزودن مشاور        ❌",
+  removeAdviserCancel: "❌        لغو حذف مشاور        ❌",
+  back: "↩️  بازگشت",
 };
 
 const AdminsStartBtns = {
@@ -29,18 +30,18 @@ const AdminsStartBtns = {
     resize_keyboard: true,
     keyboard: [
       [
-        { text: MAIN_BUTTONS_TEXT.MANAGEADVISERS },
-        { text: MAIN_BUTTONS_TEXT.MANAGEADMINS },
+        { text: mainButtonsText.manageAdvisers },
+        { text: mainButtonsText.manageAdmins },
       ],
       [
-        { text: MAIN_BUTTONS_TEXT.SENDMESSAGEFORSTUDENTS },
-        { text: MAIN_BUTTONS_TEXT.SENDMESSAGEFORADVISERS },
+        { text: mainButtonsText.sendMessageForStudents },
+        { text: mainButtonsText.sendMessageForAdvisers },
       ],
       [
-        { text: MAIN_BUTTONS_TEXT.STUDENTSQUESTIONSLIST },
-        { text: MAIN_BUTTONS_TEXT.ADVISERSQUESTIONSLIST },
+        { text: mainButtonsText.getStudentsQuestionsListForAdmins },
+        { text: mainButtonsText.getAdvisersQuestionsList },
       ],
-      [{ text: MAIN_BUTTONS_TEXT.BOTDEVELOPERS }],
+      [{ text: mainButtonsText.botDevelopers }],
     ],
   },
 };
@@ -49,9 +50,9 @@ const AdvisersStartBtns = {
   reply_markup: {
     resize_keyboard: true,
     keyboard: [
-      [{ text: MAIN_BUTTONS_TEXT.STUDENTSQUESTIONSLIST }],
-      [{ text: MAIN_BUTTONS_TEXT.SENDMESSAGEFORADMINS }],
-      [{ text: MAIN_BUTTONS_TEXT.BOTDEVELOPERS }],
+      [{ text: mainButtonsText.getStudentsQuestionsList}],
+      [{ text: mainButtonsText.sendMessageForAdmins }],
+      [{ text: mainButtonsText.botDevelopers }],
     ],
   },
 };
@@ -60,12 +61,12 @@ const StudentsStartBtns = {
   reply_markup: {
     resize_keyboard: true,
     keyboard: [
-      [{ text: MAIN_BUTTONS_TEXT.ASKQUESTIONS }],
+      [{ text: mainButtonsText.askQuestion }],
       [
-        { text: MAIN_BUTTONS_TEXT.CONTACTWITHADMIN },
-        { text: MAIN_BUTTONS_TEXT.PLANS },
+        { text: mainButtonsText.contactWithAdmin },
+        { text: mainButtonsText.showPlans },
       ],
-      [{ text: MAIN_BUTTONS_TEXT.BOTDEVELOPERS }],
+      [{ text: mainButtonsText.botDevelopers }],
     ],
   },
 };
@@ -74,12 +75,12 @@ const manageAdminsBtns = {
   reply_markup: {
     resize_keyboard: true,
     keyboard: [
-      [{ text: MAIN_BUTTONS_TEXT.ADMINSLIST }],
+      [{ text: mainButtonsText.getAdminsList }],
       [
-        { text: MAIN_BUTTONS_TEXT.REMOVEADMIN },
-        { text: MAIN_BUTTONS_TEXT.ADDADMIN },
+        { text: mainButtonsText.removeAdmin },
+        { text: mainButtonsText.addAdmin },
       ],
-      [{ text: MAIN_BUTTONS_TEXT.BACK }],
+      [{ text: mainButtonsText.back }],
     ],
   },
 };
@@ -88,12 +89,12 @@ const manageAdvisersBtns = {
   reply_markup: {
     resize_keyboard: true,
     keyboard: [
-      [{ text: MAIN_BUTTONS_TEXT.ADVISERSLIST }],
+      [{ text: mainButtonsText.getAdvisersList}],
       [
-        { text: MAIN_BUTTONS_TEXT.REMOVEADVISER },
-        { text: MAIN_BUTTONS_TEXT.ADDADVISER },
+        { text: mainButtonsText.removeAdviser },
+        { text: mainButtonsText.addAdviser },
       ],
-      [{ text: MAIN_BUTTONS_TEXT.BACK }],
+      [{ text: mainButtonsText.back }],
     ],
   },
 };
@@ -130,42 +131,42 @@ const cancelAdviserAnswerBtn = {
 const addAdminCancelBtn = {
   reply_markup: {
     resize_keyboard: true,
-    keyboard: [[{ text: MAIN_BUTTONS_TEXT.ADDADMINCANCEL }]],
+    keyboard: [[{ text: mainButtonsText.addAdminCancel }]],
   },
 };
 
 const removeAdminCancelBtn = {
   reply_markup: {
     resize_keyboard: true,
-    keyboard: [[{ text: MAIN_BUTTONS_TEXT.REMOVEADMINCANCEL }]],
+    keyboard: [[{ text: mainButtonsText.removeAdminCancel }]],
   },
 };
 
 const addAdviserCancelBtn = {
   reply_markup: {
     resize_keyboard: true,
-    keyboard: [[{ text: MAIN_BUTTONS_TEXT.ADDADVISERCANCEL }]],
+    keyboard: [[{ text: mainButtonsText.addAdviserCancel }]],
   },
 };
 
 const removeAdviserCancelBtn = {
   reply_markup: {
     resize_keyboard: true,
-    keyboard: [[{ text: MAIN_BUTTONS_TEXT.REMOVEADVISERCANCEL }]],
+    keyboard: [[{ text: mainButtonsText.removeAdviserCancel }]],
   },
 };
 
 const cancelBtn = {
   reply_markup: {
     resize_keyboard: true,
-    keyboard: [[{ text: MAIN_BUTTONS_TEXT.CANCEL }]],
+    keyboard: [[{ text: mainButtonsText.cancel }]],
   },
 };
 
 const backBtn = {
   reply_markup: {
     resize_keyboard: true,
-    keyboard: [[{ text: MAIN_BUTTONS_TEXT.BACK }]],
+    keyboard: [[{ text: mainButtonsText.back }]],
   },
 };
 
@@ -188,7 +189,7 @@ const contactWithAdminBtn = {
 };
 
 module.exports = {
-  MAIN_BUTTONS_TEXT,
+  mainButtonsText,
   AdminsStartBtns,
   AdvisersStartBtns,
   StudentsStartBtns,

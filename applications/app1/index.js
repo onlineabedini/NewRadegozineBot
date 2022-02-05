@@ -2,14 +2,22 @@
 // packages
 const { Telegraf } = require("telegraf");
 const LocalSession = require("telegraf-session-local");
-const SessionMiddleware = require("./middleware/SessionMiddleware");
-const KeyboardMiddleware = require("./middleware/KeyboardMiddleware");
-const ActionMiddleware = require("./middleware/ActionMiddleware");
+const SessionMiddleware = require("./middleware/sessions");
+const KeyboardMiddleware = require("./middleware/keyboards");
+const InlineKeyboardMiddleware = require("./middleware/inline-keyboards");
 
 // modules
 // Note : update this requires base on changes
-const { AdminsStartBtns,AdvisersStartBtns,StudentsStartBtns} = require("./buttons/ButtonManager");
-const {STARTMESSAGEFORADMIN,STARTMESSAGEFORADVISER,STARTMESSAGEFORSTUDENT} = require("./messages/MessageHandler");
+const {
+  AdminsStartBtns,
+  AdvisersStartBtns,
+  StudentsStartBtns,
+} = require("./buttons/ButtonManager");
+const {
+  STARTMESSAGEFORADMIN,
+  STARTMESSAGEFORADVISER,
+  STARTMESSAGEFORSTUDENT,
+} = require("./messages/MessageHandler");
 const Admin = require("./models/Admin.js");
 const Adviser = require("./models/Adviser");
 const User = require("./models/User");
@@ -17,18 +25,17 @@ let bot;
 
 // classes + objects of them
 const getLogs = require("./mainfunctions/startBot/getLog");
-let getUserLog = new getLogs;
+let getUserLog = new getLogs();
 
 const roleSelect = require("./mainfunctions/startBot/roleSelect");
-let roleSelector = new roleSelect;
+let roleSelector = new roleSelect();
 
-
-// bot token 
-const BOT_TOKEN = '5016211213:AAHPhaaTRo-ezEOoieUfTSWcNwdNUM8gX3s'
+// bot token
+const BOT_TOKEN = "5206753052:AAFVVNl5OnKkkmYJ98tAM74bYCwPUzILSbQ";
 const mainInfo = {
-  "MainAdminUsername": "radegozine_manager",
-  "ChannelChatId": -1001312069430
-}
+  MainAdminUsername: "siralinpr",
+  ChannelChatId: -1001644994780,
+};
 
 // start bot function
 async function startBot() {
@@ -37,9 +44,12 @@ async function startBot() {
   bot.use(new LocalSession({ database: "session.json" }));
 
   // middleware
+  // bot.use((ctx , next)=>{
+  //   console.log(ctx.update.my_chat_member.chat)
+  // })
   bot.use(KeyboardMiddleware);
+  bot.use(InlineKeyboardMiddleware);
   bot.use(SessionMiddleware);
-  bot.use(ActionMiddleware);
 
   // bot start ctx
   await bot.start((ctx) => {
@@ -51,7 +61,7 @@ async function startBot() {
   });
 
   // functions
-  // role selector 
+  // role selector
   /* 
     Note : please put this directory in its own file
   */

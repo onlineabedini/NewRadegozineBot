@@ -1,0 +1,16 @@
+module.exports = {
+    ADDADMIN: "addadmin",
+    REMOVEADMIN: "removeadmin",
+    ADDADVISER: "addadviser",
+    REMOVEADVISER: "removeadviser",
+    GETADMINFULLNAME: "getadminfullname",
+    GETADVISERFULLNAME: "getadviserfullname",
+    SENDMESSAGEFORADMINS: "sendmessageforadmins",
+    SENDMESSAGEFORADVISERS: "sendmessageforadvisers",
+    SENDMESSAGEFORSTUDENTS: "sendmessageforstudents",
+    GETSTUDENTFULLNAME: "getstudentfullname",
+    GETSTUDENTFIELD: "getstudentfield",
+    GETSTUDENTGRADE: "getstudentgrade",
+    ASKQUESTION: "askquestion",
+    ANSWER: "answer",
+};

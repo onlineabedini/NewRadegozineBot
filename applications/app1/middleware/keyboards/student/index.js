@@ -1,11 +1,8 @@
 const StudentService = require('./StudentService');
-
-const {
-    mainButtonsText,
-} = require("../../../buttons/ButtonManager");
+const {studentStartButtonsText} = require("../../../buttons/studentButtons/studentStartButtons");
 
 module.exports = {
-    [mainButtonsText.askQuestion]: StudentService.askQuestion,
-    [mainButtonsText.showPlans]: StudentService.showPlans,
-    [mainButtonsText.contactWithAdmin]: StudentService.contactWithAdmin,
+    [studentStartButtonsText.askQuestion]: StudentService.askQuestion,
+    [studentStartButtonsText.showPlans]: StudentService.showPlans,
+    [studentStartButtonsText.contactWithAdmin]: StudentService.contactWithAdmin,
 }

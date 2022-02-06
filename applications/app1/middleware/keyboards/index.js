@@ -1,11 +1,27 @@
 const adminKeyboards = require('./admin')
 const adviserKeyboards = require('./adviser')
 const studentKeyboards = require('./student')
-const sameKeyboards = require('./same')
+const similarKeyboards = require('./similar')
 
-const {
-  mainButtonsText,
-} = require("../../buttons/ButtonManager");
+const { adminStartButtonsText } = require('../../buttons/adminButtons/adminStartButtons')
+const { manageAdminsButtonsText } = require('../../buttons/adminButtons/manageAdminsButtons')
+const { manageAdvisersButtonsText } = require('../../buttons/adminButtons/manageAdvisersButtons')
+const { adviserStartButtonsText } = require('../../buttons/adviserButtons/adviserStartButtons')
+const { studentStartButtonsText } = require('../../buttons/studentButtons/studentStartButtons')
+const { backButtonText } = require('../../buttons/similarButtons/backButton')
+const { cancelButtonText } = require('../../buttons/similarButtons/cancelButton')
+const { botDevelopersButtonText } = require('../../buttons/similarButtons/botDevelopersButtonText')
+
+const mainButtonsText = {
+  ...adminStartButtonsText,
+  ...manageAdminsButtonsText,
+  ...manageAdvisersButtonsText,
+  ...adviserStartButtonsText,
+  ...studentStartButtonsText,
+  ...backButtonText,
+  ...cancelButtonText,
+  ...botDevelopersButtonText
+}
 
 module.exports = (ctx, next) => {
   if (!ctx.message) return next();
@@ -24,6 +40,5 @@ EventListener = {
   ...adminKeyboards,
   ...adviserKeyboards,
   ...studentKeyboards,
-  ...sameKeyboards
+  ...similarKeyboards
 };
-

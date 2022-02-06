@@ -1,69 +1,64 @@
 const Student = require("../../../models/Student");
 const stateList = require('../../stateList')
 
+const {cancelButtonText} = require("../../../buttons/similarButtons/cancelButton");
 const {
-    mainButtonsText,
-    StudentsStartBtns,
-} = require("../../../buttons/ButtonManager");
-
-const {
-    ENTERFIELD,
-    ENTERGRADE,
-    ENTERQUESTION,
-    QUESTIONREGISTERED,
-    ENTERTEXTONLY,
-    TEXTMESSAGEONLY,
-} = require("../../../messages/MessageHandler");
-
+    enterField,
+    onlyTextMessage,
+    enterGrade,
+    enterQuestion,
+    questionRegistrated
+} = require("../../../messages/studentMessages");
+const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
 
 module.exports = new class StudentService {
-    async getStudentFullName(ctx , next){
+    async getStudentFullName(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== mainButtonsText.cancel) {
+        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
                 const Fullname = ctx.message.text;
-                ctx.session.stateData = { ...ctx.session.stateData, Fullname };
+                ctx.session.stateData = {...ctx.session.stateData, Fullname};
                 ctx.session.state = stateList.GETSTUDENTFIELD;
-                await ctx.reply(ENTERFIELD);
+                await ctx.reply(enterField);
             } else {
-                await ctx.reply(ENTERTEXTONLY, StudentsStartBtns);
+                await ctx.reply(onlyTextMessage, studentStartButtons);
             }
         } else next();
     }
 
-    async getStudentField(ctx , next){
+    async getStudentField(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== mainButtonsText.cancel) {
+        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
                 const Field = ctx.message.text;
-                ctx.session.stateData = { ...ctx.session.stateData, Field };
+                ctx.session.stateData = {...ctx.session.stateData, Field};
                 ctx.session.state = stateList.GETSTUDENTGRADE;
-                await ctx.reply(ENTERGRADE);
+                await ctx.reply(enterGrade);
             } else {
                 ctx.session.stateData = undefined;
-                await ctx.reply(ENTERTEXTONLY, StudentsStartBtns);
+                await ctx.reply(onlyTextMessage, studentStartButtons);
             }
         } else next();
     }
 
-    async getStudentGrade(ctx , next){
+    async getStudentGrade(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== mainButtonsText.cancel) {
+        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
                 const Grade = ctx.message.text;
-                ctx.session.stateData = { ...ctx.session.stateData, Grade };
+                ctx.session.stateData = {...ctx.session.stateData, Grade};
                 ctx.session.state = stateList.ASKQUESTION;
-                await ctx.reply(ENTERQUESTION);
+                await ctx.reply(enterQuestion);
             } else {
                 ctx.session.stateData = undefined;
-                await ctx.reply(ENTERTEXTONLY, StudentsStartBtns);
+                await ctx.reply(onlyTextMessage, studentStartButtons);
             }
         } else next();
     }
 
-    async askQuestion(ctx , next){
+    async askQuestion(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== mainButtonsText.cancel) {
+        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
                 const Fullname = ctx.session.stateData.Fullname;
                 const Field = ctx.session.stateData.Field;
@@ -73,6 +68,7 @@ module.exports = new class StudentService {
                 const messageId = ctx.message.message_id;
                 const messageText = ctx.message.text;
                 AddNewStudent();
+
                 function AddNewStudent() {
                     const student = new Student({
                         ChatId: chatId,
@@ -85,11 +81,12 @@ module.exports = new class StudentService {
                     });
                     student.save();
                 }
+
                 ctx.session.stateData = undefined;
-                await ctx.reply(QUESTIONREGISTERED, StudentsStartBtns);
+                await ctx.reply(questionRegistrated, studentStartButtons);
             } else {
                 ctx.session.stateData = undefined;
-                await ctx.reply(TEXTMESSAGEONLY, StudentsStartBtns);
+                await ctx.reply(onlyTextMessage, studentStartButtons);
             }
         } else next();
     }

@@ -1,47 +1,41 @@
 const Adviser = require("../../../models/Adviser");
 const Student = require("../../../models/Student");
 
+const {cancelButtonText} = require('../../../buttons/similarButtons/cancelButton')
+const {adviserStartButtons} = require("../../../buttons/adviserButtons/adviserStartButtons");
+const {messageSent, somethingWentWrong, voiceCaption, answerRegistrated} = require("../../../messages/similarMessages");
+const {yourQuestionAnswered} = require("../../../messages/studentMessages");
+const {onlyVoiceMessage} = require("../../../messages/adviserMessages");
+
 let QuestionText;
 let MessageDatails;
 
-const {
-    mainButtonsText,
-    AdvisersStartBtns,
-} = require("../../../buttons/ButtonManager");
 
 const mainInfo = {
     MainAdminUsername: "siralinpr",
     ChannelChatId: -1001644994780,
 };
 
-const {
-    SENDMESSAGEWASSUCCESSFUL,
-    ANSWERREGISTERED,
-    YOURQUESTIONHASBEENANSWERED,
-    VOICEMESSAGEONLY,
-    voiceCaption,
-    SOMETHINGWENTWORNG,
-} = require("../../../messages/MessageHandler");
 
 module.exports = new class AdminService {
-    async sendMessageForAdmins(ctx , next){
+    async sendMessageForAdmins(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== mainButtonsText.cancel) {
-            let adviser = await Adviser.findOne({ ChatId: ctx.message.chat.id });
+        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
+            let adviser = await Adviser.findOne({ChatId: ctx.message.chat.id});
             adviser.Username = ctx.message.chat.username;
             adviser.MessageId.push(ctx.message.message_id);
             adviser.save();
-            await ctx.reply(SENDMESSAGEWASSUCCESSFUL, AdvisersStartBtns);
+            await ctx.reply(messageSent, adviserStartButtons);
         } else next();
     }
 
-    async answer(ctx , next){
+    async answer(ctx, next) {
         ctx.session.state = undefined;
         if (
             ctx.update.callback_query?.data &&
             ctx.update.callback_query.data !== "CANCEL"
         ) {
-            const tempMessage = await ctx.reply(SOMETHINGWENTWORNG);
+            const tempMessage = await ctx.reply(somethingWentWrong);
             await ctx.telegram.deleteMessage(MessageDatails[0], MessageDatails[2]);
             setTimeout(() => {
                 ctx.telegram.deleteMessage(tempMessage.chat.id, tempMessage.message_id);
@@ -55,15 +49,15 @@ module.exports = new class AdminService {
             await ctx.telegram.sendVoice(
                 mainInfo.ChannelChatId,
                 ctx.message.voice.file_id,
-                { caption: voiceCaption(QuestionText[0]) }
+                {caption: voiceCaption(QuestionText[0])}
             );
-            const tempMessage = await ctx.reply(ANSWERREGISTERED);
+            const tempMessage = await ctx.reply(answerRegistrated);
             const student = await Student.findOne({
                 MessageText: QuestionText[0].split(":")[1],
             });
             await ctx.telegram.sendMessage(
                 student.ChatId,
-                YOURQUESTIONHASBEENANSWERED
+                yourQuestionAnswered
             );
             await ctx.telegram.deleteMessage(
                 ctx.message.chat.id,
@@ -78,12 +72,12 @@ module.exports = new class AdminService {
                 MessageText: QuestionText[0].split(":")[1],
             });
         } else {
-            await ctx.reply(VOICEMESSAGEONLY);
+            await ctx.reply(onlyVoiceMessage);
             next();
         }
     }
 
-    sendQuestionText (StudentQuestionText) {
+    sendQuestionText(StudentQuestionText) {
         QuestionText = [];
         QuestionText.push(StudentQuestionText);
     };

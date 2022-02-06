@@ -1,30 +1,27 @@
-const stateList  = require("../../stateList");
-
+const stateList = require("../../stateList");
+const {cancelButton} = require("../../../buttons/similarButtons/cancelButton");
+const {showPlansButton, contactWithAdminButton} = require("../../../buttons/studentButtons/studentStartButtons");
 const {
-    cancelBtn,
-    plansBtn,
-    contactWithAdminBtn,
-} = require("../../../buttons/ButtonManager");
+    enterFullname,
+    seePlansMessage,
+    askingQuestionGuide,
+    contactWithAdminMessage
+} = require("../../../messages/studentMessages");
 
-const {
-    TIP,
-    ENTERFULLNAME,
-    SEEPLANS,
-    CONTACTWITHADMIN,
-} = require("../../../messages/MessageHandler");
-
-module.exports = new class StudentService{
-    async askQuestion(ctx , next){
+module.exports = new class StudentService {
+    async askQuestion(ctx, next) {
         ctx.session.state = stateList.GETSTUDENTFULLNAME;
-        await ctx.reply(TIP, cancelBtn);
-        await ctx.reply(ENTERFULLNAME);
+        await ctx.reply(askingQuestionGuide, cancelButton);
+        await ctx.reply(enterFullname);
     }
-    async showPlans(ctx , next){
+
+    async showPlans(ctx, next) {
         ctx.session.state = undefined;
-        await ctx.reply(SEEPLANS, plansBtn);
+        await ctx.reply(seePlansMessage, showPlansButton);
     }
-    async contactWithAdmin(ctx, next){
+
+    async contactWithAdmin(ctx, next) {
         ctx.session.state = undefined;
-        await ctx.reply(CONTACTWITHADMIN, contactWithAdminBtn);
+        await ctx.reply(contactWithAdminMessage, contactWithAdminButton);
     }
 }

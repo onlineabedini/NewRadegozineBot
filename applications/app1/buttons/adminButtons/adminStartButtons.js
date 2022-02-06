@@ -10,7 +10,6 @@ adminStartButtonsText = {
     sendMessageForAdvisers: "📤  ارسال پیام برای مشاوران",
 };
 
-
 // buttons reply
 const adminStartButtons = {
     reply_markup: {

@@ -1,9 +1,12 @@
+//import StudentService class
 const StudentService = require('./StudentService')
+
+//import stateList
 const stateList = require('../../stateList')
 
 module.exports = {
-  [stateList.GETSTUDENTFULLNAME]: StudentService.getStudentFullName,
-  [stateList.GETSTUDENTFIELD]: StudentService.getStudentField,
-  [stateList.GETSTUDENTGRADE]: StudentService.getStudentGrade ,
-  [stateList.ASKQUESTION]: StudentService.askQuestion,
+    [stateList.getStudentFullName]: StudentService.getStudentFullName,
+    [stateList.getStudentField]: StudentService.getStudentField,
+    [stateList.getStudentGrade]: StudentService.getStudentGrade,
+    [stateList.askQuestion]: StudentService.askQuestion,
 };

@@ -1,4 +1,7 @@
+//import SimilarService class
 const SimilarService = require('./SimilarService');
+
+//import buttons text
 const {cancelButtonText} = require("../../../buttons/similarButtons/cancelButton");
 const { backButtonText } = require("../../../buttons/similarButtons/backButton");
 const {botDevelopersButtonText} = require("../../../buttons/similarButtons/botDevelopersButtonText");

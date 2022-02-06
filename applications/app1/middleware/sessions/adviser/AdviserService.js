@@ -1,23 +1,30 @@
+//import models
 const Adviser = require("../../../models/Adviser");
 const Student = require("../../../models/Student");
 
+//import buttons
 const {cancelButtonText} = require('../../../buttons/similarButtons/cancelButton')
 const {adviserStartButtons} = require("../../../buttons/adviserButtons/adviserStartButtons");
+
+//import messages
 const {messageSent, somethingWentWrong, voiceCaption, answerRegistrated} = require("../../../messages/similarMessages");
 const {yourQuestionAnswered} = require("../../../messages/studentMessages");
 const {onlyVoiceMessage} = require("../../../messages/adviserMessages");
+
+//our variables
 
 let QuestionText;
 let MessageDatails;
 
 
 const mainInfo = {
-    MainAdminUsername: "siralinpr",
-    ChannelChatId: -1001644994780,
-};
+    MainAdminUsername: "radegozine_manager",
+    ChannelChatId: -1001312069430
+}
 
-
-module.exports = new class AdminService {
+//define AdviserService class
+// create an instance
+module.exports = new class AdviserService {
     async sendMessageForAdmins(ctx, next) {
         ctx.session.state = undefined;
         if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {

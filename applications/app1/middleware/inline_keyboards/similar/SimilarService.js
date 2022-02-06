@@ -1,14 +1,23 @@
+//import models
 const Student = require("../../../models/Student");
+
+//import stateList
 const stateList = require('../../stateList')
+
+//import functions
 const {sendQuestionText, sendMessageDetails} = require("../../sessions/adviser/AdviserService");
+
+//import buttons
 const {answerCancelButton, confidenceButtons} = require("../../../buttons/similarButtons/answerButtons");
+
+//import messages
 const {enterAnswerAsVoice} = require("../../../messages/adviserMessages");
 const {
     deleteMessageConfidence, messageRemoved, messageDeletedBefore, tryDeletingMessageAgain,
     deleteMessageRequestCanceled
 } = require("../../../messages/similarMessages");
 
-
+//our variables
 let MessageId;
 let ChatId;
 let StudentQuestion;
@@ -22,7 +31,7 @@ module.exports = new class SimilarService {
             ctx.update.callback_query.message.message_id,
             tempMessage.message_id
         );
-        ctx.session.state = stateList.ANSWER;
+        ctx.session.state = stateList.answer;
     }
 
     async delete(ctx, next) {

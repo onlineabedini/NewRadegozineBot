@@ -1,11 +1,17 @@
+//import models
 const Admin = require("../../../models/Admin");
 const Adviser = require("../../../models/Adviser");
 
-const {selectAnItem, requestCanceled, botDevelopersCaption} = require("../../../messages/similarMessages");
+//import buttons
 const {adminStartButtons} = require("../../../buttons/adminButtons/adminStartButtons");
 const {adviserStartButtons} = require("../../../buttons/adviserButtons/adviserStartButtons");
 const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
 
+//import messages
+const {selectAnItem, requestCanceled, botDevelopersCaption} = require("../../../messages/similarMessages");
+
+//define SimilarService class
+// create an instance
 module.exports = new class SimilarService {
     async cancel(ctx, next) {
         ctx.session.state = undefined;

@@ -1,11 +1,14 @@
+// import botDevelopers button text
 const {botDevelopersButtonText} = require('../similarButtons/botDevelopersButtonText')
 
+//buttons text
 studentStartButtonsText = {
     askQuestion: "⁉️  سوال از مشاورین  ⁉️",
     showPlans: "🗂  طرح ها  🗂",
     contactWithAdmin: "👤  ارتباط با مدیر  👤",
 }
 
+//buttons reply
 const studentStartButtons = {
     reply_markup: {
         resize_keyboard: true,

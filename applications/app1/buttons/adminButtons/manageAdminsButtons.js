@@ -1,5 +1,7 @@
+//import back button text
 const {backButtonText} = require('../similarButtons/backButton')
 
+//buttons text
 manageAdminsButtonsText = {
     addAdmin: "➕  افزودن مدیر",
     removeAdmin: "❌  حذف مدیر",
@@ -8,6 +10,7 @@ manageAdminsButtonsText = {
     getAdminsList: "👤  نمایش لیست مدیران",
 }
 
+//buttons reply
 const manageAdminsButtons = {
     reply_markup: {
         resize_keyboard: true,

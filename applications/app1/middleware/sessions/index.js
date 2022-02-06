@@ -1,3 +1,4 @@
+//import our objects and services
 const adminSessions = require("./admin");
 const adviserSessions = require("./adviser");
 const studentSessions = require("./student");

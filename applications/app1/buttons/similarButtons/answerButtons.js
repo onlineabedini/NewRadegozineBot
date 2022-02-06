@@ -1,3 +1,4 @@
+// inline keyboards
 const answerButtons = {
     reply_markup: {
         resize_keyboard: true,

@@ -1,24 +1,32 @@
+//import models
 const Admin = require("../../../models/Admin");
 const Adviser = require("../../../models/Adviser");
 const Student = require("../../../models/Student");
 
+//import stateList
 const stateList = require("../../stateList");
+
+//import buttons
 const {cancelButton} = require("../../../buttons/similarButtons/cancelButton");
+const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
+const {answerButtons} = require("../../../buttons/similarButtons/answerButtons");
+
+//import messages
 const {
     enterYourMessage,
     showStudentsQuestionsList,
     studentInfoMessage,
     emptyList
 } = require("../../../messages/similarMessages");
-const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
 const {youHaveBeenRemoved} = require("../../../messages/adviserMessages");
-const {answerButtons} = require("../../../buttons/similarButtons/answerButtons");
 
+//define AdviserService class
+// create an instance
 module.exports = new class AdviserService {
     async sendMessageForAdmins(ctx, next) {
         let adviser = await Adviser.findOne({ChatId: ctx.message.chat.id});
         if (adviser) {
-            ctx.session.state = stateList.SENDMESSAGEFORADMINS;
+            ctx.session.state = stateList.sendMessageForAdmins;
             await ctx.reply(enterYourMessage, cancelButton);
         } else {
             ctx.reply(youHaveBeenRemoved, studentStartButtons);

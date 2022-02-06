@@ -1,23 +1,34 @@
+//import models
 const Admin = require("../../../models/Admin");
 const Adviser = require("../../../models/Adviser");
 const Student = require("../../../models/Student");
 const stateList = require("../../stateList");
 
+//import buttons
 const {
     addAdminCancelButton,
     removeAdminCancelButton,
     manageAdminsButtons
 } = require("../../../buttons/adminButtons/manageAdminsButtons");
-const {
-    enterNewAdminUsername, enterRemoveAdminUsername, adminInfoMessage, showAdminsList, noAdminExist,
-    enterNewAdviserUsername, enterRemoveAdviserUsername, adviserInfoMessage, showAdvisersList, noAdviserExist,
-    showAdvisersQuestionsList
-} = require("../../../messages/adminMessages");
+
 const {
     addAdviserCancelButton,
     removeAdviserCancelButton,
     manageAdvisersButtons
 } = require("../../../buttons/adminButtons/manageAdvisersButtons");
+
+const {cancelButton} = require("../../../buttons/similarButtons/cancelButton");
+const {answerButtons} = require("../../../buttons/similarButtons/answerButtons");
+const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
+
+//import messages
+const {
+    enterNewAdminUsername, enterRemoveAdminUsername, adminInfoMessage, showAdminsList, noAdminExist,
+    enterNewAdviserUsername, enterRemoveAdviserUsername, adviserInfoMessage, showAdvisersList, noAdviserExist,
+    showAdvisersQuestionsList
+} = require("../../../messages/adminMessages");
+
+
 const {
     selectAnItem,
     enterYourMessage,
@@ -26,21 +37,20 @@ const {
     emptyList,
     requestCanceled
 } = require("../../../messages/similarMessages");
-const {cancelButton} = require("../../../buttons/similarButtons/cancelButton");
-const {answerButtons} = require("../../../buttons/similarButtons/answerButtons");
-const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
+
 const {youHaveBeenRemoved} = require("../../../messages/adviserMessages");
 let MessageIds;
 
-
+//define AdminService class
+// create an instance
 module.exports = new class AdminService {
     async addAdmin(ctx, next) {
-        ctx.session.state = stateList.ADDADMIN;
+        ctx.session.state = stateList.addAdmin;
         await ctx.reply(enterNewAdminUsername, addAdminCancelButton);
     }
 
     async removeAdmin(ctx, next) {
-        ctx.session.state = stateList.REMOVEADMIN;
+        ctx.session.state = stateList.removeAdmin;
         await ctx.reply(enterRemoveAdminUsername, removeAdminCancelButton);
     }
 
@@ -62,12 +72,12 @@ module.exports = new class AdminService {
     }
 
     async addAdviser(ctx, next) {
-        ctx.session.state = stateList.ADDADVISER;
+        ctx.session.state = stateList.addAdviser;
         await ctx.reply(enterNewAdviserUsername, addAdviserCancelButton);
     }
 
     async removeAdviser(ctx, next) {
-        ctx.session.state = stateList.REMOVEADVISER;
+        ctx.session.state = stateList.removeAdviser;
         await ctx.reply(enterRemoveAdviserUsername, removeAdviserCancelButton);
     }
 
@@ -99,12 +109,12 @@ module.exports = new class AdminService {
     }
 
     async sendMessageForAdvisers(ctx, next) {
-        ctx.session.state = stateList.SENDMESSAGEFORADVISERS;
+        ctx.session.state = stateList.sendMessageForAdvisers;
         await ctx.reply(enterYourMessage, cancelButton);
     }
 
     async sendMessageForStudents(ctx, next) {
-        ctx.session.state = stateList.SENDMESSAGEFORSTUDENTS;
+        ctx.session.state = stateList.sendMessageForStudents;
         await ctx.reply(enterYourMessage, cancelButton);
     }
 
@@ -166,12 +176,12 @@ module.exports = new class AdminService {
 
     async addAdminCancel(ctx, next) {
         ctx.session.state = undefined;
-        await ctx.reply(requestCanceled, manageAdvisersButtons);
+        await ctx.reply(requestCanceled, manageAdminsButtons);
     }
 
     async removeAdminCancel(ctx, next) {
         ctx.session.state = undefined;
-        await ctx.reply(requestCanceled, manageAdvisersButtons);
+        await ctx.reply(requestCanceled, manageAdminsButtons);
     }
 
     async addAdviserCancel(ctx, next) {

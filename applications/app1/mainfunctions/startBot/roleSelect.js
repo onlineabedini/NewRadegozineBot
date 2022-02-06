@@ -1,20 +1,24 @@
+//import models
 const Admin = require("../../models/Admin");
 const Adviser = require("../../models/Adviser");
 const User = require("../../models/User");
 
+// import Admin buttons
 const {adminStartButtons} = require('../../buttons/adminButtons/adminStartButtons')
 const {adviserStartButtons} = require('../../buttons/adviserButtons/adviserStartButtons')
 const {studentStartButtons} = require('../../buttons/studentButtons/studentStartButtons')
 
+// import Admin Messages
 const {adminStartMessage} = require('../../messages/adminMessages')
 const {adviserStartMessage} = require('../../messages/adviserMessages')
 const {studentStartMessage} = require('../../messages/studentMessages')
 
 
 const mainInfo = {
-    MainAdminUsername: "siralinpr",
-    ChannelChatId: -1001644994780,
-};
+    MainAdminUsername: "radegozine_manager",
+    ChannelChatId: -1001312069430
+}
+
 
 module.exports = class roleSelect {
     async role_selector(ctx, next) {

@@ -1,4 +1,7 @@
+//import AdminService class
 const AdminService = require('./AdminService')
+
+//import buttons text
 const {manageAdminsButtonsText} = require("../../../buttons/adminButtons/manageAdminsButtons");
 const {manageAdvisersButtonsText} = require("../../../buttons/adminButtons/manageAdvisersButtons");
 const {adminStartButtonsText} = require("../../../buttons/adminButtons/adminStartButtons");

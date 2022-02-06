@@ -1,3 +1,4 @@
+//import our classes
 const SimilarService = require('./SimilarService')
 
 module.exports = {

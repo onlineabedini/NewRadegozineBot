@@ -1,5 +1,7 @@
+//import back button text
 const {backButtonText} = require('../similarButtons/backButton')
 
+//buttons text
 manageAdvisersButtonsText = {
     addAdviser: "➕  افزودن مشاور",
     removeAdviser: "❌  حذف مشاور",
@@ -8,6 +10,7 @@ manageAdvisersButtonsText = {
     getAdvisersList: "🗣  نمایش لیست مشاوران",
 }
 
+//buttons reply
 const manageAdvisersButtons = {
     reply_markup: {
         resize_keyboard: true,

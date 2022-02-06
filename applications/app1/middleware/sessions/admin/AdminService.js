@@ -1,13 +1,16 @@
+//import models
 const Admin = require("../../../models/Admin");
 const Adviser = require("../../../models/Adviser");
 const Users = require("../../../models/User");
 const stateList = require('../../stateList')
 
+//import buttons
 const {manageAdminsButtonsText, manageAdminsButtons,} = require('../../../buttons/adminButtons/manageAdminsButtons')
 const {manageAdvisersButtonsText, manageAdvisersButtons} = require('../../../buttons/adminButtons/manageAdvisersButtons')
 const {adminStartButtons} = require('../../../buttons/adminButtons/adminStartButtons')
 const {cancelButtonText} = require('../../../buttons/similarButtons/cancelButton')
 
+//import messages
 const {
     enterAdminFullname,
     enterAdviserFullname,
@@ -27,7 +30,8 @@ const {
 } = require('../../../messages/adminMessages')
 const {enterYourMessageAsText} = require('../../../messages/similarMessages')
 
-
+//define AdminService class
+// create an instance
 module.exports = new class AdminService {
     async addAdmin(ctx, next) {
         ctx.session.state = undefined;
@@ -37,7 +41,7 @@ module.exports = new class AdminService {
                 const AdminUsername = InputText.split("@")[1];
                 if (AdminUsername) {
                     ctx.session.stateData = {...ctx.session.stateData, AdminUsername};
-                    ctx.session.state = stateList.GETADMINFULLNAME;
+                    ctx.session.state = stateList.getAdminFullName;
                     await ctx.reply(enterAdminFullname);
                 } else {
                     ctx.reply(enteredUsernameIsInvalid, manageAdminsButtons);
@@ -112,7 +116,7 @@ module.exports = new class AdminService {
                 const AdviserUsername = InputText.split("@")[1];
                 if (AdviserUsername) {
                     ctx.session.stateData = {...ctx.session.stateData, AdviserUsername};
-                    ctx.session.state = stateList.GETADVISERFULLNAME;
+                    ctx.session.state = stateList.getAdviserFullName;
                     await ctx.reply(enterAdviserFullname);
                 } else {
                     ctx.reply(enteredUsernameIsInvalid, manageAdvisersButtons);

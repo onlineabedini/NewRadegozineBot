@@ -1,7 +1,12 @@
+//import model
 const Student = require("../../../models/Student");
 const stateList = require('../../stateList')
 
+//import buttons
 const {cancelButtonText} = require("../../../buttons/similarButtons/cancelButton");
+const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
+
+//import messages
 const {
     enterField,
     onlyTextMessage,
@@ -9,8 +14,9 @@ const {
     enterQuestion,
     questionRegistrated
 } = require("../../../messages/studentMessages");
-const {studentStartButtons} = require("../../../buttons/studentButtons/studentStartButtons");
 
+//define StudentService class
+// create an instance
 module.exports = new class StudentService {
     async getStudentFullName(ctx, next) {
         ctx.session.state = undefined;
@@ -18,7 +24,7 @@ module.exports = new class StudentService {
             if (ctx.message.text) {
                 const Fullname = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, Fullname};
-                ctx.session.state = stateList.GETSTUDENTFIELD;
+                ctx.session.state = stateList.getStudentField;
                 await ctx.reply(enterField);
             } else {
                 await ctx.reply(onlyTextMessage, studentStartButtons);
@@ -32,7 +38,7 @@ module.exports = new class StudentService {
             if (ctx.message.text) {
                 const Field = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, Field};
-                ctx.session.state = stateList.GETSTUDENTGRADE;
+                ctx.session.state = stateList.getStudentGrade;
                 await ctx.reply(enterGrade);
             } else {
                 ctx.session.stateData = undefined;
@@ -47,7 +53,7 @@ module.exports = new class StudentService {
             if (ctx.message.text) {
                 const Grade = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, Grade};
-                ctx.session.state = stateList.ASKQUESTION;
+                ctx.session.state = stateList.askQuestion;
                 await ctx.reply(enterQuestion);
             } else {
                 ctx.session.stateData = undefined;

@@ -3,11 +3,10 @@
 const { Telegraf } = require("telegraf");
 const LocalSession = require("telegraf-session-local");
 const KeyboardMiddleware = require("./middleware/keyboards");
-const InlineKeyboardMiddleware = require("./middleware/inline-keyboards");
+const InlineKeyboardMiddleware = require("./middleware/inline_keyboards");
 const SessionMiddleware = require("./middleware/sessions");
 
 // modules
-// Note : update this requires base on changes
 let bot;
 
 // classes + objects of them
@@ -18,7 +17,7 @@ const roleSelect = require("./mainfunctions/startBot/roleSelect");
 let roleSelector = new roleSelect();
 
 // bot token
-const BOT_TOKEN = "5206753052:AAFVVNl5OnKkkmYJ98tAM74bYCwPUzILSbQ";
+const BOT_TOKEN = '5016211213:AAHPhaaTRo-ezEOoieUfTSWcNwdNUM8gX3s';
 
 // start bot function
 async function startBot() {
@@ -27,6 +26,7 @@ async function startBot() {
   bot.use(new LocalSession({ database: "session.json" }));
 
   // middleware
+  // Don't remove this middleware
   // bot.use((ctx , next)=>{
   //   console.log(ctx.update.my_chat_member.chat)
   // })

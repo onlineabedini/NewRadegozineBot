@@ -1,7 +1,10 @@
+//import AdviserService class
 const AdviserController = require('../adviser/AdviserService');
+
+//import stateList
 const stateList = require('../../stateList')
 
 module.exports = {
-  [stateList.SENDMESSAGEFORADMINS]: AdviserController.sendMessageForAdmins,
-  [stateList.ANSWER]: AdviserController.answer,
+    [stateList.sendMessageForAdmins]: AdviserController.sendMessageForAdmins,
+    [stateList.answer]: AdviserController.answer,
 };

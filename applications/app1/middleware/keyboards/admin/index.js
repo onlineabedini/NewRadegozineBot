@@ -1,22 +1,27 @@
+//import AdminService class
 const AdminService = require('./AdminService')
-const {mainButtonsText} = require("../../../buttons/ButtonManager");
+
+//import buttons text
+const {manageAdminsButtonsText} = require("../../../buttons/adminButtons/manageAdminsButtons");
+const {manageAdvisersButtonsText} = require("../../../buttons/adminButtons/manageAdvisersButtons");
+const {adminStartButtonsText} = require("../../../buttons/adminButtons/adminStartButtons");
+
 
 module.exports = {
-    [mainButtonsText.addAdmin]: AdminService.addAdmin,
-    [mainButtonsText.removeAdmin]: AdminService.removeAdmin,
-    [mainButtonsText.getAdminsList]: AdminService.getAdminsList,
-    [mainButtonsText.addAdviser]: AdminService.addAdviser,
-    [mainButtonsText.removeAdviser]: AdminService.removeAdviser,
-    [mainButtonsText.getAdvisersList]: AdminService.getAdvisersList,
-    [mainButtonsText.manageAdmins]: AdminService.manageAdmins,
-    [mainButtonsText.manageAdvisers]: AdminService.manageAdvisers,
-    [mainButtonsText.sendMessageForAdvisers]: AdminService.sendMessageForAdvisers,
-    [mainButtonsText.sendMessageForStudents]: AdminService.sendMessageForStudents,
-    [mainButtonsText.getStudentsQuestionsListForAdmins]: AdminService.getStudentsQuestionsListForAdmins,
-    [mainButtonsText.getAdvisersQuestionsList]: AdminService.getAdvisersQuestionsList,
-    [mainButtonsText.addAdminCancel]: AdminService.addAdminCancel,
-    [mainButtonsText.removeAdminCancel]:  AdminService.removeAdminCancel,
-    [mainButtonsText.addAdviserCancel]: AdminService.addAdviserCancel,
-    [mainButtonsText.removeAdviserCancel]: AdminService.removeAdviserCancel,
-    [mainButtonsText.back]: AdminService.back,
+    [manageAdminsButtonsText.addAdmin]: AdminService.addAdmin,
+    [manageAdminsButtonsText.removeAdmin]: AdminService.removeAdmin,
+    [manageAdminsButtonsText.getAdminsList]: AdminService.getAdminsList,
+    [manageAdvisersButtonsText.addAdviser]: AdminService.addAdviser,
+    [manageAdvisersButtonsText.removeAdviser]: AdminService.removeAdviser,
+    [manageAdvisersButtonsText.getAdvisersList]: AdminService.getAdvisersList,
+    [adminStartButtonsText.manageAdmins]: AdminService.manageAdmins,
+    [adminStartButtonsText.manageAdvisers]: AdminService.manageAdvisers,
+    [adminStartButtonsText.sendMessageForAdvisers]: AdminService.sendMessageForAdvisers,
+    [adminStartButtonsText.sendMessageForStudents]: AdminService.sendMessageForStudents,
+    [adminStartButtonsText.getStudentsQuestionsListForAdmins]: AdminService.getStudentsQuestionsListForAdmins,
+    [adminStartButtonsText.getAdvisersQuestionsList]: AdminService.getAdvisersQuestionsList,
+    [manageAdminsButtonsText.addAdminCancel]: AdminService.addAdminCancel,
+    [manageAdminsButtonsText.removeAdminCancel]:  AdminService.removeAdminCancel,
+    [manageAdvisersButtonsText.addAdviserCancel]: AdminService.addAdviserCancel,
+    [manageAdvisersButtonsText.removeAdviserCancel]: AdminService.removeAdviserCancel,
 }

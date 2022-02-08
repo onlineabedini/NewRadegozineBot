@@ -17,7 +17,7 @@ const roleSelect = require("./mainfunctions/startBot/roleSelect");
 let roleSelector = new roleSelect();
 
 // bot token
-const BOT_TOKEN = '5016211213:AAHPhaaTRo-ezEOoieUfTSWcNwdNUM8gX3s';
+const BOT_TOKEN = '5206753052:AAFVVNl5OnKkkmYJ98tAM74bYCwPUzILSbQ';
 
 // start bot function
 async function startBot() {

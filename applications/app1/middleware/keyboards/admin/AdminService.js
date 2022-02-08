@@ -1,7 +1,9 @@
 //import models
-const Admin = require("../../../models/Admin");
-const Adviser = require("../../../models/Adviser");
-const Student = require("../../../models/Student");
+const AdminModel = require("../../../models/Admin");
+const AdviserModel = require("../../../models/Adviser");
+const StudentModel = require("../../../models/Student");
+
+//import stateList
 const stateList = require("../../stateList");
 
 //import buttons
@@ -23,8 +25,8 @@ const {studentStartButtons} = require("../../../buttons/studentButtons/studentSt
 
 //import messages
 const {
-    enterNewAdminUsername, enterRemoveAdminUsername, adminInfoMessage, showAdminsList, noAdminExist,
-    enterNewAdviserUsername, enterRemoveAdviserUsername, adviserInfoMessage, showAdvisersList, noAdviserExist,
+    enterNewAdminUsername, enterRemoveAdminUsername, adminsListMessage, showAdminsList, noAdminExist,
+    enterNewAdviserUsername, enterRemoveAdviserUsername, advisersListMessage, showAdvisersList, noAdviserExist,
     showAdvisersQuestionsList
 } = require("../../../messages/adminMessages");
 
@@ -32,14 +34,13 @@ const {
 const {
     selectAnItem,
     enterYourMessage,
-    showStudentsQuestionsList,
+    viewStudentsQuestionsList,
     studentInfoMessage,
     emptyList,
     requestCanceled
 } = require("../../../messages/similarMessages");
 
-const {youHaveBeenRemoved} = require("../../../messages/adviserMessages");
-let MessageIds;
+const {youHaveBeenRemoved} = require("../../../messages/similarMessages");
 
 //define AdminService class
 // create an instance
@@ -56,16 +57,18 @@ module.exports = new class AdminService {
 
     async getAdminsList(ctx, next) {
         ctx.session.state = undefined;
-        const AdminsData = await Admin.find();
-        const AdminsId = AdminsData.map((element) => element.id);
-        if (AdminsId.length !== 0) {
-            let AdminsList = "";
-            for (const item in AdminsId) {
-                const admin = await Admin.findOne({_id: AdminsId[item]});
-                AdminsList += adminInfoMessage(admin);
+
+        const adminsData = await AdminModel.find();
+        const adminsIds = adminsData.map((admin) => admin.id);
+
+        if (adminsIds.length !== 0) {
+            let adminsList = "";
+            for (const item in adminsIds) {
+                let admin = await AdminModel.findOne({_id: adminsIds[item]});
+                adminsList += adminsListMessage(admin);
             }
             await ctx.reply(showAdminsList);
-            await ctx.reply(AdminsList);
+            await ctx.reply(adminsList);
         } else {
             await ctx.reply(noAdminExist);
         }
@@ -83,16 +86,16 @@ module.exports = new class AdminService {
 
     async getAdvisersList(ctx, next) {
         ctx.session.state = undefined;
-        const AdvisersData = await Adviser.find();
-        const AdvisersId = AdvisersData.map((element) => element.id);
-        if (AdvisersId.length !== 0) {
-            let AdvisersList = "";
-            for (const item in AdvisersId) {
-                let adviser = await Adviser.findOne({_id: AdvisersId[item]});
-                AdvisersList += adviserInfoMessage(adviser);
+        const advisersData = await AdviserModel.find();
+        const advisersIds = advisersData.map((adviser) => adviser.id);
+        if (advisersIds.length !== 0) {
+            let advisersList = "";
+            for (const item in advisersIds) {
+                let adviser = await AdviserModel.findOne({_id: advisersIds[item]});
+                advisersList += advisersListMessage(adviser);
             }
             await ctx.reply(showAdvisersList);
-            await ctx.reply(AdvisersList);
+            await ctx.reply(advisersList);
         } else {
             await ctx.reply(noAdviserExist);
         }
@@ -120,17 +123,14 @@ module.exports = new class AdminService {
 
     async getStudentsQuestionsListForAdmins(ctx, next) {
         ctx.session.state = undefined;
-        const StudentsData = await Student.find();
-        const StudentsIds = StudentsData.map((element) => element.id);
-        let adviser = await Adviser.findOne({
-            Username: ctx.message.chat.username,
-        });
-        let admin = await Admin.findOne({Username: ctx.message.chat.username});
-        if (admin || adviser) {
-            if (StudentsIds.length !== 0) {
-                await ctx.reply(showStudentsQuestionsList);
-                for (const item in StudentsIds) {
-                    let student = await Student.findOne({_id: StudentsIds[item]});
+        const studentsData = await StudentModel.find();
+        const studentsIds = studentsData.map((student) => student.id);
+        const admin = await AdminModel.findOne({userName: ctx.message.chat.username});
+        if (admin) {
+            if (studentsIds.length !== 0) {
+                await ctx.reply(viewStudentsQuestionsList);
+                for (const item in studentsIds) {
+                    let student = await StudentModel.findOne({_id: studentsIds[item]});
                     await ctx.telegram.sendMessage(
                         ctx.message.chat.id,
                         studentInfoMessage(student),
@@ -147,28 +147,27 @@ module.exports = new class AdminService {
 
     async getAdvisersQuestionsList(ctx, next) {
         ctx.session.state = undefined;
-        const AdvisersData = await Adviser.find();
-        const AdvisersIds = AdvisersData.map((element) => element.id);
-        if (AdvisersIds.length !== 0) {
-            MessageIds = [];
+
+        const advisersData = await AdviserModel.find();
+        const advisersIds = advisersData.map((adviser) => adviser.id);
+
+        if (advisersIds.length !== 0) {
             await ctx.reply(showAdvisersQuestionsList);
-            for (const item in AdvisersIds) {
-                let adviser = await Adviser.findOne({_id: AdvisersIds[item]});
-                let MessageId = adviser.MessageId;
-                if (MessageId.length !== 0) {
-                    MessageIds.push(MessageId);
-                    for (const item in MessageId) {
+            for (const item in advisersIds) {
+                let adviser = await AdviserModel.findOne({_id: advisersIds[item]});
+                let messagesIds = adviser.messagesIds;
+                if (messagesIds.length !== 0) {
+                    for (const item in messagesIds) {
                         await ctx.telegram.forwardMessage(
                             ctx.message.chat.id,
-                            adviser.ChatId,
-                            MessageId[item]
+                            adviser.userChatId,
+                            messagesIds[item]
                         );
                     }
+                    return;
                 }
             }
-            if (MessageIds.length === 0) {
-                await ctx.reply(emptyList);
-            }
+            await ctx.reply(emptyList);
         } else {
             await ctx.reply(emptyList);
         }

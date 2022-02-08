@@ -16,8 +16,8 @@ const {
 module.exports = new class StudentService {
     async askQuestion(ctx, next) {
         ctx.session.state = stateList.getStudentFullName;
-        await ctx.reply(askingQuestionGuide, cancelButton);
-        await ctx.reply(enterFullname);
+        await ctx.reply(askingQuestionGuide);
+        await ctx.reply(enterFullname , cancelButton);
     }
 
     async showPlans(ctx, next) {

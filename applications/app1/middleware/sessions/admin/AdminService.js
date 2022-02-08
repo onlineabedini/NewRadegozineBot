@@ -1,12 +1,17 @@
 //import models
-const Admin = require("../../../models/Admin");
-const Adviser = require("../../../models/Adviser");
-const Users = require("../../../models/User");
+const AdminModel = require("../../../models/Admin");
+const AdviserModel = require("../../../models/Adviser");
+const UserModel = require("../../../models/User");
+
+//import stateList
 const stateList = require('../../stateList')
 
 //import buttons
 const {manageAdminsButtonsText, manageAdminsButtons,} = require('../../../buttons/adminButtons/manageAdminsButtons')
-const {manageAdvisersButtonsText, manageAdvisersButtons} = require('../../../buttons/adminButtons/manageAdvisersButtons')
+const {
+    manageAdvisersButtonsText,
+    manageAdvisersButtons
+} = require('../../../buttons/adminButtons/manageAdvisersButtons')
 const {adminStartButtons} = require('../../../buttons/adminButtons/adminStartButtons')
 const {cancelButtonText} = require('../../../buttons/similarButtons/cancelButton')
 
@@ -28,178 +33,168 @@ const {
     messageSentToStudents,
     noStudentExist,
 } = require('../../../messages/adminMessages')
-const {enterYourMessageAsText} = require('../../../messages/similarMessages')
+const {enterYourMessageAsText, onlyTextMessage} = require('../../../messages/similarMessages')
 
 //define AdminService class
 // create an instance
 module.exports = new class AdminService {
     async addAdmin(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== manageAdminsButtonsText.addAdminCancel) {
+        if (ctx.message.text !== manageAdminsButtonsText.addAdminCancel) {
             if (ctx.message.text) {
-                const InputText = ctx.message.text;
-                const AdminUsername = InputText.split("@")[1];
-                if (AdminUsername) {
-                    ctx.session.stateData = {...ctx.session.stateData, AdminUsername};
+                const inputText = ctx.message.text;
+                const adminUserName = inputText.split("@")[1];
+                if (adminUserName) {
+                    ctx.session.stateData = {...ctx.session.stateData, adminUserName};
                     ctx.session.state = stateList.getAdminFullName;
                     await ctx.reply(enterAdminFullname);
                 } else {
                     ctx.reply(enteredUsernameIsInvalid, manageAdminsButtons);
                 }
             } else {
-                await ctx.reply(enterYourMessageAsText, manageAdminsButtons);
+                await ctx.reply(onlyTextMessage, manageAdminsButtons);
             }
-        } else next();
+        }
     }
 
     async removeAdmin(ctx, next) {
         ctx.session.state = undefined;
         if (
-            ctx.message &&
             ctx.message.text !== manageAdminsButtonsText.removeAdminCancel
         ) {
             if (ctx.message.text) {
-                const InputText = ctx.message.text;
-                const AdminUsername = InputText.split("@")[1];
-                const admin = await Admin.findOne({Username: AdminUsername});
+                const inputText = ctx.message.text;
+                const adminUserName = inputText.split("@")[1];
+                const admin = await AdminModel.findOne({userName: adminUserName});
                 if (admin) {
-                    await Admin.findOneAndDelete({Username: AdminUsername});
+                    await AdminModel.findOneAndDelete({userName: adminUserName});
                     await ctx.reply(adminRemoved, manageAdminsButtons);
                 } else {
                     await ctx.reply(noAdminExist, manageAdminsButtons);
                 }
             } else {
-                await ctx.reply(enterYourMessageAsText, manageAdminsButtons);
+                await ctx.reply(onlyTextMessage, manageAdminsButtons);
             }
-        } else next();
+        }
     }
 
     async getAdminFullName(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
+        if (ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
-                const AdminFullname = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, AdminFullname};
-                const AdminData = await Admin.findOne({
-                    Username: ctx.session.stateData.AdminUsername,
+                const adminFullName = ctx.message.text;
+                ctx.session.stateData = {...ctx.session.stateData, adminFullName};
+                const adminData = await AdminModel.findOne({
+                    userName: ctx.session.stateData.adminUserName,
                 });
-                if (!AdminData) {
-                    AddNewAdmin();
+                if (!adminData) {
+                    const newAdmin = new AdminModel({
+                        userName: ctx.session.stateData.adminUserName,
+                        userFullName: ctx.session.stateData.adminFullName,
+                    });
+                    await newAdmin.save();
+                    ctx.session.stateData = undefined;
                     await ctx.reply(adminRegistrated, adminStartButtons);
                 } else {
+                    ctx.session.stateData = undefined;
                     await ctx.reply(duplicateAdmin, adminStartButtons);
                 }
-
-                function AddNewAdmin() {
-                    const admin = new Admin({
-                        Username: ctx.session.stateData.AdminUsername,
-                        Fullname: ctx.session.stateData.AdminFullname,
-                    });
-                    admin.save();
-                }
-
-                ctx.session.stateData = undefined;
             } else {
+                ctx.session.stateData = undefined;
                 await ctx.reply(enterYourMessageAsText, manageAdminsButtons);
             }
-        } else next();
+        }
     }
 
     async addAdviser(ctx, next) {
         ctx.session.state = undefined;
         if (
-            ctx.message &&
             ctx.message.text !== manageAdvisersButtonsText.addAdviserCancel
         ) {
             if (ctx.message.text) {
-                const InputText = ctx.message.text;
-                const AdviserUsername = InputText.split("@")[1];
-                if (AdviserUsername) {
-                    ctx.session.stateData = {...ctx.session.stateData, AdviserUsername};
+                const inputText = ctx.message.text;
+                const adviserUserName = inputText.split("@")[1];
+                if (adviserUserName) {
+                    ctx.session.stateData = {...ctx.session.stateData, adviserUserName};
                     ctx.session.state = stateList.getAdviserFullName;
                     await ctx.reply(enterAdviserFullname);
                 } else {
                     ctx.reply(enteredUsernameIsInvalid, manageAdvisersButtons);
                 }
             } else {
-                await ctx.reply(enterYourMessageAsText, manageAdvisersButtons);
+                await ctx.reply(onlyTextMessage, manageAdvisersButtons);
             }
-        } else next();
+        }
     }
 
     async removeAdviser(ctx, next) {
         ctx.session.state = undefined;
         if (
-            ctx.message &&
             ctx.message.text !== manageAdvisersButtonsText.removeAdviserCancel
         ) {
             if (ctx.message.text) {
-                const InputText = ctx.message.text;
-                const AdviserUsername = InputText.split("@")[1];
-                const adviser = await Adviser.findOne({Username: AdviserUsername});
+                const inputText = ctx.message.text;
+                const adviserUserName = inputText.split("@")[1];
+                const adviser = await AdviserModel.findOne({userName: adviserUserName});
                 if (adviser) {
-                    await Adviser.findOneAndDelete({Username: AdviserUsername});
+                    await AdviserModel.findOneAndDelete({userName: adviserUserName});
                     await ctx.reply(adviserRemoved, manageAdvisersButtons);
                 } else {
                     await ctx.reply(noAdviserExist, manageAdvisersButtons);
                 }
             } else {
-                await ctx.reply(enterYourMessageAsText, manageAdvisersButtons);
+                await ctx.reply(onlyTextMessage, manageAdvisersButtons);
             }
         } else next();
     }
 
     async getAdviserFullName(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
+        if (ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
-                const AdviserFullname = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, AdviserFullname};
-                const AdviserData = await Adviser.findOne({
-                    Username: ctx.session.stateData.AdviserUsername,
+                const adviserFullName = ctx.message.text;
+                ctx.session.stateData = {...ctx.session.stateData, adviserFullName};
+                const adviserData = await AdviserModel.findOne({
+                    userName: ctx.session.stateData.adviserFullName,
                 });
-
-                if (!AdviserData) {
-                    AddNewAdviser();
+                if (!adviserData) {
+                    const newAdviser = new AdviserModel({
+                        userName: ctx.session.stateData.adviserUserName,
+                        userFullName: ctx.session.stateData.adviserFullName,
+                    });
+                    await newAdviser.save();
+                    ctx.session.stateData = undefined;
                     await ctx.reply(adviserRegistrated, adminStartButtons);
                 } else {
+                    ctx.session.stateData = undefined;
                     await ctx.reply(duplicateAdviser, adminStartButtons);
                 }
-
-                function AddNewAdviser() {
-                    const adviser = new Adviser({
-                        Username: ctx.session.stateData.AdviserUsername,
-                        Fullname: ctx.session.stateData.AdviserFullname,
-                    });
-                    adviser.save();
-                }
-
-                ctx.session.stateData = undefined;
             } else {
+                ctx.session.stateData = undefined;
                 await ctx.reply(enterYourMessageAsText, manageAdvisersButtons);
             }
-        } else next();
+        }
     }
 
     async sendMessageForAdvisers(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
-            const AdvisersData = await Adviser.find();
-            const AdvisersId = AdvisersData.map((element) => element.id);
-            if (AdvisersId.length !== 0) {
-                for (let item in AdvisersId) {
-                    let adviser = await Adviser.findOne({_id: AdvisersId[item]});
-                    const ChatId = adviser.ChatId;
-                    if (ChatId) {
-                        const MessageId = ctx.message.message_id;
+        if (ctx.message.text !== cancelButtonText.cancel) {
+            const advisersData = await AdviserModel.find();
+            const advisersId = advisersData.map((adviser) => adviser.id);
+            if (advisersId.length !== 0) {
+                for (const item in advisersId) {
+                    let adviser = await AdviserModel.findOne({_id: advisersId[item]});
+                    const chatId = adviser.userChatId;
+                    if (chatId) {
+                        const messageId = ctx.message.message_id;
                         await ctx.telegram.forwardMessage(
-                            ChatId,
+                            chatId,
                             ctx.message.chat.id,
-                            MessageId
+                            messageId
                         );
                     } else {
                         console.log(
-                            `the username (${adviser.Username}) has not started the bot or does not exist`
+                            `the username (${adviser.userName}) has not started the bot or does not exist`
                         );
                     }
                 }
@@ -207,28 +202,27 @@ module.exports = new class AdminService {
             } else {
                 await ctx.reply(noAdviserAdded, adminStartButtons);
             }
-        } else next();
+        }
     }
 
     async sendMessageForStudents(ctx, next) {
         ctx.session.state = undefined;
-        if (ctx.message && ctx.message.text !== cancelButtonText.cancel) {
-            const UserData = await Users.find();
-            const UsersChatIds = UserData.map((element) => element.ChatId);
-            if (UsersChatIds.length !== 0) {
-                const MessageId = ctx.message.message_id;
-                for (let item in UsersChatIds) {
+        if (ctx.message.text !== cancelButtonText.cancel) {
+            const usersData = await UserModel.find();
+            const usersIds = usersData.map((user) => user.userChatId);
+            if (usersIds.length !== 0) {
+                const messageId = ctx.message.message_id;
+                for (let item in usersIds) {
                     await ctx.telegram.forwardMessage(
-                        UsersChatIds[item],
+                        usersIds[item],
                         ctx.message.chat.id,
-                        MessageId
+                        messageId
                     );
                 }
                 ctx.reply(messageSentToStudents, adminStartButtons);
             } else {
                 await ctx.reply(noStudentExist, adminStartButtons);
             }
-        } else next();
+        }
     }
-
 }

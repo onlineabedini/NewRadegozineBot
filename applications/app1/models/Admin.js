@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+
 const schema = new mongoose.Schema({
-  Username: String,
-  Fullname: String,
+    userRole: { default: "admin", type: String },
+    userName: {type: String},
+    userFullName: {type: String},
 });
-module.exports = mongoose.model("Admin", schema);
+
+module.exports = mongoose.model("AdminModel", schema);

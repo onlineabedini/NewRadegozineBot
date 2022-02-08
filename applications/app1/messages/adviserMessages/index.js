@@ -4,6 +4,3 @@ module.exports.adviserStartMessage = `
         انتخاب نمایید:
  @radegozine_bot
  `
-module.exports.enterAnswerAsVoice = "لطفا پاسخ خود را بصورت ویس وارد نمایید : "
-module.exports.onlyVoiceMessage = "لطفا پیام خود را فقط به صورت ویس وارد نمایید❗️"
-module.exports.youHaveBeenRemoved = "شما از لیست مشاوران حذف شده اید ❗️ لطفا مجددا از مدیر بخواهید تا شما را به لیست مشاوران اضافه نماید و سپس مجددا بات رااستارت نمایید."

@@ -1,7 +1,7 @@
 //import models
-const Admin = require("../../models/Admin");
-const Adviser = require("../../models/Adviser");
-const User = require("../../models/User");
+const AdminModel = require("../../models/Admin");
+const AdviserModel = require("../../models/Adviser");
+const UserModel = require("../../models/User");
 
 // import Admin buttons
 const {adminStartButtons} = require('../../buttons/adminButtons/adminStartButtons')
@@ -15,60 +15,59 @@ const {studentStartMessage} = require('../../messages/studentMessages')
 
 
 const mainInfo = {
-    MainAdminUsername: "radegozine_manager",
-    ChannelChatId: -1001312069430
+    mainAdminUsername: "radegozine_manager",
+    ChannelChatId: -1001312069430,
 }
 
 
 module.exports = class roleSelect {
     async role_selector(ctx, next) {
         console.log('select role here')
-        const AdminData = await Admin.find();
-        const AdminsUsernames = AdminData.map((element) => element.Username);
-        const AdviserData = await Adviser.find();
-        const AdvisersUsernames = AdviserData.map((element) => element.Username);
-        if (ctx.message.from.username === mainInfo.MainAdminUsername) {
-            const mainAdmin = await Admin.findOne({
-                Username: ctx.message.from.username,
+
+        //get all admins username
+        const allAdmins = await AdminModel.find();
+        const adminsUserNames = allAdmins.map((admin) => admin.userName);
+
+        //get all advisers username
+        const allAdvisers = await AdviserModel.find();
+        const advisersUserNames = allAdvisers.map((adviser) => adviser.userName);
+
+        // save main admin data in database at the first bot started
+        if (ctx.message.from.username === mainInfo.mainAdminUsername) {
+            const mainAdmin = await AdminModel.findOne({
+                userName: ctx.message.from.username,
             });
             if (!mainAdmin) {
-                AddMainAdmin();
-
-                function AddMainAdmin() {
-                    const mainAdmin = new Admin({
-                        Username: ctx.message.from.username,
-                        Fullname: "Main Admin",
-                    });
-                    mainAdmin.save();
-                }
-
-                await ctx.reply(adminStartMessage, adminStartButtons);
+                const newAdmin = new AdminModel({
+                    userName: ctx.message.from.username,
+                    userFullName: "مدیر اصلی",
+                })
+                await newAdmin.save();
+                return await ctx.reply(adminStartMessage, adminStartButtons);
             } else {
-                await ctx.reply(adminStartMessage, adminStartButtons);
+                return await ctx.reply(adminStartMessage, adminStartButtons);
             }
-        } else if (AdminsUsernames.includes(ctx.message.from.username)) {
-            await ctx.reply(adminStartMessage, adminStartButtons);
-        } else if (AdvisersUsernames.includes(ctx.message.from.username)) {
-            let adviser = await Adviser.findOne({
-                Username: ctx.message.from.username,
-            });
-            adviser.ChatId = ctx.message.chat.id;
+        } else if (adminsUserNames.includes(ctx.message.from.username)) {
+            return await ctx.reply(adminStartMessage, adminStartButtons);
+        } else if (advisersUserNames.includes(ctx.message.from.username)) {
+            let adviser = await AdviserModel.findOneAndUpdate({
+                userName: ctx.message.from.username,
+            }, {userChatId: ctx.message.from.id}, {new: true});
             await adviser.save();
-            await ctx.reply(adviserStartMessage, adviserStartButtons);
+            return await ctx.reply(adviserStartMessage, adviserStartButtons);
         } else {
-            const UserData = await User.findOne({ChatId: ctx.message.chat.id});
-            if (!UserData) {
-                AddUser();
-
-                function AddUser() {
-                    const user = new User({
-                        ChatId: ctx.message.chat.id,
-                    });
-                    user.save();
-                }
-
-                await ctx.reply(studentStartMessage, studentStartButtons);
-            } else await ctx.reply(studentStartMessage, studentStartButtons);
+            const user = await UserModel.findOne({userChatId: ctx.message.chat.id});
+            if (!user) {
+                const newUser = new UserModel({
+                    userId: ctx.message.from.id,
+                    userChatId: ctx.message.chat.id,
+                    userName: ctx.message.from.username,
+                    userFirstName: ctx.message.from.first_name,
+                    userLastName: ctx.message.from.last_name,
+                })
+                await newUser.save();
+                return await ctx.reply(studentStartMessage, studentStartButtons);
+            } else return await ctx.reply(studentStartMessage, studentStartButtons);
         }
     }
 }

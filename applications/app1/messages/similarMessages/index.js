@@ -1,21 +1,21 @@
-module.exports.studentInfoMessage = (Student) => `
-❓سوال :${Student.MessageText}❓
+module.exports.studentInfoMessage = (student) => `
+❓سوال :${student.userMessageText}❓
 
 👨‍🎓مشخصات دانش آموز :
 
-🔹نام و نام خانوادگی : ${Student.Fullname}
+🔹نام و نام خانوادگی : ${student.userFullName}
 
-🔹رشته ی تحصیلی : ${Student.Field}
+🔹رشته ی تحصیلی : ${student.userField}
 
-🔹پایه ی تحصیلی : ${Student.Grade}
+🔹پایه ی تحصیلی : ${student.userGrade}
 
-🔹یوزنیم دانش آموز : @${Student.Username}
+🔹یوزنیم دانش آموز : @${student.userName}
 
 @radegozine_bot`
 
-module.exports.voiceCaption = (QuestionText) => `
+module.exports.voiceCaption = (questionText) => `
 🟢 سوالات مشاوره ای
-⁉️ ${QuestionText}
+⁉️ ${questionText}
 
 
 🟢 ردگزینه
@@ -48,9 +48,13 @@ module.exports.botDevelopersCaption = `🌹✅  تیم توسعه دهندگان
  (https://t.me/ir_node)🔸 irnode.com
 🔹 @onlineabedini  👈  ارتباط با ما ~~`
 
-module.exports.showStudentsQuestionsList = "🔻 لیست سوالات دانش آموزان 🔻"
+module.exports.viewStudentsQuestionsList = "🔻 لیست سوالات دانش آموزان 🔻"
 module.exports.enterYourMessage = "لطفا پیام خود را وارد نمایید : "
+module.exports.enterYourAnswerAsVoice = "لطفا پاسخ خود را بصورت ویس وارد نمایید : "
 module.exports.enterYourMessageAsText = "لطفا پیام خود را بصورت متنی وارد نمایید : "
+module.exports.onlyVoiceMessage = "لطفا پیام خود را فقط به صورت ویس وارد نمایید❗️"
+module.exports.onlyTextMessage = "لطفااطلاعات خواسته شده را فقط به صورت متنی وارد نمایید❗️"
+module.exports.youHaveBeenRemoved = "شما از لیست مدیران و یا مشاوران حذف شده اید ❗️ "
 module.exports.messageSent = "✅ پیام شما با موفقیت ارسال شد."
 module.exports.messageRemoved = "✅ پیام شما با موفقیت حذف شد."
 module.exports.deleteMessageRequestCanceled = "✅ درخواست حذف پیام لغو شد."

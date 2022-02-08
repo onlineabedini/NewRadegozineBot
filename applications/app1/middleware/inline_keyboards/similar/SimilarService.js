@@ -1,30 +1,32 @@
 //import models
-const Student = require("../../../models/Student");
+const StudentModel = require("../../../models/Student");
 
 //import stateList
 const stateList = require('../../stateList')
 
 //import functions
-const {sendQuestionText, sendMessageDetails} = require("../../sessions/adviser/AdviserService");
+const {sendQuestionText, sendMessageDetails} = require("../../sessions/similar/SimilarService");
 
 //import buttons
 const {answerCancelButton, confidenceButtons} = require("../../../buttons/similarButtons/answerButtons");
 
 //import messages
-const {enterAnswerAsVoice} = require("../../../messages/adviserMessages");
+const {enterYourAnswerAsVoice} = require("../../../messages/similarMessages");
 const {
     deleteMessageConfidence, messageRemoved, messageDeletedBefore, tryDeletingMessageAgain,
     deleteMessageRequestCanceled
 } = require("../../../messages/similarMessages");
 
 //our variables
-let MessageId;
-let ChatId;
-let StudentQuestion;
+let messageId;
+let chatId;
+let studentQuestion;
 
 module.exports = new class SimilarService {
     async answer(ctx, next) {
-        const tempMessage = await ctx.reply(enterAnswerAsVoice, answerCancelButton);
+        // const question = ctx.update.callback_query.message.text.split("❓")[1].split("سوال :")[1]
+        // const student = await StudentModel.findOne({userMessageText : question });
+        const tempMessage = await ctx.reply(enterYourAnswerAsVoice, answerCancelButton);
         sendQuestionText(ctx.update.callback_query.message.text.split("❓")[1]);
         sendMessageDetails(
             ctx.update.callback_query.message.chat.id,
@@ -35,19 +37,19 @@ module.exports = new class SimilarService {
     }
 
     async delete(ctx, next) {
-        MessageId = ctx.update.callback_query.message.message_id;
-        ChatId = ctx.update.callback_query.message.chat.id;
-        StudentQuestion = ctx.update.callback_query.message.text;
+        messageId = ctx.update.callback_query.message.message_id;
+        chatId = ctx.update.callback_query.message.chat.id;
+        studentQuestion = ctx.update.callback_query.message.text;
         ctx.reply(deleteMessageConfidence, confidenceButtons);
     }
 
     async yes(ctx, next) {
-        if (StudentQuestion) {
-            await Student.findOneAndDelete({
-                MessageText: StudentQuestion.split("❓")[1].split(":")[1],
+        if (studentQuestion) {
+            await StudentModel.findOneAndDelete({
+                userMessageText: studentQuestion.split("❓")[1].split(":")[1],
             });
             try {
-                await ctx.telegram.deleteMessage(ChatId, MessageId);
+                await ctx.telegram.deleteMessage(chatId, messageId);
                 await ctx.telegram.deleteMessage(
                     ctx.update.callback_query.message.chat.id,
                     ctx.update.callback_query.message.message_id
@@ -58,7 +60,7 @@ module.exports = new class SimilarService {
                         tempMessage.chat.id,
                         tempMessage.message_id
                     );
-                }, 3000);
+                }, 1500);
             } catch (err) {
                 console.log(err);
                 await ctx.telegram.deleteMessage(
@@ -71,7 +73,7 @@ module.exports = new class SimilarService {
                         tempMessage.chat.id,
                         tempMessage.message_id
                     );
-                }, 3000);
+                }, 1500);
             }
         } else {
             await ctx.telegram.deleteMessage(
@@ -81,7 +83,7 @@ module.exports = new class SimilarService {
             const tempMessage = await ctx.reply(tryDeletingMessageAgain);
             setTimeout(() => {
                 ctx.telegram.deleteMessage(tempMessage.chat.id, tempMessage.message_id);
-            }, 3000);
+            }, 1500);
         }
     }
 
@@ -93,7 +95,7 @@ module.exports = new class SimilarService {
         const tempMessage = await ctx.reply(deleteMessageRequestCanceled);
         setTimeout(() => {
             ctx.telegram.deleteMessage(tempMessage.chat.id, tempMessage.message_id);
-        }, 3000);
+        }, 1500);
     }
 
     async cancel(ctx, next) {

@@ -5,17 +5,17 @@ module.exports.adminStartMessage = `
  @radegozine_bot
  `
 
-module.exports.adminInfoMessage = (admin) => `
-🔹یوزرنیم : @${admin.Username}
-🔸نام و نام خانوادگی مدیر : ${admin.Fullname}
+module.exports.adminsListMessage = (admin) => `
+🔹یوزرنیم : @${admin.userName}
+🔸نام و نام خانوادگی مدیر : ${admin.userFullName}
 
                 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
     
 `
 
-module.exports.adviserInfoMessage = (adviser) => `
-🔹یوزرنیم : @${adviser.Username}
-🔸نام و نام خانوادگی مشاور : ${adviser.Fullname}
+module.exports.advisersListMessage = (adviser) => `
+🔹یوزرنیم : @${adviser.userName}
+🔸نام و نام خانوادگی مشاور : ${adviser.userFullName}
 
                 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
 

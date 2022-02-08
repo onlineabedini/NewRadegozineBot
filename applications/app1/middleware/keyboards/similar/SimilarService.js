@@ -1,6 +1,6 @@
 //import models
-const Admin = require("../../../models/Admin");
-const Adviser = require("../../../models/Adviser");
+const AdminModel = require("../../../models/Admin");
+const AdviserModel = require("../../../models/Adviser");
 
 //import buttons
 const {adminStartButtons} = require("../../../buttons/adminButtons/adminStartButtons");
@@ -16,22 +16,32 @@ module.exports = new class SimilarService {
     async cancel(ctx, next) {
         ctx.session.state = undefined;
         ctx.session.stateData = undefined;
-        const admin = await Admin.findOne({Username: ctx.message.chat.username});
-        const adviser = await Adviser.findOne({
-            Username: ctx.message.chat.username,
+        const admin = await AdminModel.findOne({userName: ctx.message.chat.username});
+        const adviser = await AdviserModel.findOne({
+            userName: ctx.message.chat.username,
         });
         if (admin) {
-            await ctx.reply(requestCanceled, adminStartButtons);
+            return await ctx.reply(requestCanceled, adminStartButtons);
         } else if (adviser) {
-            await ctx.reply(requestCanceled, adviserStartButtons);
+            return await ctx.reply(requestCanceled, adviserStartButtons);
         } else {
-            await ctx.reply(requestCanceled, studentStartButtons);
+            return await ctx.reply(requestCanceled, studentStartButtons);
         }
     }
 
     async back(ctx, next) {
         ctx.session.state = undefined;
-        await ctx.reply( selectAnItem , adminStartButtons);
+        const admin = await AdminModel.findOne({userName: ctx.message.chat.username});
+        const adviser = await AdviserModel.findOne({
+            userName: ctx.message.chat.username,
+        });
+        if (admin) {
+            return await ctx.reply(selectAnItem, adminStartButtons);
+        } else if (adviser) {
+            return await ctx.reply(selectAnItem, adviserStartButtons);
+        } else {
+            return await ctx.reply(selectAnItem, studentStartButtons);
+        }
     }
 
     async botDevelopersInfo(ctx, next) {

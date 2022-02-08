@@ -1,7 +1,7 @@
 //import models
-const Admin = require("../../../models/Admin");
-const Adviser = require("../../../models/Adviser");
-const Student = require("../../../models/Student");
+const AdminModel = require("../../../models/Admin");
+const AdviserModel = require("../../../models/Adviser");
+const StudentModel = require("../../../models/Student");
 
 //import stateList
 const stateList = require("../../stateList");
@@ -14,17 +14,17 @@ const {answerButtons} = require("../../../buttons/similarButtons/answerButtons")
 //import messages
 const {
     enterYourMessage,
-    showStudentsQuestionsList,
+    viewStudentsQuestionsList,
     studentInfoMessage,
     emptyList
 } = require("../../../messages/similarMessages");
-const {youHaveBeenRemoved} = require("../../../messages/adviserMessages");
+const {youHaveBeenRemoved} = require("../../../messages/similarMessages");
 
 //define AdviserService class
 // create an instance
 module.exports = new class AdviserService {
     async sendMessageForAdmins(ctx, next) {
-        let adviser = await Adviser.findOne({ChatId: ctx.message.chat.id});
+        let adviser = await AdviserModel.findOne({userChatId: ctx.message.chat.id});
         if (adviser) {
             ctx.session.state = stateList.sendMessageForAdmins;
             await ctx.reply(enterYourMessage, cancelButton);
@@ -35,17 +35,16 @@ module.exports = new class AdviserService {
 
     async getStudentsQuestionsList(ctx, next) {
         ctx.session.state = undefined;
-        const StudentsData = await Student.find();
-        const StudentsIds = StudentsData.map((element) => element.id);
-        let adviser = await Adviser.findOne({
-            Username: ctx.message.chat.username,
+        const studentsData = await StudentModel.find();
+        const studentsIds = studentsData.map((student) => student.id);
+        let adviser = await AdviserModel.findOne({
+            userName: ctx.message.chat.username,
         });
-        let admin = await Admin.findOne({Username: ctx.message.chat.username});
-        if (admin || adviser) {
-            if (StudentsIds.length !== 0) {
-                await ctx.reply(showStudentsQuestionsList);
-                for (const item in StudentsIds) {
-                    let student = await Student.findOne({_id: StudentsIds[item]});
+        if (adviser) {
+            if (studentsIds.length !== 0) {
+                await ctx.reply(viewStudentsQuestionsList);
+                for (const item in studentsIds) {
+                    let student = await StudentModel.findOne({_id: studentsIds[item]});
                     await ctx.telegram.sendMessage(
                         ctx.message.chat.id,
                         studentInfoMessage(student),

@@ -68,7 +68,7 @@ module.exports = new class StudentService {
         ctx.session.state = undefined;
         if (ctx.message.text !== cancelButtonText.cancel) {
             if (ctx.message.text) {
-                const newStudent = new StudentModel({
+                const newStudent = await new StudentModel({
                     userChatId: ctx.message.chat.id,
                     userName: ctx.message.chat.username,
                     userFullName: ctx.session.stateData.fullName,

@@ -38,7 +38,7 @@ module.exports = class roleSelect {
                 userName: ctx.message.from.username,
             });
             if (!mainAdmin) {
-                const newAdmin = new AdminModel({
+                const newAdmin = await new AdminModel({
                     userName: ctx.message.from.username,
                     userFullName: "مدیر اصلی",
                 })
@@ -58,7 +58,7 @@ module.exports = class roleSelect {
         } else {
             const user = await UserModel.findOne({userChatId: ctx.message.chat.id});
             if (!user) {
-                const newUser = new UserModel({
+                const newUser = await new UserModel({
                     userId: ctx.message.from.id,
                     userChatId: ctx.message.chat.id,
                     userName: ctx.message.from.username,

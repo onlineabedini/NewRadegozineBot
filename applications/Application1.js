@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { startBot } = require("./app1/index");
 
-class Application {
+module.exports = class Application {
   constructor() {
     this.setupMongo();
     startBot();
@@ -18,4 +18,3 @@ class Application {
   }
 }
 
-module.exports = Application;

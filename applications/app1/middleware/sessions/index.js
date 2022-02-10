@@ -9,12 +9,12 @@ const similarSessions = require("./similar");
 const stateList = require("../stateList");
 
 module.exports = (ctx, next) => {
-    if (!ctx.session.state) return next();
+    if (!ctx.session?.state) return next();
     const state = ctx.session.state;
     const values = Object.values(stateList);
     if (values.includes(state) && EventListener[state])
         return EventListener[state](ctx, next);
-    next();
+    return next();
 };
 
 const EventListener = {

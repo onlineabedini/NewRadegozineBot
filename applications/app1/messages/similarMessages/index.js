@@ -48,6 +48,15 @@ module.exports.botDevelopersCaption = `🌹✅  تیم توسعه دهندگان
  (https://t.me/ir_node)🔸 irnode.com
 🔹 @onlineabedini  👈  ارتباط با ما ~~`
 
+module.exports.forceJoinMessage = (channelUserNames) => {
+    let message = ``
+    channelUserNames.forEach((item) => {
+        message += ` @${item} `
+    })
+    return `برای استفاده از بات باید در کانال های زیر عضو شوید
+    ${message}`
+}
+
 module.exports.viewStudentsQuestionsList = "🔻 لیست سوالات دانش آموزان 🔻"
 module.exports.enterYourMessage = "لطفا پیام خود را وارد نمایید : "
 module.exports.enterYourAnswerAsVoice = "لطفا پاسخ خود را بصورت ویس وارد نمایید : "
@@ -62,7 +71,8 @@ module.exports.deleteMessageConfidence = "آیا از حذف این پیام ا�
 module.exports.somethingWentWrong = "خطایی پیش آمده است لطفا مجددا امتحان نمایید❗️"
 module.exports.answerRegistrated = "✅ پاسخ شما ثبت شد و در کانال رد گزینه قرار گرفت."
 module.exports.messageDeletedBefore = "این پیام قبلا حذف شده است❗️"
-module.exports.tryDeletingMessageAgain  = "اگر در حال حاظر این سوال حذف نشده است مجددا بر روی دکمه ی 'حذف سوال' کلیک نمایید."
+module.exports.tryDeletingMessageAgain = "اگر در حال حاظر این سوال حذف نشده است مجددا بر روی دکمه ی 'حذف سوال' کلیک نمایید."
 module.exports.selectAnItem = "لطفا از لیست زیر یک مورد را انتخاب نمایید ⬇️"
 module.exports.requestCanceled = "❎ درخواست شما لغو شد ❎"
 module.exports.emptyList = "لیست خالی است❗️"
+

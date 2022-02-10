@@ -13,13 +13,6 @@ const {adminStartMessage} = require('../../messages/adminMessages')
 const {adviserStartMessage} = require('../../messages/adviserMessages')
 const {studentStartMessage} = require('../../messages/studentMessages')
 
-
-const mainInfo = {
-    mainAdminUsername: "radegozine_manager",
-    ChannelChatId: -1001312069430,
-}
-
-
 module.exports = class roleSelect {
     async role_selector(ctx, next) {
         console.log('select role here')
@@ -33,7 +26,7 @@ module.exports = class roleSelect {
         const advisersUserNames = allAdvisers.map((adviser) => adviser.userName);
 
         // save main admin data in database at the first bot started
-        if (ctx.message.from.username === mainInfo.mainAdminUsername) {
+        if (ctx.message.from.username === process.env.MAIN_ADMIN_USERNAME) {
             const mainAdmin = await AdminModel.findOne({
                 userName: ctx.message.from.username,
             });

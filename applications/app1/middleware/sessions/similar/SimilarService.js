@@ -1,5 +1,6 @@
 //import models
 const StudentModel = require("../../../models/Student");
+const ChannelModel = require("../../../models/Channel");
 
 //import messages
 const {somethingWentWrong, voiceCaption, answerRegistrated} = require("../../../messages/similarMessages");
@@ -7,15 +8,8 @@ const {yourQuestionAnswered} = require("../../../messages/studentMessages");
 const {onlyVoiceMessage} = require("../../../messages/similarMessages");
 
 //our variables
-
 let questionText;
 let messageDatails;
-
-
-const mainInfo = {
-    MainAdminUsername: "radegozine_manager",
-    ChannelChatId: -1001312069430,
-}
 
 //define SimilarService class
 // create an instance
@@ -37,11 +31,17 @@ module.exports = new class SimilarService {
                 ctx.update.callback_query.message.message_id
             );
         } else if (ctx.message?.voice) {
-            await ctx.telegram.sendVoice(
-                mainInfo.ChannelChatId,
-                ctx.message.voice.file_id,
-                {caption: voiceCaption(questionText[0])}
-            );
+            const channelsData = await ChannelModel.find()
+            const channelsIds = channelsData.map(channel => channel.channelChatId);
+            if (channelsIds.length !== 0) {
+                for (let item in channelsIds) {
+                    await ctx.telegram.sendVoice(
+                        channelsIds[item],
+                        ctx.message.voice.file_id,
+                        {caption: voiceCaption(questionText[0])}
+                    );
+                }
+            } else return await ctx.reply("بات عضو کانالی نیست")
             const tempMessage = await ctx.reply(answerRegistrated);
             const student = await StudentModel.findOne({
                 userMessageText: questionText[0].split(":")[1],
@@ -58,7 +58,7 @@ module.exports = new class SimilarService {
             await ctx.telegram.deleteMessage(messageDatails[0], messageDatails[1]);
             setTimeout(() => {
                 ctx.telegram.deleteMessage(tempMessage.chat.id, tempMessage.message_id);
-            }, 3000);
+            }, 1500);
             await StudentModel.findOneAndDelete({
                 userMessageText: questionText[0].split(":")[1],
             });

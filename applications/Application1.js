@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const {startBot} = require("./app1/index");
 const winston = require("winston");
 
-class Application {
+module.exports = new class Application {
     constructor() {
         this.setupMongo();
         this.setupLogger();
@@ -26,4 +26,3 @@ class Application {
 
 }
 
-module.exports = Application;

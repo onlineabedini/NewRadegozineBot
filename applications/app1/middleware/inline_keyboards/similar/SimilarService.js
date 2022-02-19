@@ -1,107 +1,56 @@
-//import models
-const StudentModel = require("../../../models/Student");
-
-//import stateList
+const AdminModel = require("../../../models/Admin");
+const QuestionerModel = require('../../../models/Questioner');
 const stateList = require('../../stateList')
-
-//import functions
-const {sendQuestionText, sendMessageDetails} = require("../../sessions/similar/SimilarService");
-
-//import buttons
-const {answerCancelButton, confidenceButtons} = require("../../../buttons/similarButtons/answerButtons");
-
-//import messages
-const {enterYourAnswerAsVoice} = require("../../../messages/similarMessages");
-const {
-    deleteMessageConfidence, messageRemoved, messageDeletedBefore, tryDeletingMessageAgain,
-    deleteMessageRequestCanceled
-} = require("../../../messages/similarMessages");
-
-//our variables
-let messageId;
-let chatId;
-let studentQuestion;
-
+const {cancel_button} = require("../../../buttons/similar_buttons/cancel_button");
+const {confidence_buttons} = require("../../../buttons/similar_buttons/confidence_buttons");
+const {dont_change} = require("../../../buttons/similar_buttons/dont_change");
 module.exports = new class SimilarService {
-    async answer(ctx, next) {
-        // const question = ctx.update.callback_query.message.text.split("❓")[1].split("سوال :")[1]
-        // const student = await StudentModel.findOne({userMessageText : question });
-        const tempMessage = await ctx.reply(enterYourAnswerAsVoice, answerCancelButton);
-        sendQuestionText(ctx.update.callback_query.message.text.split("❓")[1]);
-        sendMessageDetails(
-            ctx.update.callback_query.message.chat.id,
-            ctx.update.callback_query.message.message_id,
-            tempMessage.message_id
-        );
-        ctx.session.state = stateList.answer;
-    }
-
-    async delete(ctx, next) {
-        messageId = ctx.update.callback_query.message.message_id;
-        chatId = ctx.update.callback_query.message.chat.id;
-        studentQuestion = ctx.update.callback_query.message.text;
-        ctx.reply(deleteMessageConfidence, confidenceButtons);
-    }
-
-    async yes(ctx, next) {
-        if (studentQuestion) {
-            await StudentModel.findOneAndDelete({
-                userMessageText: studentQuestion.split("❓")[1].split(":")[1],
-            });
-            try {
-                await ctx.telegram.deleteMessage(chatId, messageId);
-                await ctx.telegram.deleteMessage(
-                    ctx.update.callback_query.message.chat.id,
-                    ctx.update.callback_query.message.message_id
+    async selectPlan(ctx, matches) {
+        await ctx.telegram.deleteMessage(ctx.session.chatId, ctx.session.messageId);
+        const planId = matches[0].split("_")[1];
+        ctx.session.stateData = {
+            ...ctx.session.stateData,
+            planId,
+        };
+        const admin = await AdminModel.findOne({userName: ctx.chat.username});
+        if (admin) {
+            if (ctx.session.status === "update") {
+                await ctx.reply(
+                    "لطفا نام و نام خانوادگی دانش آموز را وارد کنید:",
+                    dont_change
                 );
-                const tempMessage = await ctx.reply(messageRemoved);
-                setTimeout(() => {
-                    ctx.telegram.deleteMessage(
-                        tempMessage.chat.id,
-                        tempMessage.message_id
-                    );
-                }, 1500);
-            } catch (err) {
-                console.log(err);
-                await ctx.telegram.deleteMessage(
-                    ctx.update.callback_query.message.chat.id,
-                    ctx.update.callback_query.message.message_id
+                ctx.session.state = stateList.getProStudentFullNameFromAdmin;
+            } else {
+                await ctx.reply(
+                    "لطفا نام و نام خانوادگی دانش آموز را وارد کنید:",
+                    cancel_button
                 );
-                const tempMessage = await ctx.reply(messageDeletedBefore);
-                setTimeout(() => {
-                    ctx.telegram.deleteMessage(
-                        tempMessage.chat.id,
-                        tempMessage.message_id
-                    );
-                }, 1500);
+                ctx.session.state = stateList.getProStudentFullNameFromAdmin;
             }
         } else {
-            await ctx.telegram.deleteMessage(
-                ctx.update.callback_query.message.chat.id,
-                ctx.update.callback_query.message.message_id
-            );
-            const tempMessage = await ctx.reply(tryDeletingMessageAgain);
-            setTimeout(() => {
-                ctx.telegram.deleteMessage(tempMessage.chat.id, tempMessage.message_id);
-            }, 1500);
+            ctx.session.state = stateList.getProStudentFullName;
+            ctx.reply("لطفا نام و نام خانوادگی خود را وارد کنید:", cancel_button);
         }
     }
 
-    async no(ctx, next) {
-        await ctx.telegram.deleteMessage(
-            ctx.update.callback_query.message.chat.id,
-            ctx.update.callback_query.message.message_id
-        );
-        const tempMessage = await ctx.reply(deleteMessageRequestCanceled);
-        setTimeout(() => {
-            ctx.telegram.deleteMessage(tempMessage.chat.id, tempMessage.message_id);
-        }, 1500);
+    async answer(ctx, matches) {
+        const questionerId = matches[0].split("_")[1];
+        const questioner = await QuestionerModel.findById(questionerId);
+        if (questioner) {
+            ctx.session.state = stateList.answer
+            ctx.session.questioner = questioner
+            ctx.reply("لطفا پاسخ خود را بصورت ویس وارد نمایید : ", cancel_button);
+        } else {
+            ctx.reply("این کاربر دیگر وجود ندارد.")
+        }
     }
 
-    async cancel(ctx, next) {
-        await ctx.telegram.deleteMessage(
-            ctx.update.callback_query.message.chat.id,
-            ctx.update.callback_query.message.message_id
-        );
+    async delete(ctx, matches) {
+        const questionerId = matches[0].split("_")[1];
+        ctx.reply("آیا از حذف این سوال اطمینان دارید؟", confidence_buttons)
+        ctx.session.questionerId = questionerId
+        ctx.session.state = stateList.removeQuestion
     }
+
+
 }

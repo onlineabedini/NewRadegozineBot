@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    userRole: {default: "adviser", type: String},
-    userChatId: {type: Number},
-    userName: {type: String},
-    userFullName: {type: String},
-    messagesIds: [],
+  userFullName: { type: String },
+  userField: { type: String },
+  userUniversity: { type: String },
+  userDescription: { type: String },
+  userPhoneNumber: { type: String },
+  userEmail: { type: String },
+  userCity: { type: String },
+  userChatId: { type: String },
+  userName: { type: String },
+  isPro: { default: false, type: Boolean },
+  isAccepted: { default: false, type: Boolean },
+  IsRegistered: { default: false, type: Boolean },
+  messagesIds: [],
 });
 module.exports = mongoose.model("AdviserModel", schema);

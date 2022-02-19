@@ -1,11 +1,8 @@
-//import StudentService class
-const StudentService = require('./StudentService');
+const StudentService = require("../student/StudentService")
 
-//import buttons text
-const {studentStartButtonsText} = require("../../../buttons/studentButtons/studentStartButtons");
+const {all_buttons_text} = require("../../../buttons/all_keyborad_text");
 
 module.exports = {
-    [studentStartButtonsText.askQuestion]: StudentService.askQuestion,
-    [studentStartButtonsText.showPlans]: StudentService.showPlans,
-    [studentStartButtonsText.contactWithAdmin]: StudentService.contactWithAdmin,
+    [all_buttons_text.update_my_info]: StudentService.update_my_info,
+    [all_buttons_text.ask_question_from_pro_adviser]: StudentService.ask_question_from_pro_adviser,
 }

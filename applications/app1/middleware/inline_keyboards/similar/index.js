@@ -1,10 +1,8 @@
 //import our classes
-const SimilarService = require('./SimilarService')
+const SimilarService = require("./SimilarService");
 
 module.exports = {
+    PLAN: SimilarService.selectPlan,
     ANSWER: SimilarService.answer,
     DELETE: SimilarService.delete,
-    YES: SimilarService.yes,
-    NO: SimilarService.no,
-    CANCEL: SimilarService.cancel,
-}
+};

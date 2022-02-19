@@ -1,32 +1,15 @@
-//import stateList
-const stateList = require("../../stateList");
-
-//import buttons
-const {cancelButton} = require("../../../buttons/similarButtons/cancelButton");
-const {showPlansButton, contactWithAdminButton} = require("../../../buttons/studentButtons/studentStartButtons");
-
-//import messages
-const {
-    enterFullname,
-    seePlansMessage,
-    askingQuestionGuide,
-    contactWithAdminMessage
-} = require("../../../messages/studentMessages");
+const stateList = require('../../stateList')
+const {cancel_button} = require("../../../buttons/similar_buttons/cancel_button");
+const {contact_with_pro_advisers} = require("../../../buttons/student_buttons/contact_with_pro_advisers");
 
 module.exports = new class StudentService {
-    async askQuestion(ctx, next) {
-        ctx.session.state = stateList.getStudentFullName;
-        await ctx.reply(askingQuestionGuide);
-        await ctx.reply(enterFullname , cancelButton);
+    async update_my_info(ctx, next) {
+        ctx.session.status = "update"
+        ctx.session.state = stateList.getProStudentFullName
+        ctx.reply("لطفا نام و نام خانوادگی خود را وارد نمایید : ", cancel_button)
     }
 
-    async showPlans(ctx, next) {
-        ctx.session.state = undefined;
-        await ctx.reply(seePlansMessage, showPlansButton);
-    }
-
-    async contactWithAdmin(ctx, next) {
-        ctx.session.state = undefined;
-        await ctx.reply(contactWithAdminMessage, contactWithAdminButton);
+    async ask_question_from_pro_adviser(ctx, next) {
+        ctx.reply("برای ارتباط با هر مشاور روی دکمه ی مربوط به آن کلیک نمایید : " , contact_with_pro_advisers)
     }
 }

@@ -1,5 +1,5 @@
 module.exports.studentInfoMessage = (student) => `
-❓سوال :${student.userMessageText}❓
+❓ سوال :${student.userMessageText}❓
 
 👨‍🎓مشخصات دانش آموز :
 
@@ -13,9 +13,9 @@ module.exports.studentInfoMessage = (student) => `
 
 @radegozine_bot`
 
-module.exports.voiceCaption = (questionText) => `
+module.exports.voice_caption = (questioner) => `
 🟢 سوالات مشاوره ای
-⁉️ ${questionText}
+⁉️ ${questioner.userMessageText}
 
 
 🟢 ردگزینه
@@ -57,7 +57,7 @@ module.exports.forceJoinMessage = (channelUserNames) => {
     ${message}`
 }
 
-module.exports.viewStudentsQuestionsList = "🔻 لیست سوالات دانش آموزان 🔻"
+module.exports.questionsListTitle = "🔻 لیست سوالات دانش آموزان 🔻"
 module.exports.enterYourMessage = "لطفا پیام خود را وارد نمایید : "
 module.exports.enterYourAnswerAsVoice = "لطفا پاسخ خود را بصورت ویس وارد نمایید : "
 module.exports.enterYourMessageAsText = "لطفا پیام خود را بصورت متنی وارد نمایید : "

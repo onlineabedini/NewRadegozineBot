@@ -2,9 +2,8 @@
 const AdviserService = require('./AdviserService')
 
 //import buttons text
-const { adviserStartButtonsText } = require("../../../buttons/adviserButtons/adviserStartButtons");
+const {all_buttons_text} = require("../../../buttons/all_keyborad_text");
 
 module.exports = {
-    [adviserStartButtonsText.sendMessageForAdmins]: AdviserService.sendMessageForAdmins,
-    [adviserStartButtonsText.getStudentsQuestionsList]: AdviserService.getStudentsQuestionsList,
+    [all_buttons_text.send_message_for_admins]: AdviserService.send_message_for_admins,
 }

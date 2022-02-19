@@ -2,6 +2,7 @@
 const adminSessions = require("./admin");
 const adviserSessions = require("./adviser");
 const studentSessions = require("./student");
+const proStudentSessions = require("./pro_student");
 const similarSessions = require("./similar");
 
 
@@ -21,6 +22,7 @@ const EventListener = {
     ...adminSessions,
     ...adviserSessions,
     ...studentSessions,
-    ...similarSessions
+    ...proStudentSessions,
+    ...similarSessions,
 };
 

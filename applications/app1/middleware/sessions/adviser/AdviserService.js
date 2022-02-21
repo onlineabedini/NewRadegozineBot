@@ -12,16 +12,26 @@ const {
 
 //import messages
 const {
-    messageSent,
-    onlyTextMessage,
+    message_sent_successfully,
+    text_message_only,
+    enter_email_message,
+    enter_field_message,
+    enter_university_message,
+    enter_description_message,
+    your_information_has_been_registered_you_will_be_notified_if_confirmed_message,
+    your_registration_has_been_canceled_message,
+    something_went_wrong_please_try_again_message,
+    input_is_invalid_message,
+    no_email
 } = require("../../../messages/similarMessages");
+const {enter_city_message, enter_phone_number_message,} = require("../../../messages/similarMessages");
 const stateList = require("../../stateList");
 
 const {
     accept_discard_buttons,
 } = require("../../../buttons/similar_buttons/accept_discard_buttons");
 const {
-    previewAdviserRegistrationForm,
+    preview_adviser_registration_form,
 } = require("../../../messages/studentMessages");
 
 const {
@@ -31,6 +41,7 @@ const {
 const {all_buttons_text} = require("../../../buttons/all_keyborad_text");
 const {register_buttons} = require("../../../buttons/user_buttons/register_buttons");
 const {skip_from_this_step_buttons} = require("../../../buttons/similar_buttons/skip_from_this_step");
+
 
 //define AdviserService class
 // create an instance
@@ -44,7 +55,7 @@ module.exports = new (class AdviserService {
             adviser.userName = ctx.message.chat.username;
             adviser.messagesIds.push(ctx.message.message_id);
             adviser.save();
-            ctx.reply(messageSent, adviser_start_buttons);
+            ctx.reply(message_sent_successfully, adviser_start_buttons);
         }
     }
 
@@ -55,13 +66,10 @@ module.exports = new (class AdviserService {
                 const adviserFullName = await ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, adviserFullName};
                 ctx.session.state = stateList.getAdviserPhoneNumber;
-                ctx.reply(
-                    "لطفا شماره تلفن  خود را وارد کنید",
-                    request_contact_button
-                );
+                ctx.reply(enter_phone_number_message, request_contact_button);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, register_buttons);
+                ctx.reply(text_message_only, register_buttons);
             }
         }
     }
@@ -70,16 +78,15 @@ module.exports = new (class AdviserService {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.contact?.phone_number) {
-                const adviserPhoneNumber = await ctx.message.contact.phone_number;
+                const adviserPhoneNumber = ctx.message.contact.phone_number;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    adviserPhoneNumber,
+                    ...ctx.session.stateData, adviserPhoneNumber,
                 };
                 ctx.session.state = stateList.getAdviserEmail;
-                ctx.reply("لطفا ایمیل خود را وارد کنید (اختیاری)", skip_from_this_step_buttons);
+                ctx.reply(enter_email_message, skip_from_this_step_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply("ورودی نامعتبر است.", register_buttons);
+                ctx.reply(input_is_invalid_message, register_buttons);
             }
         }
     }
@@ -92,16 +99,16 @@ module.exports = new (class AdviserService {
                     const adviserEmail = ctx.message.text;
                     ctx.session.stateData = {...ctx.session.stateData, adviserEmail};
                     ctx.session.state = stateList.getAdviserCity;
-                    ctx.reply("لطفا شهر محل سکونت خود را وارد : ", cancel_button);
+                    ctx.reply(enter_city_message, cancel_button);
                 } else {
-                    const adviserEmail = "فاقد ایمیل";
+                    const adviserEmail = no_email;
                     ctx.session.stateData = {...ctx.session.stateData, adviserEmail};
                     ctx.session.state = stateList.getAdviserCity;
-                    ctx.reply("لطفا شهر محل سکونت خود را وارد :", cancel_button);
+                    ctx.reply(enter_city_message, cancel_button);
                 }
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, register_buttons);
+                ctx.reply(text_message_only, register_buttons);
             }
         }
     }
@@ -113,10 +120,10 @@ module.exports = new (class AdviserService {
                 const adviserCity = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, adviserCity};
                 ctx.session.state = stateList.getAdviserField;
-                ctx.reply("لطفا زمینه کاری خود را وارد کنید :", cancel_button);
+                ctx.reply(enter_field_message, cancel_button);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, register_buttons);
+                ctx.reply(text_message_only, register_buttons);
             }
         }
     }
@@ -128,13 +135,10 @@ module.exports = new (class AdviserService {
                 const adviserField = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, adviserField};
                 ctx.session.state = stateList.getAdviserUniversity;
-                ctx.reply(
-                    "لطفا نام دانشگاهی که در آن تحصیل می کنید را وارد نمایید :",
-                    cancel_button
-                );
+                ctx.reply(enter_university_message, cancel_button);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, register_buttons);
+                ctx.reply(text_message_only, register_buttons);
             }
         }
     }
@@ -146,13 +150,10 @@ module.exports = new (class AdviserService {
                 const adviserUniversity = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, adviserUniversity};
                 ctx.session.state = stateList.getAdviserDescription;
-                ctx.reply(
-                    "لطفا توضحیاتی (مثل سابقه ی کار) و یا سایر موارد را در مورد خود وارد کنید : ",
-                    cancel_button
-                );
+                ctx.reply(enter_description_message, cancel_button);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, register_buttons);
+                ctx.reply(text_message_only, register_buttons);
             }
         }
     }
@@ -163,29 +164,23 @@ module.exports = new (class AdviserService {
             if (ctx.message.text) {
                 const adviserDescription = ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    adviserDescription,
+                    ...ctx.session.stateData, adviserDescription,
                 };
                 ctx.session.state = stateList.saveRegisteredAdviserInfo;
-                ctx.reply(
-                    previewAdviserRegistrationForm(ctx.session.stateData),
-                    accept_discard_buttons
-                );
+                ctx.reply(preview_adviser_registration_form(ctx.session.stateData), accept_discard_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, register_buttons);
+                ctx.reply(text_message_only, register_buttons);
             }
         }
     }
 
     async saveRegisteredAdviserInfo(ctx, next) {
         ctx.session.state = undefined;
-        if (
-            ctx.message.text === all_buttons_text.accept
-        ) {
+        if (ctx.message.text === all_buttons_text.accept) {
             const newAdviser = await new AdviserModel({
-                userChatId: await ctx.chat.id,
-                userName: await ctx.chat.username,
+                userChatId: ctx.chat.id,
+                userName: ctx.chat.username,
                 userFullName: ctx.session.stateData.adviserFullName,
                 userPhoneNumber: ctx.session.stateData.adviserPhoneNumber,
                 userEmail: ctx.session.stateData.adviserEmail,
@@ -197,21 +192,13 @@ module.exports = new (class AdviserService {
             });
             await newAdviser.save();
             ctx.session.stateData = undefined;
-            ctx.reply(
-                "اطلاعات شما با موفقیت ثبت شد و در صورت تایید به شما اطلاع داده خواهد شد",
-                register_buttons
-            );
-        } else if (
-            ctx.message.text === all_buttons_text.discard
-        ) {
+            ctx.reply(your_information_has_been_registered_you_will_be_notified_if_confirmed_message, register_buttons);
+        } else if (ctx.message.text === all_buttons_text.discard) {
             ctx.session.stateData = undefined;
-            ctx.reply("ثبت نام شما با موفقیت لغو شد .", register_buttons);
+            ctx.reply(your_registration_has_been_canceled_message, register_buttons);
         } else {
             ctx.session.stateData = undefined;
-            ctx.reply(
-                "خطایی پیش آمده لطفا مجددا امتحان نمایید.",
-                register_buttons
-            );
+            ctx.reply(something_went_wrong_please_try_again_message, register_buttons);
         }
     }
 })();

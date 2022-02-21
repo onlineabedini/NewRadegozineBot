@@ -1,4 +1,4 @@
-module.exports.update_and_remove_student_buttons = (id) => {
+module.exports.update_remove_student_buttons = (id) => {
     return {
         reply_markup: {
             resize_keyboard: true,

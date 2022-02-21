@@ -1,21 +1,26 @@
 {
   "sessions": [
     {
-      "id": "5017613242:5017613242",
+      "id": "552250633:552250633",
       "data": {
         "questioner": {
-          "_id": "6210cb6015fad4061f434cae",
+          "_id": "6213969158c9ee9303ecc40b",
           "userRole": "student",
           "userChatId": "1760285743",
           "userName": "siralinp",
-          "userFullName": "adsfasdfasdf",
-          "userField": "adsfasdfasdf",
-          "userGrade": "asddfasdfasdf",
-          "userMessageId": "8460",
-          "userMessageText": "asdfsdafasdf",
+          "userFullName": "علی نظرپور",
+          "userField": "ریاضی",
+          "userGrade": "دوزادهم",
+          "userMessageId": "9527",
+          "userMessageText": "چرا باید درس بخونم",
           "__v": 0
-        },
-        "questionerId": "621124f0837bc6d8d5ceedd5"
+        }
+      }
+    },
+    {
+      "id": "1760285743:1760285743",
+      "data": {
+        "state": "getAdviserFullNameForRegister"
       }
     }
   ]

@@ -10,12 +10,9 @@ const {auth_button} = require("../../../buttons/similar_buttons/auth_button");
 
 //import messages
 const {
-    enterField,
-    enterGrade,
-    enterQuestion,
-    questionRegistrated
+    enter_your_question_as_text, your_question_registrated_message
 } = require("../../../messages/studentMessages");
-const {onlyTextMessage} = require("../../../messages/similarMessages");
+const {text_message_only, enter_field_message , enter_grade_message} = require("../../../messages/similarMessages");
 
 //define StudentService class
 // create an instance
@@ -27,9 +24,9 @@ module.exports = new class StudentService {
                 const fullName = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, fullName};
                 ctx.session.state = stateList.getStudentField;
-                ctx.reply(enterField);
+                ctx.reply(enter_field_message);
             } else {
-                ctx.reply(onlyTextMessage, await auth_button(ctx));
+                ctx.reply(text_message_only, await auth_button(ctx));
             }
         }
     }
@@ -41,10 +38,10 @@ module.exports = new class StudentService {
                 const field = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, field};
                 ctx.session.state = stateList.getStudentGrade;
-                ctx.reply(enterGrade);
+                ctx.reply(enter_grade_message);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, await auth_button(ctx));
+                ctx.reply(text_message_only, await auth_button(ctx));
             }
         }
     }
@@ -56,10 +53,10 @@ module.exports = new class StudentService {
                 const grade = ctx.message.text;
                 ctx.session.stateData = {...ctx.session.stateData, grade};
                 ctx.session.state = stateList.askQuestion;
-                ctx.reply(enterQuestion);
+                ctx.reply(enter_your_question_as_text);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, await auth_button(ctx));
+                ctx.reply(text_message_only, await auth_button(ctx));
             }
         }
     }
@@ -79,10 +76,10 @@ module.exports = new class StudentService {
                 });
                 await newQuestion.save();
                 ctx.session.stateData = undefined;
-                ctx.reply(questionRegistrated, await auth_button(ctx));
+                ctx.reply(your_question_registrated_message, await auth_button(ctx));
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, await auth_button(ctx));
+                ctx.reply(text_message_only, await auth_button(ctx));
             }
         }
     }

@@ -12,9 +12,9 @@ const {student_start_buttons} = require('../../buttons/student_buttons/student_s
 const {user_start_buttons} = require('../../buttons/user_buttons/user_start_buttons')
 
 // import Admin Messages
-const {adminStartMessage} = require('../../messages/adminMessages')
-const {adviserStartMessage, proAdviserStartMessage} = require('../../messages/adviserMessages')
-const {studentStartMessage, userStartMessage} = require('../../messages/studentMessages')
+const {admin_start_message} = require('../../messages/adminMessages')
+const {adviser_start_message, pro_adviser_start_message} = require('../../messages/adviserMessages')
+const {student_start_message, user_start_message} = require('../../messages/studentMessages')
 
 module.exports = class roleSelect {
     async role_selector(ctx, next) {
@@ -30,43 +30,41 @@ module.exports = class roleSelect {
             });
             if (!mainAdmin) {
                 const mainAdmin = await new AdminModel({
-                    userFullName: "مدیر اصلی",
-                    userName: ctx.chat.username,
-                    userChatId: ctx.chat.id,
+                    userFullName: "مدیر اصلی", userName: ctx.chat.username, userChatId: ctx.chat.id,
                 })
                 await mainAdmin.save();
-                ctx.reply(adminStartMessage, admin_start_buttons);
+                ctx.reply(admin_start_message, admin_start_buttons);
             } else {
                 const mainAdmin = await AdminModel.findOneAndUpdate({userName: ctx.chat.username}, {
                     userChatId: ctx.chat.id
                 }, {new: true});
                 await mainAdmin.save();
-                ctx.reply(adminStartMessage, admin_start_buttons);
+                ctx.reply(admin_start_message, admin_start_buttons);
             }
         } else if (admin) {
             const admin = await AdminModel.findOneAndUpdate({userName: ctx.chat.username}, {
                 userChatId: ctx.chat.id
             }, {new: true});
             await admin.save();
-            ctx.reply(adminStartMessage, admin_start_buttons);
+            ctx.reply(admin_start_message, admin_start_buttons);
         } else if (proAdviser) {
             const proAdviser = await AdviserModel.findOneAndUpdate({userName: ctx.chat.username}, {
                 userChatId: ctx.chat.id
             }, {new: true});
             await proAdviser.save();
-            ctx.reply(proAdviserStartMessage, pro_adviser_start_buttons);
+            ctx.reply(pro_adviser_start_message, pro_adviser_start_buttons);
         } else if (normalAdviser) {
             const normalAdviser = await AdviserModel.findOneAndUpdate({userName: ctx.chat.username}, {
                 userChatId: ctx.chat.id
             }, {new: true});
             await normalAdviser.save();
-            ctx.reply(adviserStartMessage, adviser_start_buttons);
+            ctx.reply(adviser_start_message, adviser_start_buttons);
         } else if (proStudent) {
             const proStudent = await ProStudentModel.findOneAndUpdate({userName: ctx.chat.username}, {
                 userChatId: ctx.chat.id
             }, {new: true});
             await proStudent.save();
-            ctx.reply(studentStartMessage, student_start_buttons);
+            ctx.reply(student_start_message, student_start_buttons);
         } else {
             const user = await UserModel.findOne({userChatId: ctx.chat.id});
             if (!user) {
@@ -77,13 +75,13 @@ module.exports = class roleSelect {
                     userLastName: ctx.chat.last_name,
                 })
                 await newUser.save();
-                ctx.reply(userStartMessage, user_start_buttons);
+                ctx.reply(user_start_message, user_start_buttons);
             } else {
                 const user = await UserModel.findOneAndUpdate({userName: ctx.chat.username}, {
                     userChatId: ctx.chat.id
                 }, {new: true});
                 await user.save();
-                ctx.reply(userStartMessage, user_start_buttons);
+                ctx.reply(user_start_message, user_start_buttons);
             }
         }
     }

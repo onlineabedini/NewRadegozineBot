@@ -3,11 +3,11 @@ const express = require("express");
 module.exports = router = express.Router();
 
 new class web_application {
-    constructor(){
-        this.render_routes();   
+    constructor() {
+        this.render_routes();
     }
 
-    render_routes(){
+    render_routes() {
         // login
         router.get('/', (req, res) => {
             return res.send('login page');
@@ -22,5 +22,5 @@ new class web_application {
         router.use('/', (req, res) => {
             res.send('not_found');
         })
-    }   
+    }
 }

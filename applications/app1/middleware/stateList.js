@@ -6,7 +6,6 @@ module.exports = {
     removeAdviser: "removeAdviser",
     promoteAdviser: "promoteAdviser",
     demoteAdviser: "demoteAdviser",
-
     getPlanTitle: "getPlanTitle",
     getPlanPrice: "getPlanPrice",
     getPlanImage: "getPlanImage",
@@ -24,7 +23,6 @@ module.exports = {
     getStudentGrade: "getStudentGrade",
     askQuestion: "askQuestion",
     answer: "answer",
-
     getProStudentFullName: "getProStudentFullName",
     getProStudentField: "getProStudentField",
     getProStudentGrade: "getProStudentGrade",
@@ -34,7 +32,6 @@ module.exports = {
     getProStudentCity: "getProStudentCity",
     getProStudentPaymentPicture: "getProStudentPaymentPicture",
     registerProStudent: "registerProStudent",
-
     selectStudentPlanByAdmin: "selectStudentPlanByAdmin",
     getProStudentFullNameFromAdmin: "getProStudentFullNameFromAdmin",
     getProStudentUserNameFromAdmin: "getProStudentUserNameFromAdmin",
@@ -46,7 +43,6 @@ module.exports = {
     getProStudentEmailFromAdmin: "getProStudentEmailFromAdmin",
     getProStudentCityFromAdmin: "getProStudentCityFromAdmin",
     registerProStudentByAdmin: "registerProStudentByAdmin",
-
     getAdviserFullNameForRegister: "getAdviserFullNameForRegister",
     getAdviserPhoneNumber: "getAdviserPhoneNumber",
     getAdviserEmail: "getAdviserEmail",
@@ -55,18 +51,16 @@ module.exports = {
     getAdviserUniversity: "getAdviserUniversity",
     getAdviserDescription: "getAdviserDescription",
     saveRegisteredAdviserInfo: "saveRegisteredAdviserInfo",
-
-    getFieldForSendContent : "getFieldForSendContent",
-    getGradeForSendContent : "getGradeForSendContent",
-    getLevelForSendContent : "getLevelForSendContent",
-    getContentMessage:"getContentMessage",
-    sendContentForProStudents : "sendContentForProStudents",
-    sendContentForAllStudents : "sendContentForAllStudents",
-
+    getFieldForSendContent: "getFieldForSendContent",
+    getGradeForSendContent: "getGradeForSendContent",
+    getLevelForSendContent: "getLevelForSendContent",
+    getContentMessage: "getContentMessage",
+    sendContentForProStudents: "sendContentForProStudents",
+    sendContentForAllStudents: "sendContentForAllStudents",
     acceptAdviser: "acceptAdviser",
-    acceptStudent:"acceptStudent",
-    rejectStudent:"rejectStudent",
+    acceptStudent: "acceptStudent",
+    rejectStudent: "rejectStudent",
     rejectAdviser: "rejectAdviser",
     removeStudent: "removeStudent",
-    removeQuestion:"removeQuestion"
+    removeQuestion: "removeQuestion"
 };

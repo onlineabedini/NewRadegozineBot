@@ -1,6 +1,6 @@
 //import our models
 const ChannelModel = require('../../models/Channel.js');
-const {forceJoinMessage} = require("../../messages/similarMessages");
+const {force_join_message, bot_is_not_a_member_of_any_channels_message} = require("../../messages/similarMessages");
 
 module.exports = async (ctx, next) => {
     if (ctx.message) {
@@ -13,12 +13,12 @@ module.exports = async (ctx, next) => {
                 const membershipStatus = (await ctx.telegram.getChatMember(channelsIds[id], ctx.from.id)).status;
                 if (membershipStatus !== 'creator' && membershipStatus !== 'administrator' && membershipStatus !== 'member') {
                     const channelUserNames = channelsData.map(channel => channel.channelUserName);
-                    return await ctx.reply(forceJoinMessage(channelUserNames));
+                    return await ctx.reply(force_join_message(channelUserNames));
                 }
             }
             return next();
         } else {
-            return ctx.reply("بات عضو کانالی نیست");
+            return ctx.reply(bot_is_not_a_member_of_any_channels_message);
         }
     } else return next()
 }

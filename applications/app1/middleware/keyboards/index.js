@@ -10,17 +10,12 @@ const {all_buttons_text} = require("../../buttons/all_keyborad_text");
 module.exports = (ctx, next) => {
     if (!ctx.message) return next();
     const text = ctx.message.text;
-    if (text)
-        if (Object.values(all_buttons_text).includes(text) && EventListener[text]) {
-            return EventListener[text](ctx);
-        }
+    if (text) if (Object.values(all_buttons_text).includes(text) && EventListener[text]) {
+        return EventListener[text](ctx);
+    }
     next();
 };
 
 EventListener = {
-    ...adminKeyboards,
-    ...adviserKeyboards,
-    ...studentKeyboards,
-    ...userKeyboards,
-    ...similarKeyboards,
+    ...adminKeyboards, ...adviserKeyboards, ...studentKeyboards, ...userKeyboards, ...similarKeyboards,
 };

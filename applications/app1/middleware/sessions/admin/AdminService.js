@@ -19,32 +19,70 @@ const {
 
 //import messages
 const {
-    enterAdminFullname,
-    enterAdviserFullname,
-    enteredUsernameIsInvalid,
-    adminRemoved,
-    adviserRemoved,
-    noAdminExist,
-    noAdviserExist,
-    duplicateAdmin,
-    adminRegistrated,
-    adviserRegistrated,
-    duplicateAdviser,
-    messageSentToAdvisers,
-    noAdviserAdded,
-    messageSentToStudents,
-    noStudentExist,
-    planCaption, pro_student_preview,
+    enter_admin_fullname_message,
+    enter_adviser_fullname_message,
+    invalid_username_entered_message,
+    admin_removed_message,
+    adviser_removed_message,
+    no_admin_found_message,
+    no_adviser_found_message,
+    duplicate_admin_message,
+    admin_registrated_message,
+    adviser_registrated_message,
+    duplicate_adviser_message,
+    your_message_has_been_sent_to_advisers_message,
+    plan_caption,
+    pro_student_registration_preview,
+    The_adviser_was_promoted,
+    no_adviser_found_with_this_username,
+    The_adviser_was_demoted,
+    enter_plan_price_message,
+    enter_plan_description_message,
+    enter_plan_image_message,
+    plan_registered_message,
+    duplicate_plan_message,
+    no_user_found,
+    enter_pro_student_user_name_message,
+    enter_pro_student_field_message,
+    enter_pro_student_grade_message,
+    enter_pro_student_level_message,
+    enter_pro_student_phone_number_message,
+    enter_pro_student_whats_up_number_message,
+    enter_pro_student_email_message,
+    enter_pro_student_city_message,
+    student_registered_message,
+    student_registration_canceled_message,
+    adviser_accepted_message,
+    adviser_not_found,
+    adding_plan_was_canceled,
+    the_student_became_a_pro_student_message,
+    this_student_has_already_been_removed_message,
+    this_adviser_has_already_been_removed_message,
+    the_student_was_not_accepted_message,
+    this_plan_has_already_been_removed_message,
+    the_plan_was_removed_message, the_student_was_removed_message,
 } = require("../../../messages/adminMessages");
 const {
-    onlyTextMessage,
+    text_message_only,
+    select_an_item_message,
+    something_went_wrong,
+    message_sent_successfully,
+    your_request_has_been_canceled,
+    you_have_been_accepted_message,
+    information_updated_message,
+    error_updating_information_message,
+    information_update_canceled_message,
+    input_is_invalid_message,
+    no_contact_number,
+    no_email,
+    registration_has_not_been_completed_message, no_city,
 } = require("../../../messages/similarMessages");
 const {
     manage_plans_buttons,
 } = require("../../../buttons/admin_buttons/manage_plans_buttons");
 
 const {
-    acceptDiscardButtonsText, accept_discard_buttons,
+    accept_discard_buttons,
 } = require("../../../buttons/similar_buttons/accept_discard_buttons");
 const {
     manage_pro_students_buttons
@@ -78,12 +116,12 @@ module.exports = new (class AdminService {
                 if (adminUserName) {
                     ctx.session.stateData = {...ctx.session.stateData, adminUserName};
                     ctx.session.state = stateList.getAdminFullName;
-                    ctx.reply(enterAdminFullname);
+                    ctx.reply(enter_admin_fullname_message);
                 } else {
-                    ctx.reply(enteredUsernameIsInvalid, manage_admins_buttons);
+                    ctx.reply(invalid_username_entered_message, manage_admins_buttons);
                 }
             } else {
-                ctx.reply(onlyTextMessage, manage_admins_buttons);
+                ctx.reply(text_message_only, manage_admins_buttons);
             }
         }
     }
@@ -104,14 +142,14 @@ module.exports = new (class AdminService {
                     });
                     await newAdmin.save();
                     ctx.session.stateData = undefined;
-                    ctx.reply(adminRegistrated, admin_start_buttons);
+                    ctx.reply(admin_registrated_message, admin_start_buttons);
                 } else {
                     ctx.session.stateData = undefined;
-                    ctx.reply(duplicateAdmin, admin_start_buttons);
+                    ctx.reply(duplicate_admin_message, admin_start_buttons);
                 }
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, manage_admins_buttons);
+                ctx.reply(text_message_only, manage_admins_buttons);
             }
         }
     }
@@ -125,12 +163,12 @@ module.exports = new (class AdminService {
                 const admin = await AdminModel.findOne({userName: adminUserName});
                 if (admin) {
                     await AdminModel.findOneAndDelete({userName: adminUserName});
-                    ctx.reply(adminRemoved, manage_admins_buttons);
+                    ctx.reply(admin_removed_message, manage_admins_buttons);
                 } else {
-                    ctx.reply(noAdminExist, manage_admins_buttons);
+                    ctx.reply(no_admin_found_message, manage_admins_buttons);
                 }
             } else {
-                ctx.reply(onlyTextMessage, manage_admins_buttons);
+                ctx.reply(text_message_only, manage_admins_buttons);
             }
         }
     }
@@ -145,12 +183,12 @@ module.exports = new (class AdminService {
                 if (adviserUserName) {
                     ctx.session.stateData = {...ctx.session.stateData, adviserUserName};
                     ctx.session.state = stateList.getAdviserFullName;
-                    ctx.reply(enterAdviserFullname);
+                    ctx.reply(enter_adviser_fullname_message);
                 } else {
-                    ctx.reply(enteredUsernameIsInvalid, manage_advisers_buttons);
+                    ctx.reply(invalid_username_entered_message, manage_advisers_buttons);
                 }
             } else {
-                ctx.reply(onlyTextMessage, manage_advisers_buttons);
+                ctx.reply(text_message_only, manage_advisers_buttons);
             }
         }
     }
@@ -172,14 +210,14 @@ module.exports = new (class AdminService {
                     });
                     await newAdviser.save();
                     ctx.session.stateData = undefined;
-                    ctx.reply(adviserRegistrated, admin_start_buttons);
+                    ctx.reply(adviser_registrated_message, admin_start_buttons);
                 } else {
                     ctx.session.stateData = undefined;
-                    ctx.reply(duplicateAdviser, admin_start_buttons);
+                    ctx.reply(duplicate_adviser_message, admin_start_buttons);
                 }
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, manage_advisers_buttons);
+                ctx.reply(text_message_only, manage_advisers_buttons);
             }
         }
     }
@@ -195,12 +233,12 @@ module.exports = new (class AdminService {
                 });
                 if (adviser) {
                     await AdviserModel.findOneAndDelete({userName: adviserUserName});
-                    ctx.reply(adviserRemoved, manage_advisers_buttons);
+                    ctx.reply(adviser_removed_message, manage_advisers_buttons);
                 } else {
-                    ctx.reply(noAdviserExist, manage_advisers_buttons);
+                    ctx.reply(no_adviser_found_message, manage_advisers_buttons);
                 }
             } else {
-                ctx.reply(onlyTextMessage, manage_advisers_buttons);
+                ctx.reply(text_message_only, manage_advisers_buttons);
             }
         }
     }
@@ -218,15 +256,15 @@ module.exports = new (class AdminService {
                             isPro: true
                         }, {new: true})
                         await adviser.save()
-                        ctx.reply("مشاور مورد نظر ارتقای رتبه پیدا کرد", manage_advisers_buttons)
+                        ctx.reply(The_adviser_was_promoted, manage_advisers_buttons)
                     } else {
-                        ctx.reply("مشاوری با این یوزرنیم یافت نشد.", manage_advisers_buttons)
+                        ctx.reply(no_adviser_found_with_this_username, manage_advisers_buttons)
                     }
                 } else {
-                    ctx.reply(enteredUsernameIsInvalid, manage_advisers_buttons);
+                    ctx.reply(invalid_username_entered_message, manage_advisers_buttons);
                 }
             } else {
-                ctx.reply(onlyTextMessage, manage_advisers_buttons);
+                ctx.reply(text_message_only, manage_advisers_buttons);
             }
         }
     }
@@ -244,15 +282,15 @@ module.exports = new (class AdminService {
                             isPro: false
                         }, {new: true})
                         await adviser.save()
-                        ctx.reply("مشاور مورد نظر تنزل رتبه پیدا کرد", manage_advisers_buttons)
+                        ctx.reply(The_adviser_was_demoted, manage_advisers_buttons)
                     } else {
-                        ctx.reply("مشاوری با این یوزرنیم یافت نشد.", manage_advisers_buttons)
+                        ctx.reply(no_adviser_found_with_this_username, manage_advisers_buttons)
                     }
                 } else {
-                    ctx.reply(enteredUsernameIsInvalid, manage_advisers_buttons);
+                    ctx.reply(invalid_username_entered_message, manage_advisers_buttons);
                 }
             } else {
-                ctx.reply(onlyTextMessage, manage_advisers_buttons);
+                ctx.reply(text_message_only, manage_advisers_buttons);
             }
         }
     }
@@ -263,17 +301,13 @@ module.exports = new (class AdminService {
             if (ctx.message.text) {
                 const planTitle = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    planTitle,
+                    ...ctx.session.stateData, planTitle,
                 };
                 ctx.session.state = stateList.getPlanPrice;
-                ctx.reply(
-                    "لطفا قیمت طرح را طرح وارد نمایید (به تومان) ",
-                    cancel_button
-                );
+                ctx.reply(enter_plan_price_message, cancel_button);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, manage_plans_buttons);
+                ctx.reply(text_message_only, manage_plans_buttons);
             }
         }
     }
@@ -284,17 +318,13 @@ module.exports = new (class AdminService {
             if (ctx.message.text) {
                 const planPrice = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    planPrice,
+                    ...ctx.session.stateData, planPrice,
                 };
                 ctx.session.state = stateList.getPlanDescription;
-                ctx.reply(
-                    "لطفا توضیحاتی را در مورد طرح وارد نمایید",
-                    cancel_button
-                );
+                ctx.reply(enter_plan_description_message, cancel_button);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, manage_plans_buttons);
+                ctx.reply(text_message_only, manage_plans_buttons);
             }
         }
     }
@@ -305,18 +335,13 @@ module.exports = new (class AdminService {
             if (ctx.message.text) {
                 const planDescription = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    planDescription,
+                    ...ctx.session.stateData, planDescription,
                 };
                 ctx.session.state = stateList.getPlanImage;
-                ctx.reply(
-                    `لطفا تصویری را در مورد طرح وارد نمایید
-        در صورتی که مایل نیستید تصویری را برای طرح بارگذاری کنید بر روی دکمه ی "گذشتن از این مرحله" کلیک کنید`,
-                    skip_from_this_step_buttons
-                );
+                ctx.reply(enter_plan_image_message, skip_from_this_step_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, manage_plans_buttons);
+                ctx.reply(text_message_only, manage_plans_buttons);
             }
         }
     }
@@ -329,24 +354,17 @@ module.exports = new (class AdminService {
                 ctx.session.stateData = {...ctx.session.stateData, planImage};
                 ctx.session.state = stateList.registerPlan;
                 await ctx.replyWithPhoto(planImage, {
-                    caption: planCaption(ctx.session.stateData),
+                    caption: plan_caption(ctx.session.stateData),
                 });
-                ctx.reply(
-                    "لطفا یکی از موارد زیر را انتخاب نمایید",
-                    accept_discard_buttons
-                );
+                ctx.reply(select_an_item_message, accept_discard_buttons);
             } else if (ctx.message.text === all_buttons_text.skip_from_this_step) {
-                const planImage =
-                    "AgACAgQAAxkBAAIKw2II7CYViBRcubDrLJ2Tn9WTB0CcAAKMtzEbwGZJUAIyce3UUnJfAQADAgADeQADIwQ";
+                const planImage = "AgACAgQAAxkBAAIKw2II7CYViBRcubDrLJ2Tn9WTB0CcAAKMtzEbwGZJUAIyce3UUnJfAQADAgADeQADIwQ";
                 ctx.session.stateData = {...ctx.session.stateData, planImage};
                 ctx.session.state = stateList.registerPlan;
                 await ctx.replyWithPhoto(planImage, {
-                    caption: planCaption(ctx.session.stateData),
+                    caption: plan_caption(ctx.session.stateData),
                 });
-                ctx.reply(
-                    "لطفا یکی از موارد زیر را انتخاب نمایید",
-                    accept_discard_buttons
-                );
+                ctx.reply(select_an_item_message, accept_discard_buttons);
             }
         }
     }
@@ -364,20 +382,17 @@ module.exports = new (class AdminService {
                 });
                 await newPlan.save();
                 ctx.session.stateData = undefined;
-                ctx.reply("طرح با موفقیت ثبت شد", admin_start_buttons);
+                ctx.reply(plan_registered_message, admin_start_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply("طرحی با این عنوان در حال حاضر وجود دارد.", admin_start_buttons);
+                ctx.reply(duplicate_plan_message, admin_start_buttons);
             }
         } else if (ctx.message.text === all_buttons_text.discard) {
             ctx.session.stateData = undefined;
-            ctx.reply("طرح با موفقیت لغو شد", admin_start_buttons);
+            ctx.reply(adding_plan_was_canceled, admin_start_buttons);
         } else {
             ctx.session.stateData = undefined;
-            ctx.reply(
-                "خطایی صورت گرفته است لطفا مجددا امتحان کنید",
-                admin_start_buttons
-            );
+            ctx.reply(something_went_wrong, admin_start_buttons);
         }
     }
 
@@ -389,9 +404,9 @@ module.exports = new (class AdminService {
                 await advisers.forEach(adviser => {
                     ctx.telegram.forwardMessage(adviser.userChatId, ctx.chat.id, ctx.message.message_id)
                 })
-                ctx.reply("پیام شما برای مشاوران ارسال گردید.", admin_start_buttons)
+                ctx.reply(your_message_has_been_sent_to_advisers_message, admin_start_buttons)
             } else {
-                ctx.reply("مشاوری یافت نشد.", admin_start_buttons)
+                ctx.reply(no_adviser_found_message, admin_start_buttons)
             }
         }
     }
@@ -402,15 +417,11 @@ module.exports = new (class AdminService {
             const users = await UserModel.find();
             if (users.length !== 0) {
                 await users.forEach(user => {
-                    ctx.telegram.forwardMessage(
-                        user.userChatId,
-                        ctx.chat.id,
-                        ctx.message.message_id
-                    );
+                    ctx.telegram.forwardMessage(user.userChatId, ctx.chat.id, ctx.message.message_id);
                 })
-                ctx.reply("پیام شما برای همه ی کاربران ارسال شد.", admin_start_buttons);
+                ctx.reply(message_sent_successfully, admin_start_buttons);
             } else {
-                ctx.reply("کاربری یافت نشد.", admin_start_buttons);
+                ctx.reply(no_user_found, admin_start_buttons);
             }
         }
     }
@@ -418,16 +429,12 @@ module.exports = new (class AdminService {
     async sendMessageForRegStudents(ctx, next) {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
-            await ctx.telegram.forwardMessage(
-                ctx.session.stateData.userChatId,
-                ctx.chat.id,
-                ctx.message.message_id
-            );
+            await ctx.telegram.forwardMessage(ctx.session.stateData.userChatId, ctx.chat.id, ctx.message.message_id);
             ctx.session.stateData = undefined;
-            ctx.reply("پیام شما با موفقیت ارسال شد.", admin_start_buttons);
+            ctx.reply(message_sent_successfully, admin_start_buttons);
         } else {
             ctx.session.stateData = undefined;
-            ctx.reply("لطفا یکی از موارد زیر را انتخاب نمایید", admin_start_buttons);
+            ctx.reply(select_an_item_message, admin_start_buttons);
         }
     }
 
@@ -440,40 +447,29 @@ module.exports = new (class AdminService {
                     if (ctx.message.text !== all_buttons_text.dont_change) {
                         const proStudentFullName = await ctx.message.text;
                         ctx.session.stateData = {
-                            ...ctx.session.stateData,
-                            proStudentFullName,
+                            ...ctx.session.stateData, proStudentFullName,
                         };
                         ctx.session.state = stateList.getProStudentUserNameFromAdmin;
-                        ctx.reply(
-                            `لطفا یوزر نیم دانش آموز را به فرم @nemoone وارد نمایید :  `,
-                            dont_change
-                        );
+                        ctx.reply(enter_pro_student_user_name_message, dont_change);
                     } else {
                         const proStudentFullName = ctx.session.student.userFullName
                         ctx.session.stateData = {
-                            ...ctx.session.stateData,
-                            proStudentFullName,
+                            ...ctx.session.stateData, proStudentFullName,
                         };
                         ctx.session.state = stateList.getProStudentUserNameFromAdmin;
-                        ctx.reply(
-                            `لطفا یوزر نیم دانش آموز را به فرم @nemoone وارد نمایید :  `,
-                            dont_change)
+                        ctx.reply(enter_pro_student_user_name_message, dont_change)
                     }
                 } else {
                     const proStudentFullName = await ctx.message.text;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentFullName,
+                        ...ctx.session.stateData, proStudentFullName,
                     };
                     ctx.session.state = stateList.getProStudentUserNameFromAdmin;
-                    ctx.reply(
-                        `لطفا یوزر نیم دانش آموز را به فرم @nemoone وارد نمایید :  `,
-                        cancel_button
-                    );
+                    ctx.reply(enter_pro_student_user_name_message, cancel_button);
                 }
             } else {
                 ctx.session = undefined
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons);
+                ctx.reply(text_message_only, manage_pro_students_buttons);
             }
         } else {
             ctx.session = undefined
@@ -489,50 +485,38 @@ module.exports = new (class AdminService {
                         const proStudentUserName = await ctx.message.text.split("@")[1];
                         if (proStudentUserName) {
                             ctx.session.stateData = {
-                                ...ctx.session.stateData,
-                                proStudentUserName,
+                                ...ctx.session.stateData, proStudentUserName,
                             }
                             ctx.session.state = stateList.getProStudentFieldFromAdmin;
-                            ctx.reply(
-                                "لطفا رشته ی تحصیلی دانش آموز را وارد کنید : ",
-                                enter_field_buttons
-                            );
+                            ctx.reply(enter_pro_student_field_message, enter_field_buttons);
                         } else {
-                            ctx.reply("فرم یوزر نیم وارد شده صحیح نمیباشد.", manage_pro_students_buttons)
+                            ctx.reply(invalid_username_entered_message, manage_pro_students_buttons)
                             ctx.session = undefined
                         }
                     } else {
                         const proStudentUserName = ctx.session.student.userName
                         ctx.session.stateData = {
-                            ...ctx.session.stateData,
-                            proStudentUserName,
+                            ...ctx.session.stateData, proStudentUserName,
                         }
                         ctx.session.state = stateList.getProStudentFieldFromAdmin;
-                        ctx.reply(
-                            "لطفا رشته ی تحصیلی دانش آموز را وارد کنید : ",
-                            enter_field_buttons
-                        );
+                        ctx.reply(enter_pro_student_field_message, enter_field_buttons);
                     }
                 } else {
                     const proStudentUserName = await ctx.message.text.split("@")[1];
                     console.log(proStudentUserName)
                     if (proStudentUserName) {
                         ctx.session.stateData = {
-                            ...ctx.session.stateData,
-                            proStudentUserName,
+                            ...ctx.session.stateData, proStudentUserName,
                         }
                         ctx.session.state = stateList.getProStudentFieldFromAdmin;
-                        ctx.reply(
-                            "لطفا رشته ی تحصیلی دانش آموز را وارد کنید : ",
-                            enter_field_buttons
-                        );
+                        ctx.reply(enter_pro_student_field_message, enter_field_buttons);
                     } else {
-                        ctx.reply("فرم یوزر نیم وارد شده صحیح نمیباشد.", manage_pro_students_buttons)
+                        ctx.reply(invalid_username_entered_message, manage_pro_students_buttons)
                     }
                 }
             } else {
                 ctx.session = undefined
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons);
+                ctx.reply(text_message_only, manage_pro_students_buttons);
             }
         } else {
             ctx.session = undefined
@@ -542,25 +526,16 @@ module.exports = new (class AdminService {
     async getProStudentFieldFromAdmin(ctx, next) {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
-            if (ctx.message.text === all_buttons_text.riyazi ||
-                ctx.message.text === all_buttons_text.tajrobi ||
-                ctx.message.text === all_buttons_text.ensani ||
-                ctx.message.text === all_buttons_text.honar ||
-                ctx.message.text === all_buttons_text.zaban ||
-                ctx.message.text === all_buttons_text.other_fields) {
+            if (ctx.message.text === all_buttons_text.riyazi || ctx.message.text === all_buttons_text.tajrobi || ctx.message.text === all_buttons_text.ensani || ctx.message.text === all_buttons_text.honar || ctx.message.text === all_buttons_text.zaban || ctx.message.text === all_buttons_text.other_fields) {
                 const proStudentField = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentField,
+                    ...ctx.session.stateData, proStudentField,
                 };
                 ctx.session.state = stateList.getProStudentGradeFromAdmin;
-                ctx.reply(
-                    "لطفا پایه تحصیلی دانش آموز را وارد کنید : ",
-                    enter_grade_buttons
-                );
+                ctx.reply(enter_pro_student_grade_message, enter_grade_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply("ورودی نامعتبر است", manage_pro_students_buttons);
+                ctx.reply(invalid_username_entered_message, manage_pro_students_buttons);
             }
         }
     }
@@ -568,22 +543,16 @@ module.exports = new (class AdminService {
     async getProStudentGradeFromAdmin(ctx, next) {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
-            if (ctx.message.text === all_buttons_text.tenth ||
-                ctx.message.text === all_buttons_text.eleventh ||
-                ctx.message.text === all_buttons_text.twelfth) {
+            if (ctx.message.text === all_buttons_text.tenth || ctx.message.text === all_buttons_text.eleventh || ctx.message.text === all_buttons_text.twelfth) {
                 const proStudentGrade = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentGrade,
+                    ...ctx.session.stateData, proStudentGrade,
                 };
                 ctx.session.state = stateList.getProStudentLevelFromAdmin;
-                ctx.reply(
-                    "لطفا سطح دانش آموز را تعیین کنید : ",
-                    enter_level_buttons
-                );
+                ctx.reply(enter_pro_student_level_message, enter_level_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply("ورودی نامعتبر است.", manage_pro_students_buttons);
+                ctx.reply(invalid_username_entered_message, manage_pro_students_buttons);
             }
         }
     }
@@ -591,29 +560,17 @@ module.exports = new (class AdminService {
     async getProStudentLevelFromAdmin(ctx, next) {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
-            if (ctx.message.text === all_buttons_text.level_A ||
-                ctx.message.text === all_buttons_text.level_B ||
-                ctx.message.text === all_buttons_text.level_C ||
-                ctx.message.text === all_buttons_text.level_D
-            ) {
+            if (ctx.message.text === all_buttons_text.level_A || ctx.message.text === all_buttons_text.level_B || ctx.message.text === all_buttons_text.level_C || ctx.message.text === all_buttons_text.level_D) {
                 const proStudentLevel = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentLevel,
+                    ...ctx.session.stateData, proStudentLevel,
                 };
                 ctx.session.state = stateList.getProStudentPhoneNumberFromAdmin;
-                if (ctx.session.status === "update")
-                    return ctx.reply(
-                        "لطفا شماره ی تماس دانش آموز را وارد کنید : ",
-                        dont_change
-                    );
-                ctx.reply(
-                    "لطفا شماره ی تماس دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons
-                );
+                if (ctx.session.status === "update") return ctx.reply(enter_pro_student_phone_number_message, dont_change);
+                ctx.reply(enter_pro_student_phone_number_message, skip_from_this_step_buttons);
             } else {
                 ctx.session.stateData = undefined;
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons);
+                ctx.reply(text_message_only, manage_pro_students_buttons);
             }
         }
     }
@@ -625,46 +582,34 @@ module.exports = new (class AdminService {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentPhoneNumber = await ctx.message.text;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentPhoneNumber,
+                        ...ctx.session.stateData, proStudentPhoneNumber,
                     };
                     ctx.session.state = stateList.getProStudentWhatsUpNumberFromAdmin;
-                    ctx.reply(
-                        "لطفا شماره ی واتس آپ دانش آموز را وارد کنید : ",
-                        dont_change)
+                    ctx.reply(enter_pro_student_whats_up_number_message, dont_change)
                 } else {
                     const proStudentPhoneNumber = ctx.session.student.userPhoneNumber;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentPhoneNumber,
+                        ...ctx.session.stateData, proStudentPhoneNumber,
                     };
                     ctx.session.state = stateList.getProStudentWhatsUpNumberFromAdmin;
-                    ctx.reply(
-                        "لطفا شماره ی واتس آپ دانش آموز را وارد کنید : ",
-                        dont_change)
+                    ctx.reply(enter_pro_student_whats_up_number_message, dont_change)
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentPhoneNumber = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentPhoneNumber,
+                    ...ctx.session.stateData, proStudentPhoneNumber,
                 };
                 ctx.session.state = stateList.getProStudentWhatsUpNumberFromAdmin;
-                ctx.reply(
-                    "لطفا شماره ی واتس آپ دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons)
+                ctx.reply(enter_pro_student_whats_up_number_message, skip_from_this_step_buttons)
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
-                const proStudentPhoneNumber = "فاقد شماره ی تماس";
+                const proStudentPhoneNumber = no_contact_number;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentPhoneNumber,
+                    ...ctx.session.stateData, proStudentPhoneNumber,
                 };
                 ctx.session.state = stateList.getProStudentWhatsUpNumberFromAdmin;
-                ctx.reply(
-                    "لطفا شماره ی واتس آپ دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons)
+                ctx.reply(enter_pro_student_whats_up_number_message, skip_from_this_step_buttons)
             } else {
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons)
+                ctx.reply(text_message_only, manage_pro_students_buttons)
                 ctx.session = undefined
             }
         } else {
@@ -680,46 +625,34 @@ module.exports = new (class AdminService {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentWhatsUpNumber = await ctx.message.text;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentWhatsUpNumber,
+                        ...ctx.session.stateData, proStudentWhatsUpNumber,
                     };
                     ctx.session.state = stateList.getProStudentEmailFromAdmin;
-                    ctx.reply(
-                        "لطفا ایمیل دانش آموز را وارد کنید : ",
-                        dont_change)
+                    ctx.reply(enter_pro_student_email_message, dont_change)
                 } else {
                     const proStudentWhatsUpNumber = ctx.session.student.userWhatsUpNumber;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentWhatsUpNumber,
+                        ...ctx.session.stateData, proStudentWhatsUpNumber,
                     };
                     ctx.session.state = stateList.getProStudentEmailFromAdmin;
-                    ctx.reply(
-                        "لطفا ایمیل دانش آموز را وارد کنید : ",
-                        dont_change)
+                    ctx.reply(enter_pro_student_email_message, dont_change)
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentWhatsUpNumber = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentWhatsUpNumber,
+                    ...ctx.session.stateData, proStudentWhatsUpNumber,
                 };
                 ctx.session.state = stateList.getProStudentEmailFromAdmin;
-                ctx.reply(
-                    "لطفا ایمیل دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons)
+                ctx.reply(enter_pro_student_email_message, skip_from_this_step_buttons)
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
-                const proStudentWhatsUpNumber = "فاقد شماره ی تماس";
+                const proStudentWhatsUpNumber = no_contact_number;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentWhatsUpNumber,
+                    ...ctx.session.stateData, proStudentWhatsUpNumber,
                 };
                 ctx.session.state = stateList.getProStudentEmailFromAdmin;
-                ctx.reply(
-                    "لطفا شماره ی واتس آپ دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons)
+                ctx.reply(enter_pro_student_email_message, skip_from_this_step_buttons)
             } else {
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons)
+                ctx.reply(text_message_only, manage_pro_students_buttons)
                 ctx.session = undefined
             }
         } else {
@@ -734,46 +667,34 @@ module.exports = new (class AdminService {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentEmail = await ctx.message.text;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentEmail,
+                        ...ctx.session.stateData, proStudentEmail,
                     };
                     ctx.session.state = stateList.getProStudentCityFromAdmin;
-                    ctx.reply(
-                        "لطفا شهر دانش آموز را وارد کنید : ",
-                        dont_change)
+                    ctx.reply(enter_pro_student_city_message, dont_change)
                 } else {
                     const proStudentEmail = ctx.session.student.userEmail;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentEmail,
+                        ...ctx.session.stateData, proStudentEmail,
                     };
                     ctx.session.state = stateList.getProStudentCityFromAdmin;
-                    ctx.reply(
-                        "لطفا شهر دانش آموز را وارد کنید : ",
-                        dont_change)
+                    ctx.reply(enter_pro_student_city_message, dont_change)
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentEmail = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentEmail,
+                    ...ctx.session.stateData, proStudentEmail,
                 };
                 ctx.session.state = stateList.getProStudentCityFromAdmin;
-                ctx.reply(
-                    "لطفا شهر دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons)
+                ctx.reply(enter_pro_student_city_message, skip_from_this_step_buttons)
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
-                const proStudentEmail = "فاقد شماره ی تماس";
+                const proStudentEmail = no_email;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentEmail,
+                    ...ctx.session.stateData, proStudentEmail,
                 };
                 ctx.session.state = stateList.getProStudentCityFromAdmin;
-                ctx.reply(
-                    "لطفا شهر دانش آموز را وارد کنید : ",
-                    skip_from_this_step_buttons)
+                ctx.reply(enter_pro_student_city_message, skip_from_this_step_buttons)
             } else {
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons)
+                ctx.reply(text_message_only, manage_pro_students_buttons)
                 ctx.session = undefined
             }
         } else {
@@ -788,50 +709,34 @@ module.exports = new (class AdminService {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentCity = await ctx.message.text;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentCity,
+                        ...ctx.session.stateData, proStudentCity,
                     };
                     ctx.session.state = stateList.registerProStudentByAdmin;
-                    ctx.reply(
-                        await pro_student_preview(ctx.session.stateData),
-                        accept_discard_buttons
-                    );
+                    ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
                 } else {
                     const proStudentCity = await ctx.session.student.userCity;
                     ctx.session.stateData = {
-                        ...ctx.session.stateData,
-                        proStudentCity,
+                        ...ctx.session.stateData, proStudentCity,
                     };
                     ctx.session.state = stateList.registerProStudentByAdmin;
-                    ctx.reply(
-                        await pro_student_preview(ctx.session.stateData),
-                        accept_discard_buttons
-                    );
+                    ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentCity = await ctx.message.text;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentCity,
+                    ...ctx.session.stateData, proStudentCity,
                 };
                 ctx.session.state = stateList.registerProStudentByAdmin;
-                ctx.reply(
-                    await pro_student_preview(ctx.session.stateData),
-                    accept_discard_buttons
-                );
+                ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
-                const proStudentCity = "فاقد نام شهر"
+                const proStudentCity = no_city;
                 ctx.session.stateData = {
-                    ...ctx.session.stateData,
-                    proStudentCity,
+                    ...ctx.session.stateData, proStudentCity,
                 };
                 ctx.session.state = stateList.registerProStudentByAdmin;
-                ctx.reply(
-                    await pro_student_preview(ctx.session.stateData),
-                    accept_discard_buttons
-                );
+                ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
             } else {
-                ctx.reply(onlyTextMessage, manage_pro_students_buttons)
+                ctx.reply(text_message_only, manage_pro_students_buttons)
                 ctx.session = undefined
             }
         } else {
@@ -860,14 +765,14 @@ module.exports = new (class AdminService {
                 }, {new: true})
                 await student.save()
                 ctx.session = undefined
-                return ctx.reply("اطلاعات با موفقیت بروزرسانی شد", manage_pro_students_buttons)
+                return ctx.reply(information_updated_message, manage_pro_students_buttons)
             } else {
                 ctx.session = undefined
-                return ctx.reply("خطا در بروزرسانی اطلاعات", manage_pro_students_buttons)
+                return ctx.reply(error_updating_information_message, manage_pro_students_buttons)
             }
         } else if (ctx.session.status === "update" && ctx.message.text === all_buttons_text.discard) {
             ctx.session = undefined
-            return ctx.reply("بروزرسانی اطلاعت لغو شد.", manage_pro_students_buttons)
+            return ctx.reply(information_update_canceled_message, manage_pro_students_buttons)
         }
 
         if (ctx.session.status !== "update" && ctx.message.text === all_buttons_text.accept) {
@@ -886,13 +791,13 @@ module.exports = new (class AdminService {
                 isPro: true,
             });
             await newProStudent.save()
-            ctx.reply("دانش آموز با موفقیت ثبت شد", admin_start_buttons)
+            ctx.reply(student_registered_message, admin_start_buttons)
         } else if (ctx.session.status !== "update" && ctx.message.text === all_buttons_text.discard) {
             ctx.session.stateData = undefined;
-            ctx.reply(" ثبت نام دانش آموز با موفقیت لغو شد", manage_pro_students_buttons);
+            ctx.reply(student_registration_canceled_message, manage_pro_students_buttons);
         } else {
             ctx.session.stateData = undefined;
-            ctx.reply(onlyTextMessage, manage_pro_students_buttons);
+            ctx.reply(text_message_only, manage_pro_students_buttons);
         }
     }
 
@@ -905,17 +810,18 @@ module.exports = new (class AdminService {
                     isAccepted: true
                 }, {new: true})
                 await regAdviser.save()
-                ctx.reply("مشاور مورد نظر با موفقیت پذیرفته شد.", admin_start_buttons)
+                await ctx.telegram.sendMessage(regAdviser.userChatId, you_have_been_accepted_message)
+                ctx.reply(adviser_accepted_message, admin_start_buttons)
                 ctx.session = undefined
             } else {
-                ctx.reply("مشاور مورد نظر یافت نشد.", admin_start_buttons)
+                ctx.reply(adviser_not_found, admin_start_buttons)
                 ctx.session = undefined
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply("درخواست شما لغو شد.", admin_start_buttons)
+            ctx.reply(your_request_has_been_canceled, admin_start_buttons)
             ctx.session = undefined
         } else {
-            ctx.reply("ورودی نامعتبر میباشد.", admin_start_buttons)
+            ctx.reply(input_is_invalid_message, admin_start_buttons)
             ctx.session = undefined
         }
     }
@@ -929,21 +835,18 @@ module.exports = new (class AdminService {
                     isPro: true
                 }, {new: true})
                 await student.save()
-                ctx.reply("دانش آموز مورد نظر تبدیل به دانش آموز ویژه گردید.", admin_start_buttons)
-                await ctx.telegram.sendMessage(
-                    student.userChatId,
-                    `ثبت نام شما تایید شد از این پس میتوانید از خدمات ویژه ی ما استفاده کنید برای استفاده از این خدمات باید مجددا بات را /start کنید`
-                );
+                ctx.reply(the_student_became_a_pro_student_message, admin_start_buttons)
+                await ctx.telegram.sendMessage(student.userChatId, you_have_been_accepted_message);
                 ctx.session = undefined
             } else {
-                ctx.reply("این دانش آموز قبلا حذف شده است.", admin_start_buttons)
+                ctx.reply(this_student_has_already_been_removed_message, admin_start_buttons)
                 ctx.session = undefined
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply("درخواست شما لغو شد.", admin_start_buttons)
+            ctx.reply(your_request_has_been_canceled, admin_start_buttons)
             ctx.session = undefined
         } else {
-            ctx.reply("ورودی نامعتبر میباشد.", admin_start_buttons)
+            ctx.reply(input_is_invalid_message, admin_start_buttons)
             ctx.session = undefined
         }
     }
@@ -954,17 +857,17 @@ module.exports = new (class AdminService {
             let regAdviser = await AdviserModel.findById(ctx.session.regAdviserId)
             if (regAdviser) {
                 await AdviserModel.findByIdAndDelete(ctx.session.regAdviserId)
-                ctx.reply("مشاور مورد نظر پذیرفته نشد", admin_start_buttons)
+                ctx.reply(no_adviser_found_message, admin_start_buttons)
                 ctx.session = undefined
             } else {
-                ctx.reply("این مشاور قبلا حذف شده است.", admin_start_buttons)
+                ctx.reply(this_adviser_has_already_been_removed_message, admin_start_buttons)
                 ctx.session = undefined
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply("درخواست شما لغو شد.", admin_start_buttons)
+            ctx.reply(your_request_has_been_canceled, admin_start_buttons)
             ctx.session = undefined
         } else {
-            ctx.reply("ورودی نامعتبر میباشد.", admin_start_buttons)
+            ctx.reply(input_is_invalid_message, admin_start_buttons)
             ctx.session = undefined
         }
     }
@@ -975,21 +878,18 @@ module.exports = new (class AdminService {
             let student = await ProStudentModel.findById(ctx.session.studentId)
             if (student) {
                 await ProStudentModel.findByIdAndDelete(ctx.session.studentId)
-                ctx.reply("دانش آموز مورد نظر پذیرفته نشد", admin_start_buttons)
+                ctx.reply(the_student_was_not_accepted_message, admin_start_buttons)
                 ctx.session = undefined
-                await ctx.telegram.sendMessage(
-                    student.userChatId,
-                    `ثبت نام شما انجام نشد لطفا برای پیگیری با ادمین تماس بگیرید`
-                );
+                await ctx.telegram.sendMessage(student.userChatId, registration_has_not_been_completed_message);
             } else {
-                ctx.reply("این دانش آموز قبلا حذف شده است.", admin_start_buttons)
+                ctx.reply(this_student_has_already_been_removed_message, admin_start_buttons)
                 ctx.session = undefined
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply("درخواست شما لغو شد.", admin_start_buttons)
+            ctx.reply(your_request_has_been_canceled, admin_start_buttons)
             ctx.session = undefined
         } else {
-            ctx.reply("ورودی نامعتبر میباشد.", admin_start_buttons)
+            ctx.reply(input_is_invalid_message, admin_start_buttons)
             ctx.session = undefined
         }
     }
@@ -1000,17 +900,17 @@ module.exports = new (class AdminService {
             let proStudent = await ProStudentModel.findById(ctx.session.studentId)
             if (proStudent) {
                 await ProStudentModel.findByIdAndDelete(ctx.session.studentId)
-                ctx.reply("دانش آموز مورد نظر با موفقیت حذف شد", manage_pro_students_buttons)
+                ctx.reply(the_student_was_removed_message, manage_pro_students_buttons)
                 ctx.session = undefined
             } else {
-                ctx.reply("این دانش آموز قبلا حذف شده است.", manage_pro_students_buttons)
+                ctx.reply(this_student_has_already_been_removed_message, manage_pro_students_buttons)
                 ctx.session = undefined
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply("درخواست شما لغو شد.", manage_pro_students_buttons)
+            ctx.reply(your_request_has_been_canceled, manage_pro_students_buttons)
             ctx.session = undefined
         } else {
-            ctx.reply("ورودی نامعتبر میباشد.", manage_pro_students_buttons)
+            ctx.reply(input_is_invalid_message, manage_pro_students_buttons)
             ctx.session = undefined
         }
     }
@@ -1021,19 +921,18 @@ module.exports = new (class AdminService {
             let plan = await PlanModel.findById(ctx.session.planId)
             if (plan) {
                 await PlanModel.findByIdAndDelete(ctx.session.planId)
-                ctx.reply("طرح مورد نظر با موفقیت حذف شد", manage_plans_buttons)
+                ctx.reply(the_plan_was_removed_message, manage_plans_buttons)
                 ctx.session = undefined
             } else {
-                ctx.reply("این طرح قبلا حذف شده است.", manage_plans_buttons)
+                ctx.reply(this_plan_has_already_been_removed_message, manage_plans_buttons)
                 ctx.session = undefined
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply("درخواست شما لغو شد.", manage_plans_buttons)
+            ctx.reply(your_request_has_been_canceled, manage_plans_buttons)
             ctx.session = undefined
         } else {
-            ctx.reply("ورودی نامعتبر میباشد.", manage_plans_buttons)
+            ctx.reply(input_is_invalid_message, manage_plans_buttons)
             ctx.session = undefined
         }
     }
-})
-();
+})();

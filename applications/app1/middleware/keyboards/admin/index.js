@@ -19,12 +19,12 @@ module.exports = {
     [all_buttons_text.demote_adviser]: AdminService.demote_adviser,
 
     [all_buttons_text.manage_pro_students]: AdminService.manage_pro_students,
-    [all_buttons_text.showlist_update_remove_students]: AdminService.showlist_update_remove_students,
+    [all_buttons_text.show_update_remove_students]: AdminService.show_update_remove_students,
     [all_buttons_text.add_student]: AdminService.add_student,
 
 
     [all_buttons_text.manage_plans]: AdminService.manage_plans,
-    [all_buttons_text.showlist_update_remove_plans]: AdminService.showlist_update_remove_plans,
+    [all_buttons_text.show_update_remove_plans]: AdminService.show_update_remove_plans,
     [all_buttons_text.add_plan]: AdminService.add_plan,
 
     [all_buttons_text.send_message_for_advisers]: AdminService.send_message_for_advisers,

@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    userFullName: {type: String},
-    userField: {type: String},
-    userUniversity: {type: String},
-    userDescription: {type: String},
-    userPhoneNumber: {type: String},
-    userEmail: {type: String},
-    userCity: {type: String},
-    userChatId: {type: String},
-    userName: {type: String},
-    isPro: {default: false, type: Boolean},
-    isAccepted: {default: false, type: Boolean},
-    IsRegistered: {default: false, type: Boolean},
+    fullname: {type: String},
+    field: {type: String},
+    university: {type: String},
+    description: {type: String},
+    phone_number: {type: String},
+    email: {type: String},
+    city: {type: String},
+    chat_id: {type: String},
+    username: {type: String},
+    is_pro: {default: false, type: Boolean},
+    is_accepted: {default: false, type: Boolean},
+    is_registered: {default: false, type: Boolean},
     messagesIds: [],
 });
 module.exports = mongoose.model("AdviserModel", schema);

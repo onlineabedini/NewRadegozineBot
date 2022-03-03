@@ -35,38 +35,38 @@ const {
 module.exports = class roleSelect {
   async role_selector(ctx, next) {
     console.log("select role here");
-    const admin = await AdminModel.findOne({ userName: ctx.chat.username });
+    const admin = await AdminModel.findOne({ username: ctx.chat.username });
     const proAdviser = await AdviserModel.findOne({
-      userName: ctx.chat.username,
-      isPro: true,
+      username: ctx.chat.username,
+      is_pro: true,
     });
     const normalAdviser = await AdviserModel.findOne({
-      userName: ctx.chat.username,
-      isAccepted: true,
-      isPro: false,
+      username: ctx.chat.username,
+      is_accepted: true,
+      is_pro: false,
     });
     const proStudent = await ProStudentModel.findOne({
-      userName: ctx.chat.username,
-      isPro: true,
+      username: ctx.chat.username,
+      is_pro: true,
     });
     // save main admin data in database at the first bot started
     if (process.env.MAIN_ADMIN_USERNAME === ctx.chat.username) {
       const mainAdmin = await AdminModel.findOne({
-        userName: ctx.chat.username,
+        username: ctx.chat.username,
       });
       if (!mainAdmin) {
         const mainAdmin = await new AdminModel({
-          userFullName: "مدیر اصلی",
-          userName: ctx.chat.username,
-          userChatId: ctx.chat.id,
+          fullname: "مدیر اصلی",
+          username: ctx.chat.username,
+          chat_id: ctx.chat.id,
         });
         await mainAdmin.save();
         ctx.reply(admin_start_message, admin_start_buttons);
       } else {
         const mainAdmin = await AdminModel.findOneAndUpdate(
-          { userName: ctx.chat.username },
+          { username: ctx.chat.username },
           {
-            userChatId: ctx.chat.id,
+            chat_id: ctx.chat.id,
           },
           { new: true }
         );
@@ -75,9 +75,9 @@ module.exports = class roleSelect {
       }
     } else if (admin) {
       const admin = await AdminModel.findOneAndUpdate(
-        { userName: ctx.chat.username },
+        { username: ctx.chat.username },
         {
-          userChatId: ctx.chat.id,
+          chat_id: ctx.chat.id,
         },
         { new: true }
       );
@@ -85,9 +85,9 @@ module.exports = class roleSelect {
       ctx.reply(admin_start_message, admin_start_buttons);
     } else if (proAdviser) {
       const proAdviser = await AdviserModel.findOneAndUpdate(
-        { userName: ctx.chat.username },
+        { username: ctx.chat.username },
         {
-          userChatId: ctx.chat.id,
+          chat_id: ctx.chat.id,
         },
         { new: true }
       );
@@ -95,9 +95,9 @@ module.exports = class roleSelect {
       ctx.reply(pro_adviser_start_message, pro_adviser_start_buttons);
     } else if (normalAdviser) {
       const normalAdviser = await AdviserModel.findOneAndUpdate(
-        { userName: ctx.chat.username },
+        { username: ctx.chat.username },
         {
-          userChatId: ctx.chat.id,
+          chat_id: ctx.chat.id,
         },
         { new: true }
       );
@@ -107,28 +107,28 @@ module.exports = class roleSelect {
       const proStudent = await ProStudentModel.findOneAndUpdate(
         { userName: ctx.chat.username },
         {
-          userChatId: ctx.chat.id,
+          chat_id: ctx.chat.id,
         },
         { new: true }
       );
       await proStudent.save();
       ctx.reply(student_start_message, student_start_buttons);
     } else {
-      const user = await UserModel.findOne({ userChatId: ctx.chat.id });
+      const user = await UserModel.findOne({ chat_id: ctx.chat.id });
       if (!user) {
         const newUser = await new UserModel({
-          userChatId: ctx.chat.id,
-          userName: ctx.chat.username,
-          userFirstName: ctx.chat.first_name,
-          userLastName: ctx.chat.last_name,
+          chat_id: ctx.chat.id,
+          username: ctx.chat.username,
+          first_name: ctx.chat.first_name,
+          last_name: ctx.chat.last_name,
         });
         await newUser.save();
         ctx.reply(user_start_message, user_start_buttons);
       } else {
         const user = await UserModel.findOneAndUpdate(
-          { userName: ctx.chat.username },
+          { username: ctx.chat.username },
           {
-            userChatId: ctx.chat.id,
+            chat_id: ctx.chat.id,
           },
           { new: true }
         );

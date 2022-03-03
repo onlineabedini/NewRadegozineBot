@@ -2,37 +2,37 @@ const mongoose = require("mongoose");
 const {all_buttons_text} = require("../buttons/all_buttons_text");
 
 const schema = new mongoose.Schema({
-    userPlanId: {
+    plan_id: {
         type: String,
-    }, userFullName: {
+    }, fullname: {
         type: String,
-    }, userField: {
+    }, field: {
         type: String,
-    }, userGrade: {
+    }, grade: {
         type: String,
-    }, userLevel: {
+    }, level: {
         type: String, default: all_buttons_text.low,
-    }, userPhoneNumber: {
+    }, phone_number: {
         type: String,
-    }, userEmail: {
+    }, email: {
         type: String,
-    }, userWhatsUpNumber: {
+    }, whats_up_number: {
         type: String,
-    }, userCity: {
+    }, city: {
         type: String,
-    }, userChatId: {
+    }, chat_id: {
         type: String,
-    }, userName: {
+    }, username: {
         type: String,
-    }, userMessageId: {
+    }, message_id: {
         type: String,
-    }, userMessageText: {
+    }, message_text: {
         type: String,
-    }, userPaymentPicture: {
+    }, payment_picture: {
         type: String,
-    }, userRole: {
+    }, user_role: {
         type: String, default: "Normal",
-    }, isPro: {
+    }, is_pro: {
         type: Boolean, default: false,
     },
 });

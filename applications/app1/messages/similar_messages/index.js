@@ -1,21 +1,21 @@
 module.exports.student_info_message = (student) => `
-❓ سوال :${student.userMessageText}❓
+❓ سوال :${student.message_text}❓
 
 👨‍🎓مشخصات دانش آموز :
 
-🔹نام و نام خانوادگی : ${student.userFullName}
+🔹نام و نام خانوادگی : ${student.fullname}
 
-🔹رشته ی تحصیلی : ${student.userField}
+🔹رشته ی تحصیلی : ${student.field}
 
-🔹پایه ی تحصیلی : ${student.userGrade}
+🔹پایه ی تحصیلی : ${student.grade}
 
-🔹یوزنیم دانش آموز : @${student.userName}
+🔹یوزنیم دانش آموز : @${student.username}
 
 @radegozine_bot`;
 
-module.exports.voice_caption = (questioner) => `
+module.exports.voice_caption = (question) => `
 🟢 سوالات مشاوره ای
-⁉️ ${questioner.userMessageText}
+⁉️ ${question.message_text}
 
 
 🟢 ردگزینه
@@ -30,16 +30,16 @@ module.exports.voice_caption = (questioner) => `
 ╰┄┅◇◇◇◇◇┅┄╯
 `
 
-module.exports.force_join_message = (channelUserNames) => {
+module.exports.force_join_message = (channel_usernames) => {
     let message = ``
-    channelUserNames.forEach((item) => {
+    channel_usernames.forEach((item) => {
         message += ` @${item} `
     })
     return `برای استفاده از بات باید در کانال های زیر عضو شوید
     ${message}`
 }
 
-module.exports.botDevelopersCaption = `🌹✅  تیم توسعه دهندگان آی آر نود
+module.exports.bot_developers_caption = `🌹✅  تیم توسعه دهندگان آی آر نود
 طراحی بات ( اختصاصی - خصوصی )
 
 🟢 طراحی انواع وبسایت، وب اپلیکیشن و  بات تلگرام + خدمات سئو  + مارکتینگ و برندسازی اختصاصی

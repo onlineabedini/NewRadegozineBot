@@ -14,26 +14,26 @@ module.exports = async (ctx, next) => {
 
         if (botMembershipStatus === "administrator" && newChatMemberUserId === thisBotId) {
             const channelsIds = await ChannelModel.findOne({
-                channelChatId: ctx.update.my_chat_member.chat.id
+                chat_id: ctx.update.my_chat_member.chat.id
             })
             if (!channelsIds) {
                 //create a new channel when the bot is added to a channel
                 const newChannel = await new ChannelModel({
                     type: ctx.update.my_chat_member.chat.type,
-                    channelTitle: ctx.update.my_chat_member.chat.title,
-                    channelChatId: ctx.update.my_chat_member.chat.id,
-                    channelUserName: ctx.update.my_chat_member.chat.username,
+                    title: ctx.update.my_chat_member.chat.title,
+                    chat_id: ctx.update.my_chat_member.chat.id,
+                    username: ctx.update.my_chat_member.chat.username,
                 })
                 await newChannel.save();
             } else {
                 //update the channel when the bot is added to a channel
                 const updateChannelInfo = await ChannelModel.findOneAndUpdate({
-                    channelChatId: ctx.update.my_chat_member.chat.id
+                    chat_id: ctx.update.my_chat_member.chat.id
                 }, {
                     type: ctx.update.my_chat_member.chat.type,
-                    channelTitle: ctx.update.my_chat_member.chat.title,
-                    channelChatId: ctx.update.my_chat_member.chat.id,
-                    channelUserName: ctx.update.my_chat_member.chat.username,
+                    title: ctx.update.my_chat_member.chat.title,
+                    chat_id: ctx.update.my_chat_member.chat.id,
+                    username: ctx.update.my_chat_member.chat.username,
                 }, {
                     new: true
                 })
@@ -42,7 +42,7 @@ module.exports = async (ctx, next) => {
         } else if (botMembershipStatus === "left" && newChatMemberUserId === thisBotId) {
             //delete the channel when the bot is removed from a channel
             await ChannelModel.findOneAndDelete({
-                channelChatId: ctx.update.my_chat_member.chat.id
+                chat_id: ctx.update.my_chat_member.chat.id
             });
         } else return next();
     } else return next()

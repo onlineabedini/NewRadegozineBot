@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    userRole: {default: "admin", type: String},
-    userName: {type: String},
-    userFullName: {type: String},
-    userChatId: {type: String}
+    user_role: {default: "admin", type: String},
+    username: {type: String},
+    chat_id: {type: String},
+    fullname: {type: String},
 });
 
 module.exports = mongoose.model("AdminModel", schema);

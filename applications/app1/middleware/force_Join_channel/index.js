@@ -6,14 +6,14 @@ module.exports = async (ctx, next) => {
     if (ctx.message) {
         //collect the channel ids from database
         const channelsData = await ChannelModel.find()
-        const channelsIds = channelsData.map(channel => channel.channelChatId);
+        const channelsIds = channelsData.map(channel => channel.chat_id);
         if (channelsIds.length !== 0) {
             //checked user is joined to the channels or not
             for (let id in channelsIds) {
                 const membershipStatus = (await ctx.telegram.getChatMember(channelsIds[id], ctx.from.id)).status;
                 if (membershipStatus !== 'creator' && membershipStatus !== 'administrator' && membershipStatus !== 'member') {
-                    const channelUserNames = channelsData.map(channel => channel.channelUserName);
-                    return await ctx.reply(force_join_message(channelUserNames));
+                    const channel_usernames = channelsData.map(channel => channel.username);
+                    return await ctx.reply(force_join_message(channel_usernames));
                 }
             }
             return next();

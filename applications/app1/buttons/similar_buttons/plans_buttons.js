@@ -7,7 +7,7 @@ module.exports.plans_buttons = (data) => {
       inline_keyboard: [
         ...convertArrayToNColumn(data, 2).map((item) =>
           item.map((item) => ({
-            text: item.planTitle,
+            text: item.title,
             callback_data: `PLAN_${item._id}`,
           }))
         ),

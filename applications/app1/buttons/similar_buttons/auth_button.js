@@ -10,10 +10,10 @@ const {student_start_buttons} = require("../student_buttons/student_start_button
 
 module.exports.auth_button = async (ctx) => {
     ctx.session = undefined
-    const admin = await AdminModel.findOne({userName: ctx.chat.username});
-    const proAdviser = await AdviserModel.findOne({userName: ctx.chat.username, isPro: true});
-    const normalAdviser = await AdviserModel.findOne({userName: ctx.chat.username, isAccepted: true});
-    const proStudent = await ProStudentModel.findOne({userName: ctx.chat.username, isPro: true});
+    const admin = await AdminModel.findOne({username: ctx.chat.username});
+    const proAdviser = await AdviserModel.findOne({username: ctx.chat.username, is_pro: true});
+    const normalAdviser = await AdviserModel.findOne({username: ctx.chat.username, is_accepted: true});
+    const proStudent = await ProStudentModel.findOne({username: ctx.chat.username, is_pro: true});
     if (admin) {
         return admin_start_buttons;
     } else if (proAdviser) {

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  contentTitle: {
+  title: {
     type: String,
   },
-  contentDescription: {
+  description: {
     type: String,
   },
 });

@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  planTitle: {
+  title: {
     type: String,
   },
-  planPrice: {
+  price: {
     type: String,
   },
-  planImage: {
+  image: {
     type: String,
   },
   planDescription: {

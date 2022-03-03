@@ -13,8 +13,8 @@ module.exports.admins_list_message = (data) => {
   let message = ``;
   data.forEach((item) => {
     message += `      
-نام و نام خانوادگی مدیر : ${item.userFullName}
-یوزرنیم مدیر : @${item.userName}
+نام و نام خانوادگی مدیر : ${item.fullname}
+یوزرنیم مدیر : @${item.username}
 
 `;
   });
@@ -23,8 +23,8 @@ module.exports.admins_list_message = (data) => {
 };
 
 module.exports.plan_caption = (data) => {
-  return `🔻 نام طرح : ${data.planTitle}
- 🔻 قیمت طرح :${data.planPrice}
+  return `🔻 نام طرح : ${data.title}
+ 🔻 قیمت طرح :${data.price}
 🔻 توضیحات طرح : ${data.planDescription}
 
 @radegozine_bot
@@ -32,8 +32,8 @@ module.exports.plan_caption = (data) => {
 };
 
 module.exports.content_caption = (data) => {
-  return `🔻 عنوان تولید محتوا : ${data.contentTitle}
-🔻 توضیحات : ${data.contentDescription}
+  return `🔻 عنوان تولید محتوا : ${data.title}
+🔻 توضیحات : ${data.description}
 
 @radegozine_bot
 `;
@@ -46,7 +46,7 @@ module.exports.statistics_message = (data) => {
     🔻 تعداد مدیران : ${data.admins_count}
     🔻 تعداد مشاوران : ${data.advisers_count}
     🔻 تعداد دانش آموزان ویژه : ${data.students_count}
-    🔻 تعداد سوالات : ${data.questioners_count}
+    🔻 تعداد سوالات : ${data.questions_count}
     🔻 تعداد کانال ها : ${data.channels_count}
 
     @radegozine_bot
@@ -95,15 +95,15 @@ module.exports.do_you_want_to_remove_this_plan_message =
 
 module.exports.reg_adviser_info_message = (data) => {
   return `
-🔻 نام و نام خانوادگی : ${data.userFullName}
-🔻 رشته ی تحصیلی : ${data.userField}
-🔻 دانشگاه : ${data.userUniversity}
-🔻 توضیحات : ${data.userDescription}
-🔻 شماره تماس : ${data.userPhoneNumber}
-🔻 ایمیل : ${data.userEmail}
-🔻 شهر : ${data.userCity}
-🔻 کد کاربری : ${data.userChatId}
-🔻 نام کاربری : @${data.userName}
+🔻 نام و نام خانوادگی : ${data.fullname}
+🔻 رشته ی تحصیلی : ${data.field}
+🔻 دانشگاه : ${data.university}
+🔻 توضیحات : ${data.description}
+🔻 شماره تماس : ${data.phone_number}
+🔻 ایمیل : ${data.email}
+🔻 شهر : ${data.city}
+🔻 کد کاربری : ${data.chat_id}
+🔻 نام کاربری : @${data.username}
 
  برای پذیرش این مشاور دکمه ی پذیرش مشاور و برای رد این مشاور دکمه رد مشاور را بزنید :
 
@@ -115,9 +115,9 @@ module.exports.advisers_list_message = (data) => {
   let message = ``;
   data.forEach((item) => {
     message += `      
-نام و نام خانوادگی مشاور : ${item.userFullName}
-یوزرنیم مشاور : @${item.userName}
-رتبه ی مشاور : ${item.isPro ? "ویژه" : "عادی"}
+نام و نام خانوادگی مشاور : ${item.fullname}
+یوزرنیم مشاور : @${item.username}
+رتبه ی مشاور : ${item.is_pro ? "ویژه" : "عادی"}
 
 `;
   });
@@ -165,13 +165,13 @@ module.exports.demote_adviser_message = `🔹 لطفا یوزر نیم مشاو�
 //************************************* end  adviser section *****************************************\\
 
 //*************************************  student section  *****************************************\\
-module.exports.pro_student_registration_preview = async (data, userName) => {
+module.exports.pro_student_registration_preview = async (data, username) => {
   const plan = await PlanModel.findById(data.planId);
   return `🔻 طرح ثبت نام شده : ${
-    plan?.planTitle ? plan.planTitle : "غیر قابل تغییر توسط کاربر"
+    plan?.title ? plan.title : "غیر قابل تغییر توسط کاربر"
   } 
 🔻 نام و نام خانوادگی : ${data.proStudentFullName}
-🔻 نام کاربری : @${data.proStudentUserName ? data.proStudentUserName : userName}
+🔻 نام کاربری : @${data.proStudentUserName ? data.proStudentUserName : username}
 🔻 رشته ی تحصیلی : ${data.proStudentField}
 🔻 پایه ی تحصیلی : ${data.proStudentGrade}
 🔻 سطح دانش آموز : ${
@@ -191,17 +191,17 @@ module.exports.pro_student_registration_preview = async (data, userName) => {
 };
 
 module.exports.pro_student_caption = async (data) => {
-  const plan = await PlanModel.findById(data.userPlanId);
-  return `🔻 طرح ثبت نام شده : ${plan.planTitle}
-🔻 نام و نام خانوادگی : ${data.userFullName}
-🔻 رشته ی تحصیلی : ${data.userField}
-🔻 پایه ی تحصیلی : ${data.userGrade}
-🔻 شماره تماس : ${data.userPhoneNumber}
-🔻 ایمیل : ${data.userEmail}
-🔻 شماره واتساب : ${data.userWhatsUpNumber}
-🔻 شهر : ${data.userCity}
-🔻 کد کاربری : ${data.userChatId}
-🔻 نام کاربری : @${data.userName}
+  const plan = await PlanModel.findById(data.plan_id);
+  return `🔻 طرح ثبت نام شده : ${plan.title}
+🔻 نام و نام خانوادگی : ${data.fullname}
+🔻 رشته ی تحصیلی : ${data.field}
+🔻 پایه ی تحصیلی : ${data.grade}
+🔻 شماره تماس : ${data.phone_number}
+🔻 ایمیل : ${data.email}
+🔻 شماره واتساب : ${data.whats_up_number}
+🔻 شهر : ${data.city}
+🔻 کد کاربری : ${data.chat_id}
+🔻 نام کاربری : @${data.username}
 
 @radegozine_bot
 `;

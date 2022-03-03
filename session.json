@@ -1,27 +1,25 @@
 {
   "sessions": [
     {
-      "id": "552250633:552250633",
+      "id": "1760285743:1760285743",
       "data": {
-        "questioner": {
-          "_id": "6213969158c9ee9303ecc40b",
-          "userRole": "student",
-          "userChatId": "1760285743",
-          "userName": "siralinp",
-          "userFullName": "علی نظرپور",
-          "userField": "ریاضی",
-          "userGrade": "دوزادهم",
-          "userMessageId": "9527",
-          "userMessageText": "چرا باید درس بخونم",
-          "__v": 0
+        "chatId": 1760285743,
+        "messageId": 11777,
+        "stateData": {
+          "planId": "62207d0fc77f271e92ecca84",
+          "proStudentFullName": "aaaaaaaaaaaa",
+          "proStudentField": "ریاضی",
+          "proStudentGrade": "پایه دهم",
+          "proStudentPhoneNumber": "+989385737480",
+          "proStudentWhatsUpNumber": "+989385737480",
+          "proStudentEmail": "فاقد ایمیل",
+          "proStudentCity": "aaaaaaaaaaaaaaaa"
         }
       }
     },
     {
-      "id": "1760285743:1760285743",
-      "data": {
-        "state": "getAdviserFullNameForRegister"
-      }
+      "id": "5017613242:5017613242",
+      "data": {}
     }
   ]
 }

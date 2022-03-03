@@ -1,4 +1,4 @@
-const {all_buttons_text} = require("../all_keyborad_text");
+const {all_buttons_text} = require("../all_buttons_text");
 module.exports.info_buttons = {
     reply_markup: {
         resize_keyboard: true,

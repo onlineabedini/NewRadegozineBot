@@ -55,12 +55,17 @@ module.exports = {
     getGradeForSendContent: "getGradeForSendContent",
     getLevelForSendContent: "getLevelForSendContent",
     getContentMessage: "getContentMessage",
+    getContentTitle: "getContentTitle",
+    getContentDescription: "getContentDescription",
     sendContentForProStudents: "sendContentForProStudents",
     sendContentForAllStudents: "sendContentForAllStudents",
+    sendMessageForChannels: "sendMessageForChannels",
     acceptAdviser: "acceptAdviser",
     acceptStudent: "acceptStudent",
     rejectStudent: "rejectStudent",
+    deleteStudent: "deleteStudent",
     rejectAdviser: "rejectAdviser",
     removeStudent: "removeStudent",
-    removeQuestion: "removeQuestion"
+    removeQuestion: "removeQuestion",
+    removeContent: "removeContent"
 };

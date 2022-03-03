@@ -1,19 +1,14 @@
 const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
-    userRole: {default: "user", type: String},
-    userId: {
+    userRole: {default: "user", type: String}, userId: {
         type: String,
-    },
-    userChatId: {
+    }, userChatId: {
         type: String,
-    },
-    userName: {
+    }, userName: {
         type: String,
-    },
-    userFirstName: {
+    }, userFirstName: {
         type: String,
-    },
-    userLastName: {
+    }, userLastName: {
         type: String,
     },
 });

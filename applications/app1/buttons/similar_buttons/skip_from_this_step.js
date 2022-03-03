@@ -1,4 +1,4 @@
-const {all_buttons_text} = require("../all_keyborad_text");
+const {all_buttons_text} = require("../all_buttons_text");
 
 module.exports.skip_from_this_step_buttons = {
     reply_markup: {

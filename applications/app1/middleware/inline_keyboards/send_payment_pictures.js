@@ -4,10 +4,10 @@ const {enter_payment_picture_message} = require("../../messages/student_messages
 const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 
 module.exports = {
-    SENDPAYPIC: async (ctx, matches) => {
-        const planId = matches[0].split("_")[1];
-        ctx.session.stateData = {
-            ...ctx.session.stateData, planId,
+    SEND_PAYMENT_PICTURE: async (ctx, matches) => {
+        const student_id = matches[0].split("_")[3];
+        ctx.session.state_data = {
+            ...ctx.session.state_data, student_id,
         };
         ctx.session.state = state_list.get_pro_student_payment_picture;
         ctx.reply(enter_payment_picture_message, cancel_button);

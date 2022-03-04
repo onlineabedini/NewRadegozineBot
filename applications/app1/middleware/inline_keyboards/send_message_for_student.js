@@ -7,8 +7,8 @@ const {enter_your_message} = require("../../messages/similar_messages");
 const {this_student_has_already_been_removed_message} = require("../../messages/admin_messages");
 
 module.exports = {
-    SENDMSG: async (ctx, matches) => {
-        const studentId = matches[0].split("_")[1];
+    SEND_MESSAGE: async (ctx, matches) => {
+        const studentId = matches[0].split("_")[2];
         const student = await ProStudentModel.findById(studentId);
         if (student) {
             const chat_id = student.chat_id;

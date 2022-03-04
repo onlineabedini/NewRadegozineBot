@@ -1,76 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28578858-0295-43ec-a44b-0f546c953ed7" name="Changes" comment="New features were added and some bugs fixed">
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_accept_and_remove_reject_remove_student.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_reject_adviser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/answer_remove_question.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/plans.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/send_message_for_student.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/send_payment_pictures.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_content.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_plan.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_student.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/ask_question.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/back.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/bot_developers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/bot_statistics.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/cancel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/contact.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_admins.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_advisers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_content.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_messages.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_plans.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_pro_student.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/pro_student_info.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/questions_list.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/send_content.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/show_plan.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_admins.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_contents.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_plans.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_pro_student.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_question.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_adviser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_content.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_message.js" afterDir="false" />
+    <list default="true" id="28578858-0295-43ec-a44b-0f546c953ed7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/auth_button.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/auth_button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/plans_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/plans_buttons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/mainfunctions/startBot/roleSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/mainfunctions/startBot/roleSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/Application1.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/Application1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/admin_start_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/admin_start_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/manage_content_production_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/content_production_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/management_menu_buttons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/pro_student_register_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/pro_student_register_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/reg_adviser_register_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/reg_adviser_register_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/all_buttons_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/all_buttons_text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/answer_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/answer_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/user_buttons/send_pay_pic_button.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/user_buttons/send_payment_picture_button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/mainfunctions/startBot/getLog.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/mainfunctions/start_bot/get_log.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/mainfunctions/startBot/roleSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/mainfunctions/start_bot/role_select.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/messages/similar_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/similar_messages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/messages/student_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/student_messages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/chat_id_collector/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/chat_id_collector/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/force_Join_channel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/force_Join_channel/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/admin_inline_keyboards.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_accept_and_remove_reject_remove_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_accept_and_remove_reject_remove_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_reject_adviser.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_reject_adviser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/answer_remove_question.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/answer_delete_question.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/similar_inline_keyboards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/student_inline_keyboards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/admin_keyboards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/adviser_keyboards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/similar_keyboards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/student_keyboards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/user_keyboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/admin_sessions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/adviser_sessions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/pro_student_sessions.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_pro_student.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/similar_sessions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/user_sessions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/stateList.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/state_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/Admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/Adviser.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/Adviser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/Channel.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/Channel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/Content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/Plan.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/Plan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/ProStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/ProStudent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/Questioner.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/Question.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/plans.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/plans.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/send_message_for_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/send_message_for_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/send_payment_pictures.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/send_payment_pictures.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_content.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/back.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/back.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/cancel.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/cancel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_content.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_pro_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_pro_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_admins.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_admins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_contents.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_contents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_plans.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_plans.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_pro_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_pro_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_adviser.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_adviser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_pro_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_pro_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_content.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_message.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/state_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/state_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session.json" beforeDir="false" afterPath="$PROJECT_DIR$/session.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,8 +59,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_pro_student.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="25meMQnneqP6rvPR2ug3GtiGBmA" />
   <component name="ProjectLevelVcsManager">
@@ -140,6 +119,7 @@
       <workItem from="1646203484574" duration="5023000" />
       <workItem from="1646247564427" duration="604000" />
       <workItem from="1646293505896" duration="563000" />
+      <workItem from="1646413592792" duration="5621000" />
     </task>
     <servers />
   </component>

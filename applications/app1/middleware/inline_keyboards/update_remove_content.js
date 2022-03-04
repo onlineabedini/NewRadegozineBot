@@ -7,15 +7,15 @@ const {do_you_want_to_remove_this_plan_message} = require("../../messages/admin_
 
 module.exports = {
     UPDATE_CONTENT: async (ctx, matches) => {
-        ctx.session.contentId = matches[0].split("_")[2];
+        ctx.session.content_id = matches[0].split("_")[2];
         ctx.session.status = "update";
         ctx.session.state = state_list.get_content_title;
         ctx.reply("لطفا عنوان طرح را وارد نمایید : ", cancel_button);
     },
     REMOVE_CONTENT: async (ctx, matches) => {
-        const contentId = matches[0].split("_")[2];
+        const content_id = matches[0].split("_")[2];
         ctx.reply(do_you_want_to_remove_this_plan_message, confidence_buttons);
-        ctx.session.contentId = contentId;
+        ctx.session.content_id = content_id;
         ctx.session.state = state_list.remove_content;
     },
 }

@@ -2,7 +2,7 @@ const ContentModel = require("../../models/Content");
 const state_list = require("../state_list");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
 
-const {manage_content_production_buttons} = require("../../buttons/admin_buttons/manage_content_production_buttons");
+const {content_production_buttons} = require("../../buttons/admin_buttons/content_production_buttons");
 const {update_and_remove_content_buttons} = require("../../buttons/admin_buttons/update_remove_content");
 const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 
@@ -12,7 +12,7 @@ const {content_caption} = require("../../messages/admin_messages");
 module.exports = {
     [all_buttons_text.manage_content_production]: async (ctx) => {
         ctx.session.state = undefined;
-        await ctx.reply(select_an_item_message, manage_content_production_buttons);
+        await ctx.reply(select_an_item_message, content_production_buttons);
     },
     [all_buttons_text.add_content_title]: async (ctx) => {
         ctx.session.state = state_list.get_content_title;
@@ -29,7 +29,7 @@ module.exports = {
                 });
             });
         } else {
-            ctx.reply("عنوانی برای تولید محتوا ثبت نشده است.", manage_content_production_buttons);
+            ctx.reply("عنوانی برای تولید محتوا ثبت نشده است.", content_production_buttons);
         }
     },
 }

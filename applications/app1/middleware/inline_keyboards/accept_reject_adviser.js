@@ -8,22 +8,22 @@ const {
 } = require("../../messages/admin_messages");
 
 module.exports = {
-    ACC_ADVISER: async (ctx, matches) => {
-        const regAdviserId = matches[0].split("_")[2];
+    ACCEPT_ADVISER: async (ctx, matches) => {
+        const adviser_id = matches[0].split("_")[2];
         await ctx.reply(
             do_you_want_to_accept_this_adviser_message,
             confidence_buttons
         );
-        ctx.session.regAdviserId = regAdviserId;
+        ctx.session.adviser_id = adviser_id;
         ctx.session.state = state_list.accept_adviser;
     },
-    REJ_ADVISER: async (ctx, matches) => {
-        const regAdviserId = matches[0].split("_")[2];
+    REJECT_ADVISER: async (ctx, matches) => {
+        const adviser_id = matches[0].split("_")[2];
         await ctx.reply(
             do_you_want_to_remove_this_adviser_message,
             confidence_buttons
         );
-        ctx.session.regAdviserId = regAdviserId;
+        ctx.session.adviser_id = adviser_id;
         ctx.session.state = state_list.reject_adviser;
     },
 }

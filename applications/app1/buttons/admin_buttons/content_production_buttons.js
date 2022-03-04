@@ -1,6 +1,6 @@
 const {all_buttons_text} = require("../all_buttons_text");
 
-module.exports.manage_content_production_buttons = {
+module.exports.content_production_buttons = {
     reply_markup: {
         resize_keyboard: true,
         keyboard: [

@@ -21,8 +21,8 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text === all_buttons_text.riyazi || ctx.message.text === all_buttons_text.tajrobi || ctx.message.text === all_buttons_text.ensani || ctx.message.text === all_buttons_text.honar || ctx.message.text === all_buttons_text.zaban || ctx.message.text === all_buttons_text.other_fields) {
                 const contentField = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, contentField,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, contentField,
                 };
                 ctx.session.state = state_list.get_grade_for_send_content;
                 ctx.reply(enter_pro_student_grade_message, enter_grade_buttons);
@@ -36,8 +36,8 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text === all_buttons_text.tenth || ctx.message.text === all_buttons_text.eleventh || ctx.message.text === all_buttons_text.twelfth) {
                 const contentGrade = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, contentGrade,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, contentGrade,
                 };
                 ctx.session.state = state_list.get_level_for_send_content;
                 ctx.reply(enter_pro_student_level_message, enter_level_buttons);

@@ -27,28 +27,28 @@ module.exports = {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const adviserFullName = await ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, adviserFullName};
+                const adviser_fullname = await ctx.message.text;
+                ctx.session.state_data = {...ctx.session.state_data, adviser_fullname};
                 ctx.session.state = state_list.get_adviser_phone_number;
                 ctx.reply(enter_phone_number_message, request_contact_button);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, register_buttons);
+                ctx.session.state = state_list.get_adviser_fullname_for_register;
+                ctx.reply(text_message_only, cancel_button);
             }
         }
     }, [state_list.get_adviser_phone_number]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
-            if (ctx.message.contact?.phone_number) {
-                const adviserPhoneNumber = ctx.message.contact.phone_number;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, adviserPhoneNumber,
+            if (ctx.message.text || ctx.message.contact?.phone_number) {
+                const adviser_phone_number = (await ctx.message.contact?.phone_number) ? ctx.message.contact.phone_number : ctx.message.text;
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, adviser_phone_number,
                 };
                 ctx.session.state = state_list.get_adviser_email;
                 ctx.reply(enter_email_message, skip_from_this_step_buttons);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(input_is_invalid_message, register_buttons);
+                ctx.session.state = state_list.get_adviser_phone_number;
+                ctx.reply(input_is_invalid_message, request_contact_button);
             }
         }
     }, [state_list.get_adviser_email]: async (ctx, next) => {
@@ -56,98 +56,98 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
                 if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
-                    const adviserEmail = ctx.message.text;
-                    ctx.session.stateData = {...ctx.session.stateData, adviserEmail};
+                    const adviser_email = ctx.message.text;
+                    ctx.session.state_data = {...ctx.session.state_data, adviser_email};
                     ctx.session.state = state_list.get_adviser_city;
                     ctx.reply(enter_city_message, cancel_button);
                 } else {
-                    const adviserEmail = no_email;
-                    ctx.session.stateData = {...ctx.session.stateData, adviserEmail};
+                    const adviser_email = no_email;
+                    ctx.session.state_data = {...ctx.session.state_data, adviser_email};
                     ctx.session.state = state_list.get_adviser_city;
                     ctx.reply(enter_city_message, cancel_button);
                 }
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, register_buttons);
+                ctx.session.state = state_list.get_adviser_email;
+                ctx.reply(text_message_only, skip_from_this_step_buttons);
             }
         }
     }, [state_list.get_adviser_city]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const adviserCity = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, adviserCity};
+                const adviser_city = ctx.message.text;
+                ctx.session.state_data = {...ctx.session.state_data, adviser_city};
                 ctx.session.state = state_list.get_adviser_field;
                 ctx.reply(enter_field_message, cancel_button);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, register_buttons);
+                ctx.session.state = state_list.get_adviser_city;
+                ctx.reply(text_message_only, cancel_button);
             }
         }
     }, [state_list.get_adviser_field]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const adviserField = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, adviserField};
+                const adviser_field = ctx.message.text;
+                ctx.session.state_data = {...ctx.session.state_data, adviser_field};
                 ctx.session.state = state_list.get_adviser_university;
                 ctx.reply(enter_university_message, cancel_button);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, register_buttons);
+                ctx.session.state = state_list.get_adviser_field;
+                ctx.reply(text_message_only, cancel_button);
             }
         }
     }, [state_list.get_adviser_university]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const adviserUniversity = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, adviserUniversity};
+                const adviser_university = ctx.message.text;
+                ctx.session.state_data = {...ctx.session.state_data, adviser_university};
                 ctx.session.state = state_list.get_adviser_description;
                 ctx.reply(enter_description_message, cancel_button);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, register_buttons);
+                ctx.session.state = state_list.get_adviser_university;
+                ctx.reply(text_message_only, cancel_button);
             }
         }
     }, [state_list.get_adviser_description]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const adviserDescription = ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, adviserDescription,
+                const adviser_description = ctx.message.text;
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, adviser_description,
                 };
-                ctx.session.state = state_list.save_registered_adviser_info;
-                ctx.reply(preview_adviser_registration_form(ctx.session.stateData), accept_discard_buttons);
+                ctx.session.state = state_list.register_new_adviser;
+                ctx.reply(preview_adviser_registration_form(ctx.session.state_data), accept_discard_buttons);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, register_buttons);
+                ctx.session.state = state_list.get_adviser_description;
+                ctx.reply(text_message_only, cancel_button);
             }
         }
-    }, [state_list.save_registered_adviser_info]: async (ctx, next) => {
+    }, [state_list.register_new_adviser]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text === all_buttons_text.accept) {
-            const newAdviser = await new AdviserModel({
+            const new_adviser = await new AdviserModel({
                 chat_id: ctx.chat.id,
-                userName: ctx.chat.username,
-                fullname: ctx.session.stateData.adviserFullName,
-                phone_number: ctx.session.stateData.adviserPhoneNumber,
-                email: ctx.session.stateData.adviserEmail,
-                city: ctx.session.stateData.adviserCity,
-                field: ctx.session.stateData.adviserField,
-                university: ctx.session.stateData.adviserUniversity,
-                description: ctx.session.stateData.adviserDescription,
+                username: ctx.chat.username,
+                fullname: ctx.session.state_data.adviser_fullname,
+                phone_number: ctx.session.state_data.adviser_phone_number,
+                email: ctx.session.state_data.adviser_email,
+                city: ctx.session.state_data.adviser_city,
+                field: ctx.session.state_data.adviser_field,
+                university: ctx.session.state_data.adviser_university,
+                description: ctx.session.state_data.adviser_description,
                 is_registered: true,
             });
-            await newAdviser.save();
-            ctx.session.stateData = undefined;
+            await new_adviser.save();
+            ctx.session = undefined;
             ctx.reply(your_information_has_been_registered_you_will_be_notified_if_confirmed_message, register_buttons);
         } else if (ctx.message.text === all_buttons_text.discard) {
-            ctx.session.stateData = undefined;
+            ctx.session = undefined;
             ctx.reply(your_registration_has_been_canceled_message, register_buttons);
         } else {
-            ctx.session.stateData = undefined;
+            ctx.session = undefined;
             ctx.reply(something_went_wrong_please_try_again_message, register_buttons);
         }
     },

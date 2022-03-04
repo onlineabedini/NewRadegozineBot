@@ -50,23 +50,23 @@ module.exports = {
                 if (ctx.session.status === "update") {
                     if (ctx.message.text !== all_buttons_text.dont_change) {
                         const proStudentFullName = await ctx.message.text;
-                        ctx.session.stateData = {
-                            ...ctx.session.stateData, proStudentFullName,
+                        ctx.session.state_data = {
+                            ...ctx.session.state_data, proStudentFullName,
                         };
                         ctx.session.state = state_list.get_pro_student_username_from_admin;
                         ctx.reply(enter_pro_student_user_name_message, dont_change);
                     } else {
                         const proStudentFullName = ctx.session.student.fullname;
-                        ctx.session.stateData = {
-                            ...ctx.session.stateData, proStudentFullName,
+                        ctx.session.state_data = {
+                            ...ctx.session.state_data, proStudentFullName,
                         };
                         ctx.session.state = state_list.get_pro_student_username_from_admin;
                         ctx.reply(enter_pro_student_user_name_message, dont_change);
                     }
                 } else {
                     const proStudentFullName = await ctx.message.text;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentFullName,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentFullName,
                     };
                     ctx.session.state = state_list.get_pro_student_username_from_admin;
                     ctx.reply(enter_pro_student_user_name_message, cancel_button);
@@ -86,8 +86,8 @@ module.exports = {
                     if (ctx.message.text !== all_buttons_text.dont_change) {
                         const proStudentUserName = await ctx.message.text.split("@")[1];
                         if (proStudentUserName) {
-                            ctx.session.stateData = {
-                                ...ctx.session.stateData, proStudentUserName,
+                            ctx.session.state_data = {
+                                ...ctx.session.state_data, proStudentUserName,
                             };
                             ctx.session.state = state_list.get_pro_student_field_from_admin;
                             ctx.reply(enter_pro_student_field_message, enter_field_buttons);
@@ -96,9 +96,9 @@ module.exports = {
                             ctx.session = undefined;
                         }
                     } else {
-                        const proStudentUserName = ctx.session.student.userName;
-                        ctx.session.stateData = {
-                            ...ctx.session.stateData, proStudentUserName,
+                        const proStudentUserName = ctx.session.student.username;
+                        ctx.session.state_data = {
+                            ...ctx.session.state_data, proStudentUserName,
                         };
                         ctx.session.state = state_list.get_pro_student_field_from_admin;
                         ctx.reply(enter_pro_student_field_message, enter_field_buttons);
@@ -107,8 +107,8 @@ module.exports = {
                     const proStudentUserName = await ctx.message.text.split("@")[1];
                     console.log(proStudentUserName);
                     if (proStudentUserName) {
-                        ctx.session.stateData = {
-                            ...ctx.session.stateData, proStudentUserName,
+                        ctx.session.state_data = {
+                            ...ctx.session.state_data, proStudentUserName,
                         };
                         ctx.session.state = state_list.get_pro_student_field_from_admin;
                         ctx.reply(enter_pro_student_field_message, enter_field_buttons);
@@ -128,13 +128,13 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text === all_buttons_text.riyazi || ctx.message.text === all_buttons_text.tajrobi || ctx.message.text === all_buttons_text.ensani || ctx.message.text === all_buttons_text.honar || ctx.message.text === all_buttons_text.zaban || ctx.message.text === all_buttons_text.other_fields) {
                 const proStudentField = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentField,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentField,
                 };
                 ctx.session.state = state_list.get_pro_student_grade_from_admin;
                 ctx.reply(enter_pro_student_grade_message, enter_grade_buttons);
             } else {
-                ctx.session.stateData = undefined;
+                ctx.session.state_data = undefined;
                 ctx.reply(invalid_username_entered_message, manage_pro_students_buttons);
             }
         }
@@ -143,13 +143,13 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text === all_buttons_text.tenth || ctx.message.text === all_buttons_text.eleventh || ctx.message.text === all_buttons_text.twelfth) {
                 const proStudentGrade = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentGrade,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentGrade,
                 };
                 ctx.session.state = state_list.get_pro_student_level_from_admin;
                 ctx.reply(enter_pro_student_level_message, enter_level_buttons);
             } else {
-                ctx.session.stateData = undefined;
+                ctx.session.state_data = undefined;
                 ctx.reply(invalid_username_entered_message, manage_pro_students_buttons);
             }
         }
@@ -158,14 +158,14 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text === all_buttons_text.low || ctx.message.text === all_buttons_text.medium || ctx.message.text === all_buttons_text.high || ctx.message.text === all_buttons_text.genius) {
                 const proStudentLevel = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentLevel,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentLevel,
                 };
                 ctx.session.state = state_list.get_pro_student_phone_number_from_admin;
                 if (ctx.session.status === "update") return ctx.reply(enter_pro_student_phone_number_message, dont_change);
                 ctx.reply(enter_pro_student_phone_number_message, skip_from_this_step_buttons);
             } else {
-                ctx.session.stateData = undefined;
+                ctx.session.state_data = undefined;
                 ctx.reply(text_message_only, manage_pro_students_buttons);
             }
         }
@@ -175,30 +175,30 @@ module.exports = {
             if (ctx.message.text && ctx.session.status === "update") {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentPhoneNumber = await ctx.message.text;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentPhoneNumber,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentPhoneNumber,
                     };
                     ctx.session.state = state_list.get_pro_student_whats_up_number_from_admin;
                     ctx.reply(enter_pro_student_whats_up_number_message, dont_change);
                 } else {
                     const proStudentPhoneNumber = ctx.session.student.phone_number;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentPhoneNumber,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentPhoneNumber,
                     };
                     ctx.session.state = state_list.get_pro_student_whats_up_number_from_admin;
                     ctx.reply(enter_pro_student_whats_up_number_message, dont_change);
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentPhoneNumber = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentPhoneNumber,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentPhoneNumber,
                 };
                 ctx.session.state = state_list.get_pro_student_whats_up_number_from_admin;
                 ctx.reply(enter_pro_student_whats_up_number_message, skip_from_this_step_buttons);
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
                 const proStudentPhoneNumber = no_contact_number;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentPhoneNumber,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentPhoneNumber,
                 };
                 ctx.session.state = state_list.get_pro_student_whats_up_number_from_admin;
                 ctx.reply(enter_pro_student_whats_up_number_message, skip_from_this_step_buttons);
@@ -215,30 +215,30 @@ module.exports = {
             if (ctx.message.text && ctx.session.status === "update") {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentWhatsUpNumber = await ctx.message.text;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentWhatsUpNumber,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentWhatsUpNumber,
                     };
                     ctx.session.state = state_list.get_pro_student_email_from_admin;
                     ctx.reply(enter_pro_student_email_message, dont_change);
                 } else {
                     const proStudentWhatsUpNumber = ctx.session.student.whats_up_number;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentWhatsUpNumber,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentWhatsUpNumber,
                     };
                     ctx.session.state = state_list.get_pro_student_email_from_admin;
                     ctx.reply(enter_pro_student_email_message, dont_change);
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentWhatsUpNumber = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentWhatsUpNumber,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentWhatsUpNumber,
                 };
                 ctx.session.state = state_list.get_pro_student_email_from_admin;
                 ctx.reply(enter_pro_student_email_message, skip_from_this_step_buttons);
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
                 const proStudentWhatsUpNumber = no_contact_number;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentWhatsUpNumber,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentWhatsUpNumber,
                 };
                 ctx.session.state = state_list.get_pro_student_email_from_admin;
                 ctx.reply(enter_pro_student_email_message, skip_from_this_step_buttons);
@@ -255,30 +255,30 @@ module.exports = {
             if (ctx.message.text && ctx.session.status === "update") {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentEmail = await ctx.message.text;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentEmail,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentEmail,
                     };
                     ctx.session.state = state_list.get_pro_student_city_from_admin;
                     ctx.reply(enter_pro_student_city_message, dont_change);
                 } else {
                     const proStudentEmail = ctx.session.student.email;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentEmail,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentEmail,
                     };
                     ctx.session.state = state_list.get_pro_student_city_from_admin;
                     ctx.reply(enter_pro_student_city_message, dont_change);
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentEmail = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentEmail,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentEmail,
                 };
                 ctx.session.state = state_list.get_pro_student_city_from_admin;
                 ctx.reply(enter_pro_student_city_message, skip_from_this_step_buttons);
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
                 const proStudentEmail = no_email;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentEmail,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentEmail,
                 };
                 ctx.session.state = state_list.get_pro_student_city_from_admin;
                 ctx.reply(enter_pro_student_city_message, skip_from_this_step_buttons);
@@ -295,33 +295,33 @@ module.exports = {
             if (ctx.message.text && ctx.session.status === "update") {
                 if (ctx.message.text !== all_buttons_text.dont_change) {
                     const proStudentCity = await ctx.message.text;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentCity,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentCity,
                     };
                     ctx.session.state = state_list.register_pro_student_by_admin;
-                    ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
+                    ctx.reply(await pro_student_registration_preview(ctx.session.state_data), accept_discard_buttons);
                 } else {
                     const proStudentCity = await ctx.session.student.city;
-                    ctx.session.stateData = {
-                        ...ctx.session.stateData, proStudentCity,
+                    ctx.session.state_data = {
+                        ...ctx.session.state_data, proStudentCity,
                     };
                     ctx.session.state = state_list.register_pro_student_by_admin;
-                    ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
+                    ctx.reply(await pro_student_registration_preview(ctx.session.state_data), accept_discard_buttons);
                 }
             } else if (ctx.message.text && ctx.message.text !== all_buttons_text.skip_from_this_step) {
                 const proStudentCity = await ctx.message.text;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentCity,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentCity,
                 };
                 ctx.session.state = state_list.register_pro_student_by_admin;
-                ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
+                ctx.reply(await pro_student_registration_preview(ctx.session.state_data), accept_discard_buttons);
             } else if (ctx.message.text && ctx.message.text === all_buttons_text.skip_from_this_step) {
                 const proStudentCity = no_city;
-                ctx.session.stateData = {
-                    ...ctx.session.stateData, proStudentCity,
+                ctx.session.state_data = {
+                    ...ctx.session.state_data, proStudentCity,
                 };
                 ctx.session.state = state_list.register_pro_student_by_admin;
-                ctx.reply(await pro_student_registration_preview(ctx.session.stateData), accept_discard_buttons);
+                ctx.reply(await pro_student_registration_preview(ctx.session.state_data), accept_discard_buttons);
             } else {
                 ctx.reply(text_message_only, manage_pro_students_buttons);
                 ctx.session = undefined;
@@ -335,16 +335,16 @@ module.exports = {
             const student = await ProStudentModel.findById(ctx.session.student._id.toString());
             if (student) {
                 const student = await ProStudentModel.findByIdAndUpdate(ctx.session.student._id.toString(), {
-                    plan_id: ctx.session.stateData.planId,
-                    fullname: ctx.session.stateData.proStudentFullName,
-                    field: ctx.session.stateData.proStudentField,
-                    grade: ctx.session.stateData.proStudentGrade,
-                    level: ctx.session.stateData.proStudentLevel,
-                    phone_number: ctx.session.stateData.proStudentPhoneNumber,
-                    whats_up_number: ctx.session.stateData.proStudentWhatsUpNumber,
-                    email: ctx.session.stateData.proStudentEmail,
-                    city: ctx.session.stateData.proStudentCity,
-                    userName: ctx.session.stateData.proStudentUserName,
+                    plan_id: ctx.session.state_data.planId,
+                    fullname: ctx.session.state_data.proStudentFullName,
+                    field: ctx.session.state_data.proStudentField,
+                    grade: ctx.session.state_data.proStudentGrade,
+                    level: ctx.session.state_data.proStudentLevel,
+                    phone_number: ctx.session.state_data.proStudentPhoneNumber,
+                    whats_up_number: ctx.session.state_data.proStudentWhatsUpNumber,
+                    email: ctx.session.state_data.proStudentEmail,
+                    city: ctx.session.state_data.proStudentCity,
+                    username: ctx.session.state_data.proStudentUserName,
                     chat_id: null,
                     is_pro: true,
                 }, {new: true});
@@ -362,26 +362,26 @@ module.exports = {
 
         if (ctx.session.status !== "update" && ctx.message.text === all_buttons_text.accept) {
             const newProStudent = await new ProStudentModel({
-                plan_id: ctx.session.stateData.planId,
-                fullname: ctx.session.stateData.proStudentFullName,
-                field: ctx.session.stateData.proStudentField,
-                grade: ctx.session.stateData.proStudentGrade,
-                level: ctx.session.stateData.proStudentLevel,
-                phone_number: ctx.session.stateData.proStudentPhoneNumber,
-                whats_up_number: ctx.session.stateData.proStudentWhatsUpNumber,
-                email: ctx.session.stateData.proStudentEmail,
-                city: ctx.session.stateData.proStudentCity,
-                userName: ctx.session.stateData.proStudentUserName,
+                plan_id: ctx.session.state_data.planId,
+                fullname: ctx.session.state_data.proStudentFullName,
+                field: ctx.session.state_data.proStudentField,
+                grade: ctx.session.state_data.proStudentGrade,
+                level: ctx.session.state_data.proStudentLevel,
+                phone_number: ctx.session.state_data.proStudentPhoneNumber,
+                whats_up_number: ctx.session.state_data.proStudentWhatsUpNumber,
+                email: ctx.session.state_data.proStudentEmail,
+                city: ctx.session.state_data.proStudentCity,
+                username: ctx.session.state_data.proStudentUserName,
                 chat_id: null,
                 is_pro: true,
             });
             await newProStudent.save();
             ctx.reply(student_registered_message, admin_start_buttons);
         } else if (ctx.session.status !== "update" && ctx.message.text === all_buttons_text.discard) {
-            ctx.session.stateData = undefined;
+            ctx.session.state_data = undefined;
             ctx.reply(student_registration_canceled_message, manage_pro_students_buttons);
         } else {
-            ctx.session.stateData = undefined;
+            ctx.session.state_data = undefined;
             ctx.reply(text_message_only, manage_pro_students_buttons);
         }
     }, [state_list.accept_student]: async (ctx, next) => {

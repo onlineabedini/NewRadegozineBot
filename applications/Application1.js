@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const { startBot } = require("./app1/index");
+const { start_bot } = require("./app1/index");
 const winston = require("winston");
 
 module.exports = new (class Application {
   constructor() {
     this.setup_mongo();
     this.setup_logger();
-    startBot();
+    start_bot();
   }
 
   setup_mongo() {

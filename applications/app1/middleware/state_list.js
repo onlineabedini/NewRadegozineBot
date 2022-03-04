@@ -58,7 +58,7 @@ module.exports = {
     get_adviser_field: "get_adviser_field",
     get_adviser_university: "get_adviser_university",
     get_adviser_description: "get_adviser_description",
-    save_registered_adviser_info: "save_registered_adviser_info",
+    register_new_adviser: "register_new_adviser",
     //Send contact for pro student
     get_field_for_send_content: "get_field_for_send_content",
     get_grade_for_send_content: "get_grade_for_send_content",

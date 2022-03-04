@@ -14,15 +14,15 @@ const {user_start_buttons} = require("../../buttons/user_buttons/user_start_butt
 module.exports = {
     [all_buttons_text.cancel]: async (ctx) => {
         ctx.session = undefined;
-        const admin = await AdminModel.findOne({userName: ctx.chat.username});
+        const admin = await AdminModel.findOne({username: ctx.chat.username});
         const pro_adviser = await AdviserModel.findOne({
-            userName: ctx.chat.username, is_pro: true,
+            username: ctx.chat.username, is_pro: true,
         });
         const normal_adviser = await AdviserModel.findOne({
-            userName: ctx.chat.username, is_accepted: true,
+            username: ctx.chat.username, is_accepted: true,
         });
         const pro_student = await ProStudentModel.findOne({
-            userName: ctx.chat.username, is_pro: true,
+            username: ctx.chat.username, is_pro: true,
         });
 
         if (admin) {

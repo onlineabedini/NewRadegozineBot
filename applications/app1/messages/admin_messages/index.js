@@ -63,7 +63,7 @@ module.exports.admin_registrated_message = "✅ مدیر جدید با موفق�
 module.exports.admin_removed_message = "✅ ادمین با موفقیت حذف شد";
 module.exports.duplicate_admin_message = "این مدیر قبلا ثبت شده است❗️ ";
 module.exports.no_admin_added_message = "مدیری افزوده نشده است❗️";
-module.exports.no_admin_found_message = "مدیر یافت نشد❗️";
+module.exports.no_admin_found_message = "مدیری یافت نشد❗️";
 module.exports.admins_list_title_message = "🔻 لیست مدیران 🔻";
 module.exports.invalid_username_entered_message =
   "فرم یوزرنیم وارد شده نامعتبر است ❗️";
@@ -166,23 +166,23 @@ module.exports.demote_adviser_message = `🔹 لطفا یوزر نیم مشاو�
 
 //*************************************  student section  *****************************************\\
 module.exports.pro_student_registration_preview = async (data, username) => {
-  const plan = await PlanModel.findById(data.planId);
+  const plan = await PlanModel.findById(data.plan_id);
   return `🔻 طرح ثبت نام شده : ${
     plan?.title ? plan.title : "غیر قابل تغییر توسط کاربر"
   } 
-🔻 نام و نام خانوادگی : ${data.proStudentFullName}
-🔻 نام کاربری : @${data.proStudentUserName ? data.proStudentUserName : username}
-🔻 رشته ی تحصیلی : ${data.proStudentField}
-🔻 پایه ی تحصیلی : ${data.proStudentGrade}
+🔻 نام و نام خانوادگی : ${data.student_fullname}
+🔻 نام کاربری : @${data.student_username ? data.student_username : username}
+🔻 رشته ی تحصیلی : ${data.student_field}
+🔻 پایه ی تحصیلی : ${data.student_grade}
 🔻 سطح دانش آموز : ${
-    data.proStudentLevel
-      ? data.proStudentLevel
+    data.student_level
+      ? data.student_level
       : "این بخش توسط مشاور مشخص میشود"
   }
-🔻 شماره تماس : ${data.proStudentPhoneNumber}
-🔻 ایمیل : ${data.proStudentEmail}
-🔻 شماره واتساب : ${data.proStudentWhatsUpNumber}
-🔻 شهر : ${data.proStudentCity}
+🔻 شماره تماس : ${data.student_phone_number}
+🔻 ایمیل : ${data.student_email}
+🔻 شماره واتساب : ${data.student_whats_up_number}
+🔻 شهر : ${data.student_city}
 
 اطلاعات شما بصورت بالا در سیستم ذخیره شده است برای ادامه روند ثبت نام یکی از دکمه های زیر را انتخاب نمایید :
 

@@ -1,5 +1,10 @@
-const stateList = require("../state_list");
+const AdminModel = require("../../models/Admin");
+const state_list = require("../state_list");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
+
+const {manage_admins_buttons} = require("../../buttons/admin_buttons/manage_admins_buttons");
+const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
+
 const {
     enter_admin_fullname_message,
     invalid_username_entered_message,
@@ -8,73 +13,79 @@ const {
     admin_registrated_message,
     duplicate_admin_message
 } = require("../../messages/admin_messages");
-const {manage_admins_buttons} = require("../../buttons/admin_buttons/manage_admins_buttons");
 const {text_message_only} = require("../../messages/similar_messages");
-const AdminModel = require("../../models/Admin");
-const {admin_start_buttons} = require("../../buttons/admin_buttons/admin_start_buttons");
 
 module.exports = {
     //Add admin
-    [stateList.add_admin]: async (ctx, next) => {
+    [state_list.add_admin]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const inputUserName = await ctx.message.text;
-                const adminUserName = inputUserName.split("@")[1];
-                if (adminUserName) {
-                    ctx.session.stateData = {...ctx.session.stateData, adminUserName};
-                    ctx.session.state = stateList.get_admin_fullname;
-                    ctx.reply(enter_admin_fullname_message);
+                const username = await ctx.message.text;
+                const admin_username = username.split("@")[1];
+                if (admin_username) {
+                    ctx.session.state_data = {...ctx.session.state_data, admin_username};
+                    ctx.session.state = state_list.get_admin_fullname;
+                    ctx.reply(enter_admin_fullname_message, cancel_button);
                 } else {
-                    ctx.reply(invalid_username_entered_message, manage_admins_buttons);
+                    ctx.session.state = state_list.add_admin
+                    ctx.reply(invalid_username_entered_message, cancel_button);
                 }
             } else {
-                ctx.reply(text_message_only, manage_admins_buttons);
+                ctx.session.state = state_list.add_admin
+                ctx.reply(text_message_only, cancel_button);
             }
         }
-    }, //Remove admin
-    [stateList.remove_admin]: async (ctx, next) => {
-        ctx.session.state = undefined;
-        if (ctx.message.text !== all_buttons_text.cancel) {
-            if (ctx.message.text) {
-                const inputUserName = ctx.message.text;
-                const adminUserName = inputUserName.split("@")[1];
-                const admin = await AdminModel.findOne({username: adminUserName});
-                if (admin) {
-                    await AdminModel.findOneAndDelete({userName: adminUserName});
-                    ctx.reply(admin_removed_message, manage_admins_buttons);
-                } else {
-                    ctx.reply(no_admin_found_message, manage_admins_buttons);
-                }
-            } else {
-                ctx.reply(text_message_only, manage_admins_buttons);
-            }
-        }
-    }, //Register admin
-    //Get admin full name
-    [stateList.get_admin_fullname]: async (ctx, next) => {
+    },//Get admin full name
+    [state_list.get_admin_fullname]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel_button) {
             if (ctx.message.text) {
-                const adminFullName = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, adminFullName};
-                const adminData = await AdminModel.findOne({
-                    userName: ctx.session.stateData.adminUserName,
+                const admin_fullname = ctx.message.text;
+                const admin = await AdminModel.findOne({
+                    username: ctx.session.state_data.admin_username,
                 });
-                if (!adminData) {
-                    const newAdmin = new AdminModel({
-                        userName: ctx.session.stateData.adminUserName, fullname: ctx.session.stateData.adminFullName,
+                if (!admin) {
+                    const new_admin = await new AdminModel({
+                        username: ctx.session.state_data.admin_username,
+                        fullname: admin_fullname,
                     });
-                    await newAdmin.save();
-                    ctx.session.stateData = undefined;
-                    ctx.reply(admin_registrated_message, admin_start_buttons);
+                    await new_admin.save();
+                    ctx.session = undefined;
+                    ctx.reply(admin_registrated_message, manage_admins_buttons);
                 } else {
-                    ctx.session.stateData = undefined;
-                    ctx.reply(duplicate_admin_message, admin_start_buttons);
+                    ctx.session = undefined;
+                    ctx.reply(duplicate_admin_message, manage_admins_buttons);
                 }
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, manage_admins_buttons);
+                ctx.session.state = state_list.get_admin_fullname
+                ctx.reply(text_message_only, cancel_button);
+            }
+        }
+    }, //Remove admin
+    [state_list.remove_admin]: async (ctx, next) => {
+        ctx.session.state = undefined;
+        if (ctx.message.text !== all_buttons_text.cancel) {
+            if (ctx.message.text) {
+                const username = ctx.message.text;
+                const admin_username = username.split("@")[1];
+                if (admin_username) {
+                    const admin = await AdminModel.findOne({username: admin_username});
+                    if (admin) {
+                        await AdminModel.findOneAndDelete({username: admin_username});
+                        ctx.session = undefined
+                        ctx.reply(admin_removed_message, manage_admins_buttons);
+                    } else {
+                        ctx.session.state = state_list.remove_admin
+                        ctx.reply(no_admin_found_message, cancel_button);
+                    }
+                } else {
+                    ctx.session.state = state_list.remove_admin
+                    ctx.reply(invalid_username_entered_message, cancel_button);
+                }
+            } else {
+                ctx.session.state = state_list.remove_admin
+                ctx.reply(text_message_only, cancel_button);
             }
         }
     },

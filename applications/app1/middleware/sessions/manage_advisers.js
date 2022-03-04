@@ -1,4 +1,4 @@
-const stateList = require("../state_list");
+const state_list = require("../state_list");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
 const {
     enter_adviser_fullname_message,
@@ -20,164 +20,184 @@ const {
 } = require("../../messages/similar_messages");
 const AdviserModel = require("../../models/Adviser");
 const {admin_start_buttons} = require("../../buttons/admin_buttons/admin_start_buttons");
+const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 
 module.exports = {
-    [stateList.add_adviser]: async (ctx, next) => {
+    [state_list.add_adviser]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const inputUserName = ctx.message.text;
-                const adviserUserName = inputUserName.split("@")[1];
-                if (adviserUserName) {
-                    ctx.session.stateData = {...ctx.session.stateData, adviserUserName};
-                    ctx.session.state = stateList.get_adviser_fullname;
-                    ctx.reply(enter_adviser_fullname_message);
+                const username = ctx.message.text;
+                const adviser_username = username.split("@")[1];
+                if (adviser_username) {
+                    ctx.session.state_data = {...ctx.session.state_data, adviser_username};
+                    ctx.session.state = state_list.get_adviser_fullname;
+                    ctx.reply(enter_adviser_fullname_message, cancel_button);
                 } else {
-                    ctx.reply(invalid_username_entered_message, manage_advisers_buttons);
+                    ctx.session.state = state_list.add_adviser;
+                    ctx.reply(invalid_username_entered_message, cancel_button);
                 }
             } else {
-                ctx.reply(text_message_only, manage_advisers_buttons);
+                ctx.session.state = state_list.add_adviser;
+                ctx.reply(text_message_only, cancel_button);
             }
         }
-    }, [stateList.remove_adviser]: async (ctx, next) => {
+    }, [state_list.get_adviser_fullname]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const inputText = ctx.message.text;
-                const adviserUserName = inputText.split("@")[1];
+                const adviser_fullname = ctx.message.text;
                 const adviser = await AdviserModel.findOne({
-                    username: adviserUserName,
+                    username: ctx.session.state_data.adviser_username,
                 });
-                if (adviser) {
-                    await AdviserModel.findOneAndDelete({username: adviserUserName});
-                    ctx.reply(adviser_removed_message, manage_advisers_buttons);
+                if (!adviser) {
+                    const new_adviser = await new AdviserModel({
+                        username: ctx.session.state_data.adviser_username,
+                        fullname: adviser_fullname,
+                        is_accepted: true,
+                    });
+                    await new_adviser.save();
+                    ctx.session = undefined;
+                    ctx.reply(adviser_registrated_message, admin_start_buttons);
                 } else {
-                    ctx.reply(no_adviser_found_message, manage_advisers_buttons);
+                    ctx.session = undefined;
+                    ctx.reply(duplicate_adviser_message, manage_advisers_buttons);
                 }
             } else {
-                ctx.reply(text_message_only, manage_advisers_buttons);
+                ctx.session.state = state_list.get_adviser_fullname
+                ctx.reply(text_message_only, cancel_button);
             }
         }
-    }, [stateList.promote_adviser]: async (ctx, next) => {
+    }, [state_list.remove_adviser]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const inputUserName = ctx.message.text;
-                const adviserUserName = inputUserName.split("@")[1];
-                if (adviserUserName) {
+                const username = ctx.message.text;
+                const adviser_username = username.split("@")[1];
+                if (adviser_username) {
                     const adviser = await AdviserModel.findOne({
-                        userName: adviserUserName,
+                        username: adviser_username,
                     });
                     if (adviser) {
-                        const adviser = await AdviserModel.findOneAndUpdate({userName: adviserUserName}, {
+                        await AdviserModel.findOneAndDelete({username: adviser_username});
+                        ctx.session = undefined
+                        ctx.reply(adviser_removed_message, manage_advisers_buttons);
+                    } else {
+                        ctx.session.state = state_list.remove_adviser;
+                        ctx.reply(no_adviser_found_message, cancel_button);
+                    }
+                } else {
+                    ctx.session.state = state_list.remove_adviser
+                    ctx.reply(invalid_username_entered_message, cancel_button);
+                }
+
+            } else {
+                ctx.session.state = state_list.remove_adviser;
+                ctx.reply(text_message_only, cancel_button);
+            }
+        }
+    }, [state_list.promote_adviser]: async (ctx, next) => {
+        ctx.session.state = undefined;
+        if (ctx.message.text !== all_buttons_text.cancel) {
+            if (ctx.message.text) {
+                const username = ctx.message.text;
+                const adviser_username = username.split("@")[1];
+                if (adviser_username) {
+                    let adviser = await AdviserModel.findOne({
+                        username: adviser_username,
+                    });
+                    if (adviser) {
+                        adviser = await AdviserModel.findOneAndUpdate({username: adviser_username}, {
                             is_pro: true,
                         }, {new: true});
                         await adviser.save();
+                        ctx.session = undefined
                         ctx.reply(The_adviser_was_promoted, manage_advisers_buttons);
                     } else {
-                        ctx.reply(no_adviser_found_with_this_username, manage_advisers_buttons);
+                        ctx.session.state = state_list.promote_adviser
+                        ctx.reply(no_adviser_found_with_this_username, cancel_button);
                     }
                 } else {
-                    ctx.reply(invalid_username_entered_message, manage_advisers_buttons);
+                    ctx.session.state = state_list.promote_adviser
+                    ctx.reply(invalid_username_entered_message, cancel_button);
                 }
             } else {
-                ctx.reply(text_message_only, manage_advisers_buttons);
+                ctx.session.state = state_list.promote_adviser
+                ctx.reply(text_message_only, cancel_button);
             }
         }
-    }, [stateList.demote_adviser]: async (ctx, next) => {
+    }, [state_list.demote_adviser]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const inputUserName = ctx.message.text;
-                const adviserUserName = inputUserName.split("@")[1];
-                if (adviserUserName) {
-                    const adviser = await AdviserModel.findOne({
-                        userName: adviserUserName,
+                const username = ctx.message.text;
+                const adviser_username = username.split("@")[1];
+                if (adviser_username) {
+                    let adviser = await AdviserModel.findOne({
+                        username: adviser_username,
                     });
                     if (adviser) {
-                        const adviser = await AdviserModel.findOneAndUpdate({userName: adviserUserName}, {
+                        adviser = await AdviserModel.findOneAndUpdate({username: adviser_username}, {
                             is_pro: false,
                         }, {new: true});
                         await adviser.save();
+                        ctx.session = undefined;
                         ctx.reply(The_adviser_was_demoted, manage_advisers_buttons);
                     } else {
-                        ctx.reply(no_adviser_found_with_this_username, manage_advisers_buttons);
+                        ctx.session.state = state_list.demote_adviser
+                        ctx.reply(no_adviser_found_with_this_username, cancel_button);
                     }
                 } else {
-                    ctx.reply(invalid_username_entered_message, manage_advisers_buttons);
+                    ctx.session.state = state_list.demote_adviser
+                    ctx.reply(invalid_username_entered_message, cancel_button);
                 }
             } else {
-                ctx.reply(text_message_only, manage_advisers_buttons);
+                ctx.session.state = state_list.demote_adviser
+                ctx.reply(text_message_only, cancel_button);
             }
         }
-    }, [stateList.get_adviser_fullname]: async (ctx, next) => {
-        ctx.session.state = undefined;
-        if (ctx.message.text !== all_buttons_text.cancel) {
-            if (ctx.message.text) {
-                const adviserFullName = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, adviserFullName};
-                const adviserData = await AdviserModel.findOne({
-                    userName: ctx.session.stateData.adviserFullName,
-                });
-                if (!adviserData) {
-                    const newAdviser = new AdviserModel({
-                        userName: ctx.session.stateData.adviserUserName,
-                        fullname: ctx.session.stateData.adviserFullName,
-                        is_accepted: true,
-                    });
-                    await newAdviser.save();
-                    ctx.session.stateData = undefined;
-                    ctx.reply(adviser_registrated_message, admin_start_buttons);
-                } else {
-                    ctx.session.stateData = undefined;
-                    ctx.reply(duplicate_adviser_message, admin_start_buttons);
-                }
-            } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, manage_advisers_buttons);
-            }
-        }
-    }, [stateList.accept_adviser]: async (ctx, next) => {
+    }, [state_list.accept_adviser]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text === all_buttons_text.yes) {
-            let regAdviser = await AdviserModel.findById(ctx.session.regAdviserId);
-            if (regAdviser) {
-                regAdviser = await AdviserModel.findByIdAndUpdate(ctx.session.regAdviserId, {
+            let adviser = await AdviserModel.findById(ctx.session.adviser_id);
+            if (adviser) {
+                adviser = await AdviserModel.findByIdAndUpdate(ctx.session.adviser_id, {
                     is_accepted: true,
                 }, {new: true});
-                await regAdviser.save();
-                await ctx.telegram.sendMessage(regAdviser.chat_id, you_have_been_accepted_message);
-                ctx.reply(adviser_accepted_message, admin_start_buttons);
+                await adviser.save();
+                await ctx.telegram.sendMessage(adviser.chat_id, you_have_been_accepted_message);
+                ctx.reply(adviser_accepted_message, manage_advisers_buttons);
                 ctx.session = undefined;
             } else {
-                ctx.reply(adviser_not_found, admin_start_buttons);
+                ctx.reply(adviser_not_found, manage_advisers_buttons);
                 ctx.session = undefined;
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply(your_request_has_been_canceled, admin_start_buttons);
+            ctx.reply(your_request_has_been_canceled, manage_advisers_buttons);
             ctx.session = undefined;
         } else {
-            ctx.reply(input_is_invalid_message, admin_start_buttons);
+            ctx.reply(input_is_invalid_message, manage_advisers_buttons);
             ctx.session = undefined;
         }
-    }, [stateList.reject_adviser]: async (ctx, next) => {
+    }, [state_list.reject_adviser]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text === all_buttons_text.yes) {
-            let regAdviser = await AdviserModel.findById(ctx.session.regAdviserId);
-            if (regAdviser) {
-                await AdviserModel.findByIdAndDelete(ctx.session.regAdviserId);
-                ctx.reply("مشاور با موفقیت حذف گردید", admin_start_buttons);
+            let adviser = await AdviserModel.findById(ctx.session.adviser_id);
+            if (adviser) {
+                await ctx.telegram.sendMessage(adviser.chat_id , "با عرض تاسف در خواست شما برای ثبت نام به عنوان مشاور رد گردید.")
+                ctx.reply("مشاور پذیرفته نشد.", manage_advisers_buttons);
+                await AdviserModel.findByIdAndDelete(ctx.session.adviser_id);
                 ctx.session = undefined;
             } else {
-                ctx.reply(this_adviser_has_already_been_removed_message, admin_start_buttons);
                 ctx.session = undefined;
+                ctx.reply(this_adviser_has_already_been_removed_message, manage_advisers_buttons);
             }
         } else if (ctx.message.text === all_buttons_text.no) {
-            ctx.reply(your_request_has_been_canceled, admin_start_buttons);
             ctx.session = undefined;
+            ctx.reply(your_request_has_been_canceled, manage_advisers_buttons);
         } else {
-            ctx.reply(input_is_invalid_message, admin_start_buttons);
             ctx.session = undefined;
+            ctx.reply(input_is_invalid_message, manage_advisers_buttons);
         }
     },
 }

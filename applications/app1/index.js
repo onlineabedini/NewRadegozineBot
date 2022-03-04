@@ -16,17 +16,17 @@ const session_middleware = require("./middleware/sessions");
 let bot;
 
 // classes + objects of them
-const getLogs = require("./mainfunctions/startBot/getLog");
-let getUserLog = new getLogs();
+const get_logs = require("./mainfunctions/start_bot/get_log");
+let get_user_log = new get_logs();
 
-const roleSelect = require("./mainfunctions/startBot/roleSelect");
+const role_select = require("./mainfunctions/start_bot/role_select");
 const {
   something_went_wrong_please_try_again_message,
 } = require("./messages/similar_messages");
-let roleSelector = new roleSelect();
+let role_selector = new role_select();
 
 // start bot function
-async function startBot() {
+async function start_bot() {
   bot = new Telegraf(process.env.BOT_TOKEN);
   await bot.launch();
   bot.use(new LocalSession({ database: "session.json" }));
@@ -51,9 +51,9 @@ async function startBot() {
   });
 
   await bot.start((ctx) => {
-    roleSelector.role_selector(ctx);
-    getUserLog.get_user_start();
+    role_selector.role_selector(ctx);
+    get_user_log.get_user_start();
   });
 }
 
-module.exports.startBot = startBot;
+module.exports.start_bot = start_bot;

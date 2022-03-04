@@ -19,9 +19,9 @@ module.exports = {
         ctx.session = undefined;
         const plans = await PlanModel.find();
         if (plans.length !== 0) {
-            const tempMessage = await ctx.reply(select_your_plan_message, plans_buttons(plans));
-            ctx.session.chatId = tempMessage.chat.id;
-            ctx.session.messageId = tempMessage.message_id;
+            const temp_message = await ctx.reply(select_your_plan_message, plans_buttons(plans));
+            ctx.session.chat_id = temp_message.chat.id;
+            ctx.session.message_id = temp_message.message_id;
         } else await ctx.reply(no_plan_found_message, manage_pro_students_buttons);
     },
     [all_buttons_text.show_update_remove_students]: async (ctx) => {

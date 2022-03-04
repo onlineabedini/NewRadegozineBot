@@ -11,8 +11,8 @@ const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 const {confidence_buttons} = require("../../buttons/similar_buttons/confidence_buttons");
 
 module.exports = {
-    ANSWER: async (ctx, matches) => {
-        const question_id = matches[0].split("_")[1];
+    ANSWER_QUESTION: async (ctx, matches) => {
+        const question_id = matches[0].split("_")[2];
         const question = await QuestionModel.findById(question_id);
         if (question) {
             ctx.session.state = state_list.answer;
@@ -22,8 +22,8 @@ module.exports = {
             ctx.reply(this_user_no_longer_exists_message);
         }
     },
-    DELETE: async (ctx, matches) => {
-        const question_id = matches[0].split("_")[1];
+    DELETE_QUESTION: async (ctx, matches) => {
+        const question_id = matches[0].split("_")[2];
         ctx.reply(are_you_sure_you_want_to_remove_this_question_message, confidence_buttons);
         ctx.session.question_id = question_id;
         ctx.session.state = state_list.remove_question;

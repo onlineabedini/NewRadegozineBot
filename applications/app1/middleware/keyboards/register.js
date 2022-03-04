@@ -21,11 +21,11 @@ module.exports = {
     },
     [all_buttons_text.register_as_pro_students]: async (ctx) => {
         ctx.session = undefined;
-        const plansData = await PlanModel.find();
-        if (plansData.length !== 0) {
-            const tempMessage = await ctx.reply(pro_students_register_message, plans_buttons(plansData));
-            ctx.session.chatId = tempMessage.chat.id;
-            ctx.session.messageId = tempMessage.message_id;
+        const plans = await PlanModel.find();
+        if (plans.length !== 0) {
+            const temp_message = await ctx.reply(pro_students_register_message, plans_buttons(plans));
+            ctx.session.chat_id = temp_message.chat.id;
+            ctx.session.message_id = temp_message.message_id;
         } else ctx.reply(no_plan_found_message);
     },
     [all_buttons_text.register_as_adviser]: async (ctx) => {

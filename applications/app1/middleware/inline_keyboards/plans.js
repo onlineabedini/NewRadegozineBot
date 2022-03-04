@@ -9,12 +9,13 @@ const {enter_full_name_message} = require("../../messages/similar_messages");
 
 module.exports = {
     PLAN: async (ctx, matches) => {
-        await ctx.telegram.deleteMessage(ctx.session.chatId, ctx.session.messageId);
-        const planId = matches[0].split("_")[1];
-        ctx.session.stateData = {
-            ...ctx.session.stateData, planId,
+        await ctx.telegram.deleteMessage(ctx.session.chat_id, ctx.session.message_id);
+        ctx.session = undefined;
+        const plan_id = matches[0].split("_")[1];
+        ctx.session.state_data = {
+            ...ctx.session.state_data, plan_id,
         };
-        const admin = await AdminModel.findOne({userName: ctx.chat.username});
+        const admin = await AdminModel.findOne({username: ctx.chat.username});
         if (admin) {
             if (ctx.session.status === "update") {
                 await ctx.reply(enter_pro_student_full_name_message, dont_change);

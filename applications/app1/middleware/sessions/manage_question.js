@@ -1,5 +1,11 @@
+const QuestionModel = require("../../models/Question");
+const ChannelModel = require("../../models/Channel");
 const state_list = require("../state_list");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
+
+const {auth_button} = require("../../buttons/similar_buttons/auth_button");
+const {channel_post_buttons} = require("../../buttons/similar_buttons/channel_post_buttons");
+
 const {
     enter_field_message, text_message_only, enter_grade_message,
     voice_caption,
@@ -11,15 +17,14 @@ const {
     your_request_has_been_canceled,
     input_is_invalid_message
 } = require("../../messages/similar_messages");
-const {auth_button} = require("../../buttons/similar_buttons/auth_button");
+
 const {
     enter_your_question_as_text,
     your_question_registrated_message,
     your_question_answered_message
 } = require("../../messages/student_messages");
-const QuestionModel = require("../../models/Question");
-const ChannelModel = require("../../models/Channel");
-const {channel_post_buttons} = require("../../buttons/similar_buttons/channel_post_buttons");
+const {messages_list_buttons} = require("../../buttons/admin_buttons/messages_list_buttons");
+
 module.exports = {
     //ask question
     [state_list.get_student_fullname]: async (ctx, next) => {
@@ -130,5 +135,17 @@ module.exports = {
             ctx.session = undefined;
             ctx.reply(input_is_invalid_message, await auth_button(ctx));
         }
-    },
+    }, [state_list.tag_person]: async (ctx, next) => {
+        ctx.session.state = undefined;
+        if (ctx.message.text) {
+            const question = await QuestionModel.findByIdAndUpdate(ctx.session.question_id , {
+                tag : ctx.message.text
+            })
+            await question.save()
+            ctx.reply("نام مورد نظر شما با موفقیت به سوال چسبانده شد." , messages_list_buttons )
+        } else {
+            ctx.session.state = state_list.tag_person
+            ctx.reply(text_message_only);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
-    user_role: {default: "student", type: String}, chat_id: {
+    user_role: {default: "student", type: String},
+    chat_id: {
         type: String,
     }, username: {
         type: String,
@@ -13,7 +14,9 @@ const schema = new mongoose.Schema({
     }, message_id: {
         type: String,
     }, message_text: {
-        type: "String",
-    },
+        type: String,
+    },tag : {
+        type: String
+    }
 });
 module.exports = mongoose.model("QuestionModel", schema);

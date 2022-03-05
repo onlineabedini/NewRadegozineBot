@@ -40,7 +40,8 @@ module.exports = {
     [all_buttons_text.show_users_questions_list]: async (ctx) => {
         ctx.session.state = undefined;
         const admin = await AdminModel.find({username: ctx.chat.username})
-        if (admin) {
+        console.log(admin)
+        if (admin.length !== 0) {
             const questions = await QuestionModel.find();
             if (questions.length !== 0) {
                 await ctx.reply(questions_list_title_message);

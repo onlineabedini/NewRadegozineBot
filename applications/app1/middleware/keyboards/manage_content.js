@@ -8,6 +8,8 @@ const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 
 const {select_an_item_message} = require("../../messages/similar_messages");
 const {content_caption} = require("../../messages/admin_messages");
+const {auth_button} = require("../../buttons/similar_buttons/auth_button");
+const {content_production_titles_list_message} = require("../../messages/adviser_messages");
 
 module.exports = {
     [all_buttons_text.manage_content_production]: async (ctx) => {
@@ -31,5 +33,13 @@ module.exports = {
         } else {
             ctx.reply("عنوانی برای تولید محتوا ثبت نشده است.", content_production_buttons);
         }
-    },
+    },[all_buttons_text.show_content_production_titles_list]: async (ctx) => {
+        ctx.session.state = undefined;
+        const contents = await ContentModel.find();
+        if (contents.length !== 0){
+            ctx.reply(content_production_titles_list_message(contents))
+        }else {
+            ctx.reply("اخیرا عنوانی برای تولید محتوا افزوده نشده است." , auth_button(ctx))
+        }
+    }
 }

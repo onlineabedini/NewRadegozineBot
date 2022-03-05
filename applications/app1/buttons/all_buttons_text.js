@@ -2,42 +2,43 @@ module.exports.all_buttons_text = {
   
   //admin
   manage_admins: "👤 مدیریت مدیران 👤",
-  show_admins_list: "لیست مدیران",
-  add_admin: "افزودن مدیر",
-  remove_admin: "حذف مدیر",
+  show_admins_list: "👤 لیست مدیران 👤",
+  add_admin: "➕ افزودن مدیر ➕",
+  remove_admin: "➖ حذف مدیر ➖",
   
   // adviser
   manage_advisers: "🗣 مدیریت مشاوران 🗣",
-  show_advisers_list: "لیست مشاوران",
-  show_reg_advisers_list: "لیست ثبت نامها",
-  show_advisers_questions_list: "لیست پیام های مشاوران",
-  add_adviser: "افزودن مشاور",
-  remove_adviser: "حذف مشاور",
-  promote_adviser: "ارتقای مشاور",
-  demote_adviser: "تنزل مشاور",
-  
+  show_advisers_list: "🗣 لیست مشاوران 🗣",
+  show_reg_advisers_list: "📝 لیست ثبت نامها 📝",
+  add_adviser: "➕ افزودن مشاور ➕",
+  remove_adviser: "➖ حذف مشاور ➖",
+  promote_adviser: "⬆️ ارتقای مشاور ⬆️",
+  demote_adviser: "⬇️ تنزل مشاور ⬇️",
+
   // student
   manage_pro_students: "🥇 دانش آموزان رد گزینه پرو 🥇",
-  add_student: "افزودن دانش آموز",
-  show_update_remove_students: "نمایش | ویرایش | حذف (دانش آموز)",
-  
+  add_student: "➕ افزودن دانش آموز ➕",
+  show_update_remove_students: "📁 نمایش | ویرایش | حذف (دانش آموز) 📁",
+
   // plan
   manage_plans: "🗂 طرح ها 🗂",
-  add_plan: "افزودن طرح",
-  show_update_remove_plans: "نمایش | ویرایش | حذف (طرح)",
-  
+  add_plan: "➕ افزودن طرح ➕",
+  show_update_remove_plans: "📁 نمایش | ویرایش | حذف (طرح) 📁",
+
   // content
-  manage_content_production: "📝 تولید محتوا 📝",
-  add_content_title: "افزودن عنوان محتوا",
-  show_update_remove_content: "نمایش | ویرایش | حذف (محتوا)",
-  
-  // messages 
-  manage_messages : "✉️ پیام ها ✉️",
-  send_message: "ارسال پیام",
-  messages_list: "لیست پیام ها",
-  send_message_for_advisers: "ارسال پیام برای مشاوران",
-  send_message_for_users: "ارسال پیام برای کاربران",
-  send_message_for_channels: "ارسال پیام در همه ی کانال ها",
+  manage_content_production: "📋 تولید محتوا 📋",
+  show_content_production_titles_list : "📋 نمایش لیست عناوین برای تولید محتوا 📋",
+  add_content_title: "➕ افزودن عنوان محتوا ➕",
+  show_update_remove_content: "📁 نمایش | ویرایش | حذف (محتوا) 📁",
+
+  // messages
+  manage_messages : "⁉️ سوالات و پیام ها ✉️",
+  send_message: "📤 ارسال پیام 📤",
+  messages_list: "📥 لیست پیام ها و سوالات 📥",
+  show_advisers_questions_list: "📩 لیست پیام های مشاوران 📩",
+  send_message_for_advisers: "📤 ارسال پیام برای مشاوران 📤",
+  send_message_for_users: "📤 ارسال پیام برای کاربران 📤",
+  send_message_for_channels: "📤 ارسال پیام در همه ی کانال ها 📤",
 
   //student levels
   low: "عادی",
@@ -48,10 +49,10 @@ module.exports.all_buttons_text = {
   bot_statistics: "📊 آمار و ارقام بات 📊",
 
   // similar buttons text for admin and adviser
-  show_users_questions_list: "لیست سوالات دانش آموزان",
-  send_content_for_students: "ارسال محتوا برای دانش آموزان",
-  send_content_for_pro_students: "ارسال محتوا برای دانش آموزان ویژه",
-  send_content_for_all_students: "ارسال محتوا برای همه ی دانش آموزان",
+  show_users_questions_list: "⁉️ لیست سوالات دانش آموزان ⁉️",
+  send_content_for_students: "📤 ارسال محتوا برای دانش آموزان 📤",
+  send_content_for_pro_students: "🔸 ارسال محتوا برای دانش آموزان ویژه 🔸",
+  send_content_for_all_students: "🔹 ارسال محتوا برای همه ی دانش آموزان 🔹",
 
   // similar buttons text for all
   cancel: "❌ لغو ❌",
@@ -62,8 +63,8 @@ module.exports.all_buttons_text = {
   yes: "بله  ✅",
   no: "خیر  ❌",
   request_contact: "📱 دریافت شماره ی تماس 📱",
-  skip_from_this_step: "عبور از این مرحله",
-  dont_change: "تغییر نده",
+  skip_from_this_step: "➡️ عبور از این مرحله",
+  dont_change: "➡️ تغییر نده",
 
   // grades text
   tenth: "پایه دهم",
@@ -92,5 +93,5 @@ module.exports.all_buttons_text = {
   ask_question_from_pro_adviser: "💬 گفت و گو با مشاورین ویژه 💬",
   my_info: "📁 اطلاعات من 📁",
   show_my_info: "📁 نمایش اطلاعات من 📁",
-  update_my_info: "به روز رسانی اطلاعات من",
+  update_my_info: "🔄 به روز رسانی اطلاعات من 🔄",
 };

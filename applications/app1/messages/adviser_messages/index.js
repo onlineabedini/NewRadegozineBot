@@ -11,3 +11,19 @@ module.exports.pro_adviser_start_message = `
         انتخاب نمایید:
  @radegozine_bot
  `
+
+module.exports.content_production_titles_list_message = (data) => {
+    let message = `
+    🔻 لیست عناوین تولید محتوا 🔻
+    `;
+    data.forEach((item) => {
+        message += `
+🟣   عنوان  :  ${item.title}
+
+🟡   توضیحات تکمیلی :  ${item.description}
+
+`;
+    });
+    message += `@radegozine_bot`;
+    return message;
+}

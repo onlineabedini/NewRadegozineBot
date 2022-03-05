@@ -9,6 +9,7 @@ module.exports.pro_adviser_start_buttons = {
                 {text: all_buttons_text.send_message_for_admins},
                 {text: all_buttons_text.send_content_for_students}
             ],
+            [{text: all_buttons_text.show_content_production_titles_list}],
             [{text: all_buttons_text.bot_developers}],
         ],
     },

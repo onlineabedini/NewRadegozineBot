@@ -22,7 +22,7 @@ module.exports = {
                 ctx.reply("لطفا توضیحاتی را در این باره وارد نمایید : ", cancel_button);
             } else {
                 ctx.session.state = state_list.get_content_title;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_content_description]: async (ctx, next) => {
@@ -52,7 +52,7 @@ module.exports = {
                 }
             } else {
                 ctx.session.state = state_list.get_content_description
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.remove_content]: async (ctx, next) => {

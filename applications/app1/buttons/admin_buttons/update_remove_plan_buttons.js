@@ -6,5 +6,4 @@ module.exports.update_and_remove_plan_buttons = (id) => {
             [{text: "🔄 ویرایش این طرح 🔄", callback_data: `UPDATE_PLAN_${id}`}],
         ],
     }
-
 }

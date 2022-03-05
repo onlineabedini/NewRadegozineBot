@@ -23,7 +23,7 @@ module.exports = {
         const plans = await PlanModel.find();
         if (plans.length !== 0) {
             plans.forEach((plan) => {
-                ctx.replyWithPhoto({source: plan.planImage}, {
+                ctx.replyWithPhoto(plan.image, {
                     caption: plan_caption(plan), reply_markup: update_and_remove_plan_buttons(plan._id),
                 });
             });

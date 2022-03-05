@@ -72,7 +72,7 @@ module.exports = {
                 ctx.session.state = state_list.get_pro_student_field;
                 ctx.reply(enter_field_message, enter_field_buttons);
             } else {
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
                 ctx.session.state = state_list.get_pro_student_fullname;
             }
         }
@@ -93,7 +93,7 @@ module.exports = {
                 ctx.reply(enter_grade_message, enter_grade_buttons);
             } else {
                 ctx.session.state = state_list.get_pro_student_field;
-                ctx.reply(input_is_invalid_message, enter_field_buttons);
+                ctx.reply(input_is_invalid_message);
             }
         }
     }, [state_list.get_pro_student_grade]: async (ctx, next) => {
@@ -110,7 +110,7 @@ module.exports = {
                 ctx.reply(enter_phone_number_message, request_contact_button);
             } else {
                 ctx.session.state = state_list.get_pro_student_grade;
-                ctx.reply(input_is_invalid_message, enter_grade_buttons);
+                ctx.reply(input_is_invalid_message);
             }
         }
     }, [state_list.get_pro_student_phone_number]: async (ctx, next) => {
@@ -125,7 +125,7 @@ module.exports = {
                 ctx.reply(enter_whats_up_number_message, request_contact_button);
             } else {
                 ctx.session.state = state_list.get_pro_student_phone_number;
-                ctx.reply(input_is_invalid_message, request_contact_button);
+                ctx.reply(input_is_invalid_message);
             }
         }
     }, [state_list.get_pro_student_whats_up_number]: async (ctx, next) => {
@@ -140,7 +140,7 @@ module.exports = {
                 ctx.reply(enter_email_message, skip_from_this_step_buttons);
             } else {
                 ctx.session.state = state_list.get_pro_student_whats_up_number;
-                ctx.reply(text_message_only, request_contact_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_pro_student_email]: async (ctx, next) => {
@@ -164,7 +164,7 @@ module.exports = {
                 }
             } else {
                 ctx.session.state = state_list.get_pro_student_email;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_pro_student_city]: async (ctx, next) => {
@@ -179,7 +179,7 @@ module.exports = {
                 ctx.reply(await pro_student_registration_preview(ctx.session.state_data, ctx.chat.username), accept_discard_buttons);
             } else {
                 ctx.session.state = state_list.get_pro_student_city;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.register_pro_student]: async (ctx, next) => {

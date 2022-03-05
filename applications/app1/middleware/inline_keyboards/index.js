@@ -29,6 +29,7 @@ const ActionMap = {
 
     ANSWER_QUESTION: /^ANSWER_QUESTION_\w+/,
     DELETE_QUESTION: /^DELETE_QUESTION_\w+/,
+    TAG_PERSON: /^TAG_PERSON_\w+/,
 
     PLAN: /^PLAN_\w+/,
 

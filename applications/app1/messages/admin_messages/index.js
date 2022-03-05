@@ -23,12 +23,12 @@ module.exports.admins_list_message = (data) => {
 };
 
 module.exports.plan_caption = (data) => {
-  return `🔻 نام طرح : ${data.title}
- 🔻 قیمت طرح :${data.price}
-🔻 توضیحات طرح : ${data.planDescription}
+  return `
+🔻 نام طرح : ${data.title}
+🔻 قیمت طرح :${data.price}
+🔻 توضیحات طرح : ${data.description}
 
-@radegozine_bot
-`;
+@radegozine_bot`
 };
 
 module.exports.content_caption = (data) => {

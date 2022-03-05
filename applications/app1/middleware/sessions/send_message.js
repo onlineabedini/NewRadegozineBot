@@ -28,9 +28,9 @@ module.exports = {
             let adviser = await AdviserModel.findOne({
                 chat_id: ctx.message.chat.id,
             });
-            adviser.userName = ctx.message.chat.username;
-            adviser.messagesIds.push(ctx.message.message_id);
-            adviser.save();
+            adviser.username = ctx.message.chat.username;
+            adviser.messages_ids.push(ctx.message.message_id);
+            await adviser.save();
             ctx.reply(message_sent_successfully, adviser_start_buttons);
         }
     }, [state_list.send_message_for_advisers]: async (ctx, next) => {
@@ -41,9 +41,9 @@ module.exports = {
                 await advisers.forEach((adviser) => {
                     ctx.telegram.forwardMessage(adviser.chat_id, ctx.chat.id, ctx.message.message_id);
                 });
-                ctx.reply(your_message_has_been_sent_to_advisers_message, admin_start_buttons);
+                ctx.reply(your_message_has_been_sent_to_advisers_message, send_message_buttons);
             } else {
-                ctx.reply(no_adviser_found_message, admin_start_buttons);
+                ctx.reply(no_adviser_found_message, send_message_buttons);
             }
         }
     }, [state_list.send_message_for_all_users]: async (ctx, next) => {
@@ -54,20 +54,10 @@ module.exports = {
                 await users.forEach((user) => {
                     ctx.telegram.forwardMessage(user.chat_id, ctx.chat.id, ctx.message.message_id);
                 });
-                ctx.reply(message_sent_successfully, admin_start_buttons);
+                ctx.reply(message_sent_successfully, send_message_buttons);
             } else {
-                ctx.reply(no_user_found, admin_start_buttons);
+                ctx.reply(no_user_found, send_message_buttons);
             }
-        }
-    }, [state_list.send_message_for_reg_students]: async (ctx, next) => {
-        ctx.session.state = undefined;
-        if (ctx.message.text !== all_buttons_text.cancel) {
-            await ctx.telegram.forwardMessage(ctx.session.state_data.chat_id, ctx.chat.id, ctx.message.message_id);
-            ctx.session.state_data = undefined;
-            ctx.reply(message_sent_successfully, admin_start_buttons);
-        } else {
-            ctx.session.state_data = undefined;
-            ctx.reply(select_an_item_message, admin_start_buttons);
         }
     }, [state_list.send_message_for_channels]: async (ctx, next) => {
         ctx.session.state = undefined;
@@ -83,9 +73,16 @@ module.exports = {
                 ctx.reply(no_channel_found_message, send_message_buttons);
                 ctx.session = undefined;
             }
+        }
+    }, [state_list.send_message_for_reg_students]: async (ctx, next) => {
+        ctx.session.state = undefined;
+        if (ctx.message.text !== all_buttons_text.cancel) {
+            await ctx.telegram.forwardMessage(ctx.session.state_data.chat_id, ctx.chat.id, ctx.message.message_id);
+            ctx.session = undefined;
+            ctx.reply(message_sent_successfully, admin_start_buttons);
         } else {
             ctx.session = undefined;
-            ctx.reply(select_an_item_message, send_message_buttons);
+            ctx.reply(select_an_item_message, admin_start_buttons);
         }
     },
 }

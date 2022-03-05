@@ -16,8 +16,8 @@ const {
 module.exports = {
     UPDATE_STUDENT: async (ctx, matches) => {
         ctx.session = undefined;
-        const studentId = matches[0].split("_")[2];
-        const student = await ProStudentModel.findById(studentId);
+        const student_id = matches[0].split("_")[2];
+        const student = await ProStudentModel.findById(student_id);
         if (student) {
             const plans = await PlanModel.find();
             if (plans.length !== 0) {
@@ -33,9 +33,9 @@ module.exports = {
         }
     },
     REMOVE_STUDENT: async (ctx, matches) => {
-        const studentId = matches[0].split("_")[2];
+        const student_id = matches[0].split("_")[2];
         ctx.reply(do_you_want_to_remove_this_student_message, confidence_buttons);
-        ctx.session.studentId = studentId;
+        ctx.session.student_id = student_id;
         ctx.session.state = state_list.remove_student;
     },
 }

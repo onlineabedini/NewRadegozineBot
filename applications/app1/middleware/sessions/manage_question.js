@@ -1,6 +1,7 @@
 const state_list = require("../state_list");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
-const {enter_field_message, text_message_only, enter_grade_message,
+const {
+    enter_field_message, text_message_only, enter_grade_message,
     voice_caption,
     your_answer_registered_message,
     bot_is_not_a_member_of_any_channels_message,
@@ -11,7 +12,11 @@ const {enter_field_message, text_message_only, enter_grade_message,
     input_is_invalid_message
 } = require("../../messages/similar_messages");
 const {auth_button} = require("../../buttons/similar_buttons/auth_button");
-const {enter_your_question_as_text, your_question_registrated_message, your_question_answered_message} = require("../../messages/student_messages");
+const {
+    enter_your_question_as_text,
+    your_question_registrated_message,
+    your_question_answered_message
+} = require("../../messages/student_messages");
 const QuestionModel = require("../../models/Question");
 const ChannelModel = require("../../models/Channel");
 const {channel_post_buttons} = require("../../buttons/similar_buttons/channel_post_buttons");
@@ -22,11 +27,12 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
                 const fullname = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, fullname};
+                ctx.session.state_data = {...ctx.session.state_data, fullname};
                 ctx.session.state = state_list.get_student_field;
                 ctx.reply(enter_field_message);
             } else {
-                ctx.reply(text_message_only, await auth_button(ctx));
+                ctx.session.state = state_list.get_student_fullname
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_student_field]: async (ctx, next) => {
@@ -34,12 +40,12 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
                 const field = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, field};
+                ctx.session.state_data = {...ctx.session.state_data, field};
                 ctx.session.state = state_list.get_student_grade;
                 ctx.reply(enter_grade_message);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, await auth_button(ctx));
+                ctx.session.state = state_list.get_student_field
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_student_grade]: async (ctx, next) => {
@@ -47,33 +53,33 @@ module.exports = {
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
                 const grade = ctx.message.text;
-                ctx.session.stateData = {...ctx.session.stateData, grade};
+                ctx.session.state_data = {...ctx.session.state_data, grade};
                 ctx.session.state = state_list.ask_question;
                 ctx.reply(enter_your_question_as_text);
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, await auth_button(ctx));
+                ctx.session.state = state_list.get_student_grade
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.ask_question]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const newQuestion = await new QuestionModel({
+                const new_question = await new QuestionModel({
                     chat_id: ctx.message.chat.id,
-                    userName: ctx.message.chat.username,
-                    fullname: ctx.session.stateData.fullname,
-                    field: ctx.session.stateData.field,
-                    grade: ctx.session.stateData.grade,
+                    username: ctx.message.chat.username,
+                    fullname: ctx.session.state_data.fullname,
+                    field: ctx.session.state_data.field,
+                    grade: ctx.session.state_data.grade,
                     message_id: ctx.message.message_id,
                     message_text: ctx.message.text,
                 });
-                await newQuestion.save();
-                ctx.session.stateData = undefined;
+                await new_question.save();
+                ctx.session = undefined;
                 ctx.reply(your_question_registrated_message, await auth_button(ctx));
             } else {
-                ctx.session.stateData = undefined;
-                ctx.reply(text_message_only, await auth_button(ctx));
+                ctx.session.state = state_list.ask_question
+                ctx.reply(text_message_only);
             }
         }
     },
@@ -96,21 +102,21 @@ module.exports = {
                 });
                 ctx.session = undefined;
             } else {
-                ctx.session.question = undefined;
+                ctx.session = undefined;
                 ctx.reply(bot_is_not_a_member_of_any_channels_message, await auth_button(ctx));
             }
         } else {
-            ctx.session.question = undefined;
-            ctx.reply(voice_message_only, await auth_button(ctx));
+            ctx.session.state = state_list.answer
+            ctx.reply(voice_message_only);
         }
     },
     // remove question
     [state_list.remove_question]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text === all_buttons_text.yes) {
-            let question_id = await QuestionModel.findById(ctx.session.question_id);
-            if (question_id) {
-                await QuestionModel.findByIdAndDelete(ctx.session.question_id);
+            let question = await QuestionModel.findById(ctx.session.question_id);
+            if (question) {
+                await QuestionModel.findByIdAndDelete(question._id);
                 ctx.session = undefined;
                 ctx.reply(question_was_removed_message, await auth_button(ctx));
             } else {

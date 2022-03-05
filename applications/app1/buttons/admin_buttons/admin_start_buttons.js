@@ -9,13 +9,13 @@ module.exports.admin_start_buttons = {
         { text: all_buttons_text.manage_admins },
       ],
       [
-        { text: all_buttons_text.manage_messages },
 
+        { text: all_buttons_text.manage_plans },
         { text: all_buttons_text.manage_pro_students },
       ],
       [
+        { text: all_buttons_text.manage_messages },
         { text: all_buttons_text.manage_content_production },
-        { text: all_buttons_text.manage_plans },
       ],
       [
         { text: all_buttons_text.bot_developers },

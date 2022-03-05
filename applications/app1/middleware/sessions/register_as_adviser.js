@@ -33,7 +33,7 @@ module.exports = {
                 ctx.reply(enter_phone_number_message, request_contact_button);
             } else {
                 ctx.session.state = state_list.get_adviser_fullname_for_register;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_adviser_phone_number]: async (ctx, next) => {
@@ -48,7 +48,7 @@ module.exports = {
                 ctx.reply(enter_email_message, skip_from_this_step_buttons);
             } else {
                 ctx.session.state = state_list.get_adviser_phone_number;
-                ctx.reply(input_is_invalid_message, request_contact_button);
+                ctx.reply(input_is_invalid_message);
             }
         }
     }, [state_list.get_adviser_email]: async (ctx, next) => {
@@ -68,7 +68,7 @@ module.exports = {
                 }
             } else {
                 ctx.session.state = state_list.get_adviser_email;
-                ctx.reply(text_message_only, skip_from_this_step_buttons);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_adviser_city]: async (ctx, next) => {
@@ -81,7 +81,7 @@ module.exports = {
                 ctx.reply(enter_field_message, cancel_button);
             } else {
                 ctx.session.state = state_list.get_adviser_city;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_adviser_field]: async (ctx, next) => {
@@ -94,7 +94,7 @@ module.exports = {
                 ctx.reply(enter_university_message, cancel_button);
             } else {
                 ctx.session.state = state_list.get_adviser_field;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_adviser_university]: async (ctx, next) => {
@@ -107,7 +107,7 @@ module.exports = {
                 ctx.reply(enter_description_message, cancel_button);
             } else {
                 ctx.session.state = state_list.get_adviser_university;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_adviser_description]: async (ctx, next) => {
@@ -122,7 +122,7 @@ module.exports = {
                 ctx.reply(preview_adviser_registration_form(ctx.session.state_data), accept_discard_buttons);
             } else {
                 ctx.session.state = state_list.get_adviser_description;
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.register_new_adviser]: async (ctx, next) => {

@@ -9,24 +9,29 @@ const {enter_full_name_message} = require("../../messages/similar_messages");
 
 module.exports = {
     PLAN: async (ctx, matches) => {
-        await ctx.telegram.deleteMessage(ctx.session.chat_id, ctx.session.message_id);
-        ctx.session = undefined;
-        const plan_id = matches[0].split("_")[1];
-        ctx.session.state_data = {
-            ...ctx.session.state_data, plan_id,
-        };
-        const admin = await AdminModel.findOne({username: ctx.chat.username});
-        if (admin) {
-            if (ctx.session.status === "update") {
-                await ctx.reply(enter_pro_student_full_name_message, dont_change);
-                ctx.session.state = state_list.get_pro_student_fullname_from_admin;
+        if (ctx.session.chat_id && ctx.session.message_id) {
+            await ctx.telegram.deleteMessage(ctx.session.chat_id, ctx.session.message_id);
+            ctx.session = undefined;
+            const plan_id = matches[0].split("_")[1];
+            ctx.session.state_data = {
+                ...ctx.session.state_data, plan_id,
+            };
+            const admin = await AdminModel.findOne({username: ctx.chat.username});
+            if (admin) {
+                if (ctx.session.status === "update") {
+                    await ctx.reply(enter_pro_student_full_name_message, dont_change);
+                    ctx.session.state = state_list.get_pro_student_fullname_from_admin;
+                } else {
+                    await ctx.reply(enter_pro_student_full_name_message, cancel_button);
+                    ctx.session.state = state_list.get_pro_student_fullname_from_admin;
+                }
             } else {
-                await ctx.reply(enter_pro_student_full_name_message, cancel_button);
-                ctx.session.state = state_list.get_pro_student_fullname_from_admin;
+                ctx.session.state = state_list.get_pro_student_fullname;
+                ctx.reply(enter_full_name_message, cancel_button);
             }
         } else {
-            ctx.session.state = state_list.get_pro_student_fullname;
-            ctx.reply(enter_full_name_message, cancel_button);
+            ctx.reply("این دکمه منقضی شده است ، لطفا مجددا بر روی دکمه ی ثبت نام و یا ویرایش کلیک کنید")
         }
+
     },
 }

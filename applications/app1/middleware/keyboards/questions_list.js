@@ -1,3 +1,4 @@
+const AdminModel = require("../../models/Admin");
 const AdviserModel = require("../../models/Adviser");
 const QuestionModel = require("../../models/Question");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
@@ -11,6 +12,7 @@ const {
     student_info_message,
     no_questions_to_show_message
 } = require("../../messages/similar_messages");
+const {answer_buttons_for_admins} = require("../../buttons/similar_buttons/answer_buttons_for_admins");
 
 module.exports = {
     [all_buttons_text.show_advisers_questions_list]: async (ctx) => {
@@ -37,14 +39,29 @@ module.exports = {
     },
     [all_buttons_text.show_users_questions_list]: async (ctx) => {
         ctx.session.state = undefined;
-        const questions = await QuestionModel.find();
-        if (questions.length !== 0) {
-            await ctx.reply(questions_list_title_message);
-            questions.forEach((question) => {
-                ctx.reply(student_info_message(question), answer_buttons(question._id));
-            });
+        const admin = await AdminModel.find({username: ctx.chat.username})
+        if (admin) {
+            const questions = await QuestionModel.find();
+            if (questions.length !== 0) {
+                await ctx.reply(questions_list_title_message);
+                questions.forEach((question) => {
+                    ctx.reply(student_info_message(question), answer_buttons_for_admins(question._id));
+                });
+            } else {
+                ctx.reply(no_questions_to_show_message);
+            }
         } else {
-            ctx.reply(no_questions_to_show_message);
+            const questions = await QuestionModel.find();
+            if (questions.length !== 0) {
+                await ctx.reply(questions_list_title_message);
+                questions.forEach((question) => {
+                    ctx.reply(student_info_message(question), answer_buttons(question._id));
+                });
+            } else {
+                ctx.reply(no_questions_to_show_message);
+            }
         }
+
+
     },
 }

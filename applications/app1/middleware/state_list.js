@@ -28,6 +28,7 @@ module.exports = {
     get_student_field: "get_student_field",
     get_student_grade: "get_student_grade",
     ask_question: "ask_question",
+    tag_person : "tag_person",
     answer: "answer",
     //Register new pro student
     get_pro_student_fullname: "get_pro_student_fullname",

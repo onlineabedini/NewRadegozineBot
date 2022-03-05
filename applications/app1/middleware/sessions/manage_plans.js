@@ -25,7 +25,7 @@ const {
     input_is_invalid_message,
     text_message_only,
     select_an_item_message,
-    something_went_wrong
+    something_went_wrong, photo_message_only
 } = require("../../messages/similar_messages");
 
 module.exports = {
@@ -33,99 +33,102 @@ module.exports = {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const planTitle = await ctx.message.text;
+                const title = ctx.message.text;
                 ctx.session.state_data = {
-                    ...ctx.session.state_data, planTitle,
+                    ...ctx.session.state_data, title,
                 };
                 ctx.session.state = state_list.get_plan_price;
                 ctx.reply(enter_plan_price_message, cancel_button);
             } else {
-                ctx.session.state_data = undefined;
-                ctx.reply(text_message_only, manage_plans_buttons);
+                ctx.session.state = state_list.get_plan_title
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_plan_price]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const planPrice = await ctx.message.text;
+                const price = await ctx.message.text;
                 ctx.session.state_data = {
-                    ...ctx.session.state_data, planPrice,
+                    ...ctx.session.state_data, price,
                 };
                 ctx.session.state = state_list.get_plan_description;
                 ctx.reply(enter_plan_description_message, cancel_button);
             } else {
-                ctx.session.state_data = undefined;
-                ctx.reply(text_message_only, manage_plans_buttons);
+                ctx.session.state = state_list.get_plan_price
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_plan_description]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.text) {
-                const planDescription = await ctx.message.text;
+                const description = await ctx.message.text;
                 ctx.session.state_data = {
-                    ...ctx.session.state_data, planDescription,
+                    ...ctx.session.state_data, description,
                 };
                 ctx.session.state = state_list.get_plan_image;
                 ctx.reply(enter_plan_image_message, skip_from_this_step_buttons);
             } else {
-                ctx.session.state_data = undefined;
-                ctx.reply(text_message_only, manage_plans_buttons);
+                ctx.session.state = state_list.get_plan_description
+                ctx.reply(text_message_only);
             }
         }
     }, [state_list.get_plan_image]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
             if (ctx.message.photo) {
-                const planImage = ctx.message.photo[0].file_id;
-                ctx.session.state_data = {...ctx.session.state_data, planImage};
+                const image = ctx.message.photo[0].file_id;
+                ctx.session.state_data = {...ctx.session.state_data, image};
                 ctx.session.state = state_list.register_plan;
-                await ctx.replyWithPhoto(planImage, {
+                await ctx.replyWithPhoto(image, {
                     caption: plan_caption(ctx.session.state_data),
                 });
                 ctx.reply(select_an_item_message, accept_discard_buttons);
             } else if (ctx.message.text === all_buttons_text.skip_from_this_step) {
-                const planImage = "static/img/sample_img.jpg";
-                ctx.session.state_data = {...ctx.session.state_data, planImage};
+                const image = {source : "static/img/sample_img.jpg"};
+                ctx.session.state_data = {...ctx.session.state_data, image};
                 ctx.session.state = state_list.register_plan;
-                await ctx.replyWithPhoto({source: planImage}, {caption: plan_caption(ctx.session.state_data)});
+                await ctx.replyWithPhoto(image, {caption: plan_caption(ctx.session.state_data)});
                 ctx.reply(select_an_item_message, accept_discard_buttons);
+            } else {
+                ctx.session.state = state_list.get_plan_image
+                ctx.reply(photo_message_only)
             }
         }
     }, [state_list.register_plan]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text === all_buttons_text.accept) {
             const plan = await PlanModel.findOne({
-                title: ctx.session.state_data.planTitle,
+                title: ctx.session.state_data.title,
             });
             if (!plan) {
-                const newPlan = await new PlanModel({
-                    title: ctx.session.state_data.planTitle,
-                    price: ctx.session.state_data.planPrice,
-                    description: ctx.session.state_data.planDescription,
-                    image: ctx.session.state_data.planImage,
+                const new_plan = await new PlanModel({
+                    title: ctx.session.state_data.title,
+                    price: ctx.session.state_data.price,
+                    description: ctx.session.state_data.description,
+                    image: ctx.session.state_data.image,
                 });
-                await newPlan.save();
-                ctx.session.state_data = undefined;
-                ctx.reply(plan_registered_message, admin_start_buttons);
+                await new_plan.save();
+                ctx.session = undefined;
+                ctx.reply(plan_registered_message, manage_plans_buttons);
             } else {
-                ctx.session.state_data = undefined;
-                ctx.reply(duplicate_plan_message, admin_start_buttons);
+                ctx.session = undefined;
+                ctx.reply(duplicate_plan_message, manage_plans_buttons);
             }
         } else if (ctx.message.text === all_buttons_text.discard) {
-            ctx.session.state_data = undefined;
-            ctx.reply(adding_plan_was_canceled, admin_start_buttons);
+            ctx.session = undefined;
+            ctx.reply(adding_plan_was_canceled, manage_plans_buttons);
         } else {
-            ctx.session.state_data = undefined;
-            ctx.reply(something_went_wrong, admin_start_buttons);
+            ctx.session = undefined;
+            ctx.reply(something_went_wrong, manage_plans_buttons);
         }
     }, [state_list.remove_plan]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text === all_buttons_text.yes) {
-            let plan = await PlanModel.findById(ctx.session.planId);
+            let plan = await PlanModel.findById(ctx.session.plan_id);
             if (plan) {
-                await PlanModel.findByIdAndDelete(ctx.session.planId);
+                await PlanModel.findByIdAndDelete(plan._id);
                 ctx.reply(the_plan_was_removed_message, manage_plans_buttons);
                 ctx.session = undefined;
             } else {

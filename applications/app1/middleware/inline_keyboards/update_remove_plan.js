@@ -9,9 +9,9 @@ module.exports = {
         ctx.reply("این بخش در حال انجام است.");
     },
     REMOVE_PLAN: async (ctx, matches) => {
-        const planId = matches[0].split("_")[2];
+        const plan_id = matches[0].split("_")[2];
         ctx.reply(do_you_want_to_remove_this_plan_message, confidence_buttons);
-        ctx.session.planId = planId;
+        ctx.session.plan_id = plan_id;
         ctx.session.state = state_list.remove_plan;
     },
 }

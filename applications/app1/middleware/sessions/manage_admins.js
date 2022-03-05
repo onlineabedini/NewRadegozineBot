@@ -29,11 +29,11 @@ module.exports = {
                     ctx.reply(enter_admin_fullname_message, cancel_button);
                 } else {
                     ctx.session.state = state_list.add_admin
-                    ctx.reply(invalid_username_entered_message, cancel_button);
+                    ctx.reply(invalid_username_entered_message);
                 }
             } else {
                 ctx.session.state = state_list.add_admin
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     },//Get admin full name
@@ -59,7 +59,7 @@ module.exports = {
                 }
             } else {
                 ctx.session.state = state_list.get_admin_fullname
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     }, //Remove admin
@@ -77,15 +77,15 @@ module.exports = {
                         ctx.reply(admin_removed_message, manage_admins_buttons);
                     } else {
                         ctx.session.state = state_list.remove_admin
-                        ctx.reply(no_admin_found_message, cancel_button);
+                        ctx.reply(no_admin_found_message);
                     }
                 } else {
                     ctx.session.state = state_list.remove_admin
-                    ctx.reply(invalid_username_entered_message, cancel_button);
+                    ctx.reply(invalid_username_entered_message);
                 }
             } else {
                 ctx.session.state = state_list.remove_admin
-                ctx.reply(text_message_only, cancel_button);
+                ctx.reply(text_message_only);
             }
         }
     },

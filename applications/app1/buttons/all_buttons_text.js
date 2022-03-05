@@ -9,7 +9,7 @@ module.exports.all_buttons_text = {
   // adviser
   manage_advisers: "🗣 مدیریت مشاوران 🗣",
   show_advisers_list: "لیست مشاوران",
-  show_reg_advisers_list: "لیست مشاوران (ثبت نامی)",
+  show_reg_advisers_list: "لیست ثبت نامها",
   show_advisers_questions_list: "لیست پیام های مشاوران",
   add_adviser: "افزودن مشاور",
   remove_adviser: "حذف مشاور",
@@ -22,17 +22,17 @@ module.exports.all_buttons_text = {
   show_update_remove_students: "نمایش | ویرایش | حذف (دانش آموز)",
   
   // plan
-  manage_plans: "🗂 مدیریت طرح ها 🗂",
+  manage_plans: "🗂 طرح ها 🗂",
   add_plan: "افزودن طرح",
   show_update_remove_plans: "نمایش | ویرایش | حذف (طرح)",
   
   // content
-  manage_content_production: "📝 مدیریت عناوین تولید محتوا 📝",
+  manage_content_production: "📝 تولید محتوا 📝",
   add_content_title: "افزودن عنوان محتوا",
   show_update_remove_content: "نمایش | ویرایش | حذف (محتوا)",
   
   // messages 
-  manage_messages : "✉️ مدیریت پیام ها ✉️",
+  manage_messages : "✉️ پیام ها ✉️",
   send_message: "ارسال پیام",
   messages_list: "لیست پیام ها",
   send_message_for_advisers: "ارسال پیام برای مشاوران",
@@ -56,7 +56,7 @@ module.exports.all_buttons_text = {
   // similar buttons text for all
   cancel: "❌ لغو ❌",
   back: "↩️ بازگشت",
-  bot_developers: "👥 تیم توسعه و طراحی بات 👥",
+  bot_developers: "👥 تیم طراحی بات 👥",
   accept: "اطلاعات وارد شده را تایید میکنم ✅",
   discard: "اطلاعات وارد شده را تایید نمیکنم ❌",
   yes: "بله  ✅",

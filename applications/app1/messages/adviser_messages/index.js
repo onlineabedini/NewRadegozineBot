@@ -27,3 +27,5 @@ module.exports.content_production_titles_list_message = (data) => {
     message += `@radegozine_bot`;
     return message;
 }
+module.exports.you_have_been_promoted = "شما به مشاور ویژه ارتقای درجه پیدا کردید."
+module.exports.you_have_been_demoted = "درجه ی شما به مشاور عادی تنزل یافت."

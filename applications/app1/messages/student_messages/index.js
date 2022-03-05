@@ -82,13 +82,13 @@ module.exports.payment_information_message = `علیرضا عابدینی
 - درصورت بروز هرگونه مشکل با ما تماس بگیرید: 
 09924730751
 @radegozine_manager`
-module.exports.asking_question_guide = "دانش آموز گرامی جهت پرسش از مشاورین باید مشخصات خواسته شده را وارد نمایید❗️";
-module.exports.enter_your_question_as_text = "لطفا سوال خود را را بصورت متنی وارد نمایید : ";
-module.exports.enter_payment_picture_message = "لطفا تصویر رسید خود را وارد کنید:";
-module.exports.ask_question_from_pro_adviser_message = "برای ارتباط با هر مشاور روی دکمه ی مربوط به آن کلیک نمایید : ";
+module.exports.asking_question_guide = "🔹 دانش آموز گرامی جهت پرسش از مشاورین باید مشخصات خواسته شده را وارد نمایید";
+module.exports.enter_your_question_as_text = "🔹 لطفا سوال خود را را بصورت متنی وارد نمایید : ";
+module.exports.enter_payment_picture_message = "🔹 لطفا تصویر رسید خود را وارد کنید:";
+module.exports.ask_question_from_pro_adviser_message = "🔹 برای ارتباط با هر مشاور روی دکمه ی مربوط به آن کلیک نمایید : ";
 module.exports.your_question_registrated_message = "✅ سوال شما ثبت گردید و دراسرع وقت توسط مشاوران پاسخ داده خواهد شد.";
 module.exports.your_question_answered_message = "✅ سوال شما پاسخ داده شد و در کانال رد گزینه قرار گرفت.";
-module.exports.see_plans_message = "برای دیدن طرح ها بر روی دکمه ی زیر کلیک کنید ⬇️";
-module.exports.contact_with_admin_message = "برای ارتباط با مدیر بر روی کلید زیر کلیک کنید ⬇️";
-module.exports.you_have_been_accepted_in_the_radegozine_pro_plan_message = "شما در طرح رد گزینه پرو پذیرفته شدید منتظر تماس مشاور باشید."
-module.exports.you_have_already_registered_once_message = "شما قبلا یکبار ثبت نام کرده اید امکان ثبت نام مجدد در این زمان فراهم نیست."
+module.exports.see_plans_message = "🔹 برای دیدن طرح ها بر روی دکمه ی زیر کلیک کنید";
+module.exports.contact_with_admin_message = "🔹 برای ارتباط با مدیر بر روی کلید زیر کلیک کنید";
+module.exports.you_have_been_accepted_in_the_radegozine_pro_plan_message = "🔹 شما در طرح رد گزینه پرو پذیرفته شدید منتظر تماس مشاور باشید."
+module.exports.you_have_already_registered_once_message = "🔁 شما قبلا یکبار ثبت نام کرده اید امکان ثبت نام مجدد در این زمان فراهم نیست."

@@ -15,6 +15,7 @@ module.exports = {
         await ctx.reply(select_an_item_message, manage_plans_buttons);
     },
     [all_buttons_text.add_plan]: async (ctx) => {
+        ctx.session = undefined;
         ctx.session.state = state_list.get_plan_title;
         await ctx.reply(enter_plan_title_message, cancel_button);
     },

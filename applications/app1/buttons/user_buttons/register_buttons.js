@@ -5,7 +5,7 @@ module.exports.register_buttons = {
         keyboard: [
             [{text: all_buttons_text.register_as_pro_students}],
             [{text: all_buttons_text.register_as_adviser}],
-            [{text: "↩️ بازگشت"}],
+            [{text: all_buttons_text.back}],
         ],
     },
 };

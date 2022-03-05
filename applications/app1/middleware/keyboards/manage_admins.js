@@ -23,7 +23,6 @@ module.exports = {
         ctx.session.state = undefined;
         const admins = await AdminModel.find();
         if (admins.length !== 0) {
-            await ctx.reply(admins_list_title_message);
             ctx.reply(admins_list_message(admins));
         } else {
             ctx.reply(no_admin_found_message, manage_admins_buttons);

@@ -1,4 +1,5 @@
 const AdviserModel = require("../../models/Adviser");
+const UserModel = require("../../models/User");
 const state_list = require("../state_list");
 const {all_buttons_text} = require("../../buttons/all_buttons_text");
 
@@ -27,6 +28,7 @@ const {
     your_request_has_been_canceled,
     input_is_invalid_message
 } = require("../../messages/similar_messages");
+const {you_have_been_promoted, you_have_been_demoted} = require("../../messages/adviser_messages");
 
 module.exports = {
     [state_list.add_adviser]: async (ctx) => {
@@ -118,6 +120,7 @@ module.exports = {
                         }, {new: true});
                         await adviser.save();
                         ctx.session = undefined
+                        adviser.chat_id ? await ctx.telegram.sendMessage(adviser.chat_id , you_have_been_promoted) : null
                         ctx.reply(The_adviser_was_promoted, manage_advisers_buttons);
                     } else {
                         ctx.session.state = state_list.promote_adviser
@@ -148,6 +151,7 @@ module.exports = {
                         }, {new: true});
                         await adviser.save();
                         ctx.session = undefined;
+                        adviser.chat_id ? await ctx.telegram.sendMessage(adviser.chat_id , you_have_been_demoted) : null
                         ctx.reply(The_adviser_was_demoted, manage_advisers_buttons);
                     } else {
                         ctx.session.state = state_list.demote_adviser
@@ -171,6 +175,7 @@ module.exports = {
                     is_accepted: true,
                 }, {new: true});
                 await adviser.save();
+                adviser.chat_id ? await UserModel.findByIdAndDelete(adviser.chat_id) : null
                 await ctx.telegram.sendMessage(adviser.chat_id, you_have_been_accepted_message);
                 ctx.reply(adviser_accepted_message, manage_advisers_buttons);
                 ctx.session = undefined;

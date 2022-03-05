@@ -29,7 +29,6 @@ module.exports = {
         ctx.session.state = undefined;
         const advisers = await AdviserModel.find({is_accepted: true});
         if (advisers.length !== 0) {
-            await ctx.reply(advisers_list_title_message);
             ctx.reply(advisers_list_message(advisers));
         } else {
             ctx.reply(no_adviser_found_message, manage_advisers_buttons);
@@ -37,7 +36,7 @@ module.exports = {
     },
     [all_buttons_text.show_reg_advisers_list]: async (ctx) => {
         ctx.session.state = undefined;
-        const reg_advisers = await AdviserModel.find({is_registered: true});
+        const reg_advisers = await AdviserModel.find({is_registered: true, is_accepted: false});
         await ctx.reply(reg_advisers_list_title_message);
         if (reg_advisers.length !== 0) {
             reg_advisers.forEach((reg_adviser) => {

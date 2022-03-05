@@ -22,7 +22,7 @@ module.exports = {
     },
     ACCEPT_AND_REMOVE: async (ctx, matches) => {
         const student_id = matches[0].split("_")[3];
-        ctx.reply("آیا از پذیرش این دانش آموز اطمینان دارید ؟", confidence_buttons);
+        ctx.reply(do_you_want_to_accept_this_student_message, confidence_buttons);
         ctx.session.student_id = student_id;
         ctx.session.state = state_list.delete_student;
     },

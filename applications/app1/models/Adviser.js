@@ -13,6 +13,6 @@ const schema = new mongoose.Schema({
     is_pro: {default: false, type: Boolean},
     is_accepted: {default: false, type: Boolean},
     is_registered: {default: false, type: Boolean},
-    message_ids: [],
+    messages_ids: [],
 });
 module.exports = mongoose.model("AdviserModel", schema);

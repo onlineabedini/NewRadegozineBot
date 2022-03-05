@@ -18,7 +18,8 @@ const {
     duplicate_adviser_message,
     adviser_accepted_message,
     adviser_not_found,
-    this_adviser_has_already_been_removed_message
+    this_adviser_has_already_been_removed_message, adviser_not_accepted_message,
+    your_request_to_register_as_a_adviser_has_been_denied_message
 } = require("../../messages/admin_messages");
 const {
     text_message_only,
@@ -189,8 +190,8 @@ module.exports = {
         if (ctx.message.text === all_buttons_text.yes) {
             let adviser = await AdviserModel.findById(ctx.session.adviser_id);
             if (adviser) {
-                await ctx.telegram.sendMessage(adviser.chat_id, "با عرض تاسف در خواست شما برای ثبت نام به عنوان مشاور رد گردید.")
-                ctx.reply("مشاور پذیرفته نشد.", manage_advisers_buttons);
+                await ctx.telegram.sendMessage(adviser.chat_id, your_request_to_register_as_a_adviser_has_been_denied_message)
+                ctx.reply(adviser_not_accepted_message, manage_advisers_buttons);
                 await AdviserModel.findByIdAndDelete(ctx.session.adviser_id);
                 ctx.session = undefined;
             } else {

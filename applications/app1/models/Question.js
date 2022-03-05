@@ -3,19 +3,26 @@ const schema = new mongoose.Schema({
     user_role: {default: "student", type: String},
     chat_id: {
         type: String,
-    }, username: {
+    },
+    username: {
         type: String,
-    }, fullname: {
+    },
+    fullname: {
         type: String,
-    }, field: {
+    },
+    field: {
         type: String,
-    }, grade: {
+    }
+    , grade: {
         type: String,
-    }, message_id: {
+    },
+    message_id: {
         type: String,
-    }, message_text: {
+    },
+    message_text: {
         type: String,
-    },tag : {
+    },
+    tag : {
         type: String
     }
 });

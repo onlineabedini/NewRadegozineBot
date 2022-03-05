@@ -1,7 +1,7 @@
-module.exports.convertArrayToNColumn = (array, n) => {
-    const arrItems = Object.values(array);
+module.exports.convert_array_to_n_column = (array, n) => {
+    const arr_items = Object.values(array);
     let arr = [];
-    arrItems.forEach((item, index) => {
+    arr_items.forEach((item, index) => {
         if (Math.floor(index / n) >= arr.length) {
             arr.push([]);
         }

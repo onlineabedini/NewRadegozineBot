@@ -30,7 +30,7 @@ const {
     pro_student_caption, pro_student_registration_preview,
 } = require("../../messages/admin_messages");
 const {
-    registered_for_plan_message, payment_information_message,
+    registered_for_plan_message, payment_information_message, you_have_already_registered_once_message,
 } = require("../../messages/student_messages");
 const {
     pro_student_register_buttons,
@@ -202,7 +202,7 @@ module.exports = {
                 ctx.reply(information_updated_message, student_start_buttons);
                 ctx.session = undefined;
             } else if (student) {
-                ctx.reply("شما قبلا یکبار ثبت نام کرده اید امکان ثبت نام مجدد در این زمان فراهم نیست.", register_buttons);
+                ctx.reply(you_have_already_registered_once_message , register_buttons);
                 ctx.session = undefined;
             } else {
                 const new_student = await new ProStudentModel({

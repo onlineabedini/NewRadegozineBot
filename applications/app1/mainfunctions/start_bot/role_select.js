@@ -24,113 +24,81 @@ const {
 // import Admin Messages
 const {admin_start_message} = require("../../messages/admin_messages");
 const {
-    adviser_start_message,
-    pro_adviser_start_message,
+    adviser_start_message, pro_adviser_start_message,
 } = require("../../messages/adviser_messages");
 const {
-    student_start_message,
-    user_start_message,
+    student_start_message, user_start_message,
 } = require("../../messages/student_messages");
 
 module.exports = class role_select {
     async role_selector(ctx, next) {
         const admin = await AdminModel.findOne({username: ctx.chat.username});
-        const proAdviser = await AdviserModel.findOne({
-            username: ctx.chat.username,
-            is_pro: true,
+        const pro_adviser = await AdviserModel.findOne({
+            username: ctx.chat.username, is_pro: true,
         });
-        const normalAdviser = await AdviserModel.findOne({
-            username: ctx.chat.username,
-            is_accepted: true,
-            is_pro: false,
+        const normal_adviser = await AdviserModel.findOne({
+            username: ctx.chat.username, is_accepted: true, is_pro: false,
         });
-        const proStudent = await ProStudentModel.findOne({
-            username: ctx.chat.username,
-            is_pro: true,
+        const pro_student = await ProStudentModel.findOne({
+            username: ctx.chat.username, is_pro: true,
         });
         // save main admin data in database at the first bot started
         if (process.env.MAIN_ADMIN_USERNAME === ctx.chat.username) {
-            const mainAdmin = await AdminModel.findOne({
+            const main_admin = await AdminModel.findOne({
                 username: ctx.chat.username,
             });
-            if (!mainAdmin) {
-                const mainAdmin = await new AdminModel({
-                    fullname: "مدیر اصلی",
-                    username: ctx.chat.username,
-                    chat_id: ctx.chat.id,
+            if (!main_admin) {
+                const main_admin = await new AdminModel({
+                    fullname: "مدیر اصلی", username: ctx.chat.username, chat_id: ctx.chat.id,
                 });
-                await mainAdmin.save();
+                await main_admin.save();
                 ctx.reply(admin_start_message, admin_start_buttons);
             } else {
-                const mainAdmin = await AdminModel.findOneAndUpdate(
-                    {username: ctx.chat.username},
-                    {
-                        chat_id: ctx.chat.id,
-                    },
-                    {new: true}
-                );
-                await mainAdmin.save();
+                const main_admin = await AdminModel.findOneAndUpdate({username: ctx.chat.username}, {
+                    chat_id: ctx.chat.id,
+                }, {new: true});
+                await main_admin.save();
                 ctx.reply(admin_start_message, admin_start_buttons);
             }
         } else if (admin) {
-            const admin = await AdminModel.findOneAndUpdate(
-                {username: ctx.chat.username},
-                {
-                    chat_id: ctx.chat.id,
-                },
-                {new: true}
-            );
+            const admin = await AdminModel.findOneAndUpdate({username: ctx.chat.username}, {
+                chat_id: ctx.chat.id,
+            }, {new: true});
             await admin.save();
             ctx.reply(admin_start_message, admin_start_buttons);
-        } else if (proAdviser) {
-            const proAdviser = await AdviserModel.findOneAndUpdate(
-                {username: ctx.chat.username},
-                {
-                    chat_id: ctx.chat.id,
-                },
-                {new: true}
-            );
-            await proAdviser.save();
+        } else if (pro_adviser) {
+            const pro_adviser = await AdviserModel.findOneAndUpdate({username: ctx.chat.username}, {
+                chat_id: ctx.chat.id,
+            }, {new: true});
+            await pro_adviser.save();
             ctx.reply(pro_adviser_start_message, pro_adviser_start_buttons);
-        } else if (normalAdviser) {
-            const normalAdviser = await AdviserModel.findOneAndUpdate(
-                {username: ctx.chat.username},
-                {
-                    chat_id: ctx.chat.id,
-                },
-                {new: true}
-            );
-            await normalAdviser.save();
+        } else if (normal_adviser) {
+            const normal_adviser = await AdviserModel.findOneAndUpdate({username: ctx.chat.username}, {
+                chat_id: ctx.chat.id,
+            }, {new: true});
+            await normal_adviser.save();
             ctx.reply(adviser_start_message, adviser_start_buttons);
-        } else if (proStudent) {
-            const proStudent = await ProStudentModel.findOneAndUpdate(
-                {username: ctx.chat.username},
-                {
-                    chat_id: ctx.chat.id,
-                },
-                {new: true}
-            );
-            await proStudent.save();
+        } else if (pro_student) {
+            const pro_student = await ProStudentModel.findOneAndUpdate({username: ctx.chat.username}, {
+                chat_id: ctx.chat.id,
+            }, {new: true});
+            await pro_student.save();
             ctx.reply(student_start_message, student_start_buttons);
         } else {
             const user = await UserModel.findOne({chat_id: ctx.chat.id});
             if (!user) {
-                const newUser = await new UserModel({
+                const new_user = await new UserModel({
                     chat_id: ctx.chat.id,
                     username: ctx.chat.username,
                     first_name: ctx.chat.first_name,
                     last_name: ctx.chat.last_name,
                 });
-                await newUser.save();
+                await new_user.save();
                 ctx.reply(user_start_message, user_start_buttons);
             } else {
-                const user = await UserModel.findOneAndUpdate(
-                    {username: ctx.chat.username},
-                    {
-                        chat_id: ctx.chat.id,
-                    },
-                    {new: true}
-                );
+                const user = await UserModel.findOneAndUpdate({username: ctx.chat.username}, {
+                    chat_id: ctx.chat.id,
+                }, {new: true});
                 await user.save();
                 ctx.reply(user_start_message, user_start_buttons);
             }

@@ -17,17 +17,17 @@ const {answer_buttons_for_admins} = require("../../buttons/similar_buttons/answe
 module.exports = {
     [all_buttons_text.show_advisers_questions_list]: async (ctx) => {
         ctx.session.state = undefined;
-        const advisersData = await AdviserModel.find();
-        const advisersIds = advisersData.map((adviser) => adviser.id);
+        const advisers = await AdviserModel.find();
+        const advisers_ids = advisers.map((adviser) => adviser.id);
 
-        if (advisersIds.length !== 0) {
+        if (advisers_ids.length !== 0) {
             await ctx.reply(show_advisers_questions_list_message);
-            for (const item in advisersIds) {
-                let adviser = await AdviserModel.findOne({_id: advisersIds[item]});
-                let messagesIds = adviser.messagesIds;
-                if (messagesIds.length !== 0) {
-                    for (const item in messagesIds) {
-                        await ctx.telegram.forwardMessage(ctx.message.chat.id, adviser.chat_id, messagesIds[item]);
+            for (const item in advisers_ids) {
+                let adviser = await AdviserModel.findOne({_id: advisers_ids[item]});
+                let messages_ids = adviser.messages_ids;
+                if (messages_ids.length !== 0) {
+                    for (const item in messages_ids) {
+                        await ctx.telegram.forwardMessage(ctx.message.chat.id, adviser.chat_id, messages_ids[item]);
                     }
                     return;
                 }
@@ -40,7 +40,6 @@ module.exports = {
     [all_buttons_text.show_users_questions_list]: async (ctx) => {
         ctx.session.state = undefined;
         const admin = await AdminModel.find({username: ctx.chat.username})
-        console.log(admin)
         if (admin.length !== 0) {
             const questions = await QuestionModel.find();
             if (questions.length !== 0) {

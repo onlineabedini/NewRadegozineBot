@@ -15,23 +15,23 @@ module.exports = {
     [all_buttons_text.back]: async (ctx) => {
         ctx.session = undefined;
         const admin = await AdminModel.findOne({username: ctx.chat.username});
-        const proAdviser = await AdviserModel.findOne({
+        const pro_adviser = await AdviserModel.findOne({
             username: ctx.chat.username, is_pro: true,
         });
-        const normalAdviser = await AdviserModel.findOne({
+        const normal_adviser = await AdviserModel.findOne({
             username: ctx.chat.username, is_accepted: true,
         });
-        const proStudent = await ProStudentModel.findOne({
+        const pro_student = await ProStudentModel.findOne({
             username: ctx.chat.username, is_pro: true,
         });
 
         if (admin) {
             ctx.reply(select_an_item_message, admin_start_buttons);
-        } else if (proAdviser) {
+        } else if (pro_adviser) {
             ctx.reply(select_an_item_message, pro_adviser_start_buttons);
-        } else if (normalAdviser) {
+        } else if (normal_adviser) {
             ctx.reply(select_an_item_message, adviser_start_buttons);
-        } else if (proStudent) {
+        } else if (pro_student) {
             ctx.reply(select_an_item_message, student_start_buttons);
         } else {
             ctx.reply(select_an_item_message, user_start_buttons);

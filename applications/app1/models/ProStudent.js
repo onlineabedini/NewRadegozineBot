@@ -4,35 +4,50 @@ const {all_buttons_text} = require("../buttons/all_buttons_text");
 const schema = new mongoose.Schema({
     plan_id: {
         type: String,
-    }, fullname: {
+    },
+    fullname: {
         type: String,
-    }, field: {
+    },
+    field: {
         type: String,
-    }, grade: {
+    },
+    grade: {
         type: String,
-    }, level: {
+    },
+    level: {
         type: String, default: all_buttons_text.low,
-    }, phone_number: {
+    },
+    phone_number: {
         type: String,
-    }, email: {
+    },
+    email: {
         type: String,
-    }, whats_up_number: {
+    },
+    whats_up_number: {
         type: String,
-    }, city: {
+    },
+    city: {
         type: String,
-    }, chat_id: {
+    },
+    chat_id: {
         type: String,
-    }, username: {
+    },
+    username: {
         type: String,
-    }, message_id: {
+    },
+    message_id: {
         type: String,
-    }, message_text: {
+    },
+    message_text: {
         type: String,
-    }, payment_picture: {
+    },
+    payment_picture: {
         type: String,
-    }, user_role: {
+    },
+    user_role: {
         type: String, default: "Normal",
-    }, is_pro: {
+    },
+    is_pro: {
         type: Boolean, default: false,
     },
 });

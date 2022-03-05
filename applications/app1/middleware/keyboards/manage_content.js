@@ -7,7 +7,10 @@ const {update_and_remove_content_buttons} = require("../../buttons/admin_buttons
 const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 
 const {select_an_item_message} = require("../../messages/similar_messages");
-const {content_caption} = require("../../messages/admin_messages");
+const {
+    content_caption, enter_content_title_message, there_is_no_registered_title, there_is_no_registered_title_message,
+    no_title_registered_recently_message
+} = require("../../messages/admin_messages");
 const {auth_button} = require("../../buttons/similar_buttons/auth_button");
 const {content_production_titles_list_message} = require("../../messages/adviser_messages");
 
@@ -19,7 +22,7 @@ module.exports = {
     [all_buttons_text.add_content_title]: async (ctx) => {
         ctx.session.state = state_list.get_content_title;
         ctx.session.status = "create";
-        await ctx.reply("لطفا عنوان مورد نظر حهت تولید محتوا را وارد نمایید :", cancel_button);
+        await ctx.reply(enter_content_title_message, cancel_button);
     },
     [all_buttons_text.show_update_remove_content]: async (ctx) => {
         ctx.session.state = undefined;
@@ -31,15 +34,15 @@ module.exports = {
                 });
             });
         } else {
-            ctx.reply("عنوانی برای تولید محتوا ثبت نشده است.", content_production_buttons);
+            ctx.reply(there_is_no_registered_title_message, content_production_buttons);
         }
-    },[all_buttons_text.show_content_production_titles_list]: async (ctx) => {
+    }, [all_buttons_text.show_content_production_titles_list]: async (ctx) => {
         ctx.session.state = undefined;
         const contents = await ContentModel.find();
-        if (contents.length !== 0){
+        if (contents.length !== 0) {
             ctx.reply(content_production_titles_list_message(contents))
-        }else {
-            ctx.reply("اخیرا عنوانی برای تولید محتوا افزوده نشده است." , auth_button(ctx))
+        } else {
+            ctx.reply(no_title_registered_recently_message, auth_button(ctx))
         }
     }
 }

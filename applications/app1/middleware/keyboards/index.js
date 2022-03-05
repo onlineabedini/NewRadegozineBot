@@ -23,13 +23,13 @@ module.exports = (ctx, next) => {
   if (!ctx.message) return next();
   const text = ctx.message.text;
   if (text)
-    if (Object.values(all_buttons_text).includes(text) && EventListener[text]) {
-      return EventListener[text](ctx);
+    if (Object.values(all_buttons_text).includes(text) && event_listener[text]) {
+      return event_listener[text](ctx);
     }
   next();
 };
 
-EventListener = {
+event_listener = {
   ...manage_admins,
   ...manage_advisers,
   ...manage_pro_student,

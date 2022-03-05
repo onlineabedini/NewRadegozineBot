@@ -27,7 +27,8 @@ const {
     enter_pro_student_city_message,
     pro_student_registration_preview,
     student_registered_message,
-    student_registration_canceled_message
+    student_registration_canceled_message, the_student_was_successfully_accepted_message,
+    this_student_is_currently_accepted_message
 } = require("../../messages/admin_messages");
 const {admin_start_buttons} = require("../../buttons/admin_buttons/admin_start_buttons");
 const {
@@ -43,6 +44,7 @@ const {
     error_updating_information_message,
     information_update_canceled_message
 } = require("../../messages/similar_messages");
+const {you_have_been_accepted_in_the_radegozine_pro_plan_message} = require("../../messages/student_messages");
 
 
 module.exports = {
@@ -428,11 +430,11 @@ module.exports = {
             let student = await ProStudentModel.findById(ctx.session.student_id);
             if (student) {
                 await ProStudentModel.findByIdAndDelete(student._id);
-                ctx.reply("دانش آموز با موفقیت پذیرفته شد.", admin_start_buttons);
-                await ctx.telegram.sendMessage(student.chat_id, "شما در طرح رد گزینه پرو پذیرفته شدید منتظر تماس مشاور باشید.");
+                ctx.reply(the_student_was_successfully_accepted_message , admin_start_buttons);
+                await ctx.telegram.sendMessage(student.chat_id, you_have_been_accepted_in_the_radegozine_pro_plan_message );
                 ctx.session = undefined;
             } else {
-                ctx.reply("این دانش آموز در حال حاظر پذیرفته شده است.", admin_start_buttons);
+                ctx.reply( this_student_is_currently_accepted_message , admin_start_buttons);
                 ctx.session = undefined;
             }
         } else if (ctx.message.text === all_buttons_text.no) {

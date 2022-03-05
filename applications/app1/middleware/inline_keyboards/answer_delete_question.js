@@ -9,6 +9,7 @@ const {
 
 const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 const {confidence_buttons} = require("../../buttons/similar_buttons/confidence_buttons");
+const {enter_a_person_name_to_tag_message} = require("../../messages/admin_messages");
 
 module.exports = {
     ANSWER_QUESTION: async (ctx, matches) => {
@@ -34,7 +35,7 @@ module.exports = {
         if (question) {
             ctx.session.state = state_list.tag_person;
             ctx.session.question_id = question_id;
-            ctx.reply("لطفا نام شخصی که چسباندن آن به این سوال را دارید وارد کنید : ", cancel_button);
+            ctx.reply(enter_a_person_name_to_tag_message, cancel_button);
         } else {
             ctx.reply(this_user_no_longer_exists_message);
         }

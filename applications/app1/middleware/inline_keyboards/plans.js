@@ -5,7 +5,7 @@ const {dont_change} = require("../../buttons/similar_buttons/dont_change");
 const {cancel_button} = require("../../buttons/similar_buttons/cancel_button");
 
 const {enter_pro_student_full_name_message} = require("../../messages/admin_messages");
-const {enter_full_name_message} = require("../../messages/similar_messages");
+const {enter_full_name_message, this_button_has_expired_message} = require("../../messages/similar_messages");
 
 module.exports = {
     PLAN: async (ctx, matches) => {
@@ -30,7 +30,7 @@ module.exports = {
                 ctx.reply(enter_full_name_message, cancel_button);
             }
         } else {
-            ctx.reply("این دکمه منقضی شده است ، لطفا مجددا بر روی دکمه ی ثبت نام و یا ویرایش کلیک کنید")
+            ctx.reply(this_button_has_expired_message)
         }
 
     },

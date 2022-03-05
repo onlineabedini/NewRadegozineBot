@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
     type: {
         type: String,
-    }, chat_id: {
+    },
+    chat_id: {
         type: "Number",
-    }, username: {
+    },
+    username: {
         type: String,
-    }, title: {
+    },
+    title: {
         type: String,
     },
 });

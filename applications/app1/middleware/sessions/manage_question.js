@@ -24,6 +24,7 @@ const {
     your_question_answered_message
 } = require("../../messages/student_messages");
 const {messages_list_buttons} = require("../../buttons/admin_buttons/messages_list_buttons");
+const {the_name_was_successfully_tagged_to_the_question_message} = require("../../messages/admin_messages");
 
 module.exports = {
     //ask question
@@ -142,7 +143,7 @@ module.exports = {
                 tag : ctx.message.text
             })
             await question.save()
-            ctx.reply("نام مورد نظر شما با موفقیت به سوال چسبانده شد." , messages_list_buttons )
+            ctx.reply(the_name_was_successfully_tagged_to_the_question_message , messages_list_buttons )
         } else {
             ctx.session.state = state_list.tag_person
             ctx.reply(text_message_only);

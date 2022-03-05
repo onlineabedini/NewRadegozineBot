@@ -15,12 +15,12 @@ module.exports = (ctx, next) => {
   if (!ctx.session?.state) return next();
   const state = ctx.session.state;
   const values = Object.values(state_list);
-  if (values.includes(state) && EventListener[state])
-    return EventListener[state](ctx, next);
+  if (values.includes(state) && event_listener[state])
+    return event_listener[state](ctx, next);
   return next();
 };
 
-const EventListener = {
+const event_listener = {
   ...manage_admins,
   ...manage_advisers,
   ...manage_pro_student,

@@ -2,13 +2,17 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
     user_role: {default: "user", type: String}, userId: {
         type: String,
-    }, chat_id: {
+    },
+    chat_id: {
         type: String,
-    }, username: {
+    },
+    username: {
         type: String,
-    }, first_name: {
+    }
+    , first_name: {
         type: String,
-    }, last_name: {
+    },
+    last_name: {
         type: String,
     },
 });

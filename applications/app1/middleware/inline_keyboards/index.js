@@ -9,7 +9,7 @@ const send_payment_pictures = require("./send_payment_pictures");
 const plans = require("./plans");
 
 
-const ActionMap = {
+const action_map = {
     ACCEPT_AND_REMOVE: /^ACCEPT_AND_REMOVE_\w+/,
     ACCEPT_STUDENT: /^ACCEPT_STUDENT_\w+/,
     REJECT_STUDENT: /^REJECT_STUDENT_\w+/,
@@ -40,17 +40,17 @@ module.exports = (ctx, next) => {
     if (!ctx.update.callback_query) return next();
     const callback_data = ctx.update.callback_query.data;
     if (callback_data) {
-        const actionValues = Object.values(ActionMap);
-        for (let i = 0; i < actionValues.length; i++) {
-            const isMatch = callback_data.match(actionValues[i]);
-            if (isMatch && EventListener[Object.keys(ActionMap)[i]])
-                return EventListener[Object.keys(ActionMap)[i]](ctx, isMatch);
+        const action_values = Object.values(action_map);
+        for (let i = 0; i < action_values.length; i++) {
+            const is_match = callback_data.match(action_values[i]);
+            if (is_match && event_listener[Object.keys(action_map)[i]])
+                return event_listener[Object.keys(action_map)[i]](ctx, is_match);
         }
     }
     next();
 };
 
-const EventListener = {
+const event_listener = {
     ...accept_accept_and_remove_reject_remove_student,
     ...update_remove_student,
     ...accept_reject_adviser,

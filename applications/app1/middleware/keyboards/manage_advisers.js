@@ -37,11 +37,11 @@ module.exports = {
     },
     [all_buttons_text.show_reg_advisers_list]: async (ctx) => {
         ctx.session.state = undefined;
-        const regAdvisers = await AdviserModel.find({is_registered: true});
+        const reg_advisers = await AdviserModel.find({is_registered: true});
         await ctx.reply(reg_advisers_list_title_message);
-        if (regAdvisers.length !== 0) {
-            regAdvisers.forEach((regAdviser) => {
-                ctx.reply(reg_adviser_info_message(regAdviser), reg_adviser_register_buttons(regAdviser._id));
+        if (reg_advisers.length !== 0) {
+            reg_advisers.forEach((reg_adviser) => {
+                ctx.reply(reg_adviser_info_message(reg_adviser), reg_adviser_register_buttons(reg_adviser._id));
             });
         } else {
             ctx.reply(no_one_has_registered_recently, manage_advisers_buttons);

@@ -175,7 +175,7 @@ module.exports = {
                     is_accepted: true,
                 }, {new: true});
                 await adviser.save();
-                adviser.chat_id ? await UserModel.findByIdAndDelete(adviser.chat_id) : null
+                adviser.chat_id ? await UserModel.findOneAndDelete(adviser.chat_id) : null
                 await ctx.telegram.sendMessage(adviser.chat_id, you_have_been_accepted_message);
                 ctx.reply(adviser_accepted_message, manage_advisers_buttons);
                 ctx.session = undefined;

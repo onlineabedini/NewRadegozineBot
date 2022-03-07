@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28578858-0295-43ec-a44b-0f546c953ed7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/pro_adviser_start_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/pro_adviser_start_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/adviser_start_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/adviser_start_buttons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/buttons/all_buttons_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/all_buttons_text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/user_buttons/register_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/user_buttons/register_buttons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/messages/adviser_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/adviser_messages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/messages/similar_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/similar_messages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/messages/student_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/student_messages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_plan.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/update_remove_plan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/contact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_admins.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_admins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_advisers.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_advisers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_plans.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_plans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/show_plan.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/show_plan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/force_Join_channel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/force_Join_channel/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_plans.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_plans.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/session.json" beforeDir="false" afterPath="$PROJECT_DIR$/session.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,6 +103,7 @@
       <workItem from="1646493161886" duration="177000" />
       <workItem from="1646493383983" duration="6928000" />
       <workItem from="1646479903296" duration="10590000" />
+      <workItem from="1646632098636" duration="5983000" />
     </task>
     <servers />
   </component>

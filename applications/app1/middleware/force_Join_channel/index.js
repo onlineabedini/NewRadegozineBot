@@ -10,7 +10,7 @@ module.exports = async (ctx, next) => {
         if (channels_ids.length !== 0) {
             //checked user is joined to the channels or not
             for (let id in channels_ids) {
-                const membership_status = (await ctx.telegram.getChatMember(channels_ids[id], ctx.from.id)).status;
+                const membership_status = (await ctx.telegram.getChatMember(channels_ids[id], ctx.chat.id)).status;
                 if (membership_status !== 'creator' && membership_status !== 'administrator' && membership_status !== 'member') {
                     const channel_usernames = channels.map(channel => channel.username);
                     return await ctx.reply(force_join_message(channel_usernames));

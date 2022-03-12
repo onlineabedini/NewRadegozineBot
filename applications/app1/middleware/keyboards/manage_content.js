@@ -13,6 +13,7 @@ const {
 } = require("../../messages/admin_messages");
 const {auth_button} = require("../../buttons/similar_buttons/auth_button");
 const {content_production_titles_list_message} = require("../../messages/adviser_messages");
+const {send_content_button} = require("../../buttons/similar_buttons/send_content_button");
 
 module.exports = {
     [all_buttons_text.manage_content_production]: async (ctx) => {
@@ -40,7 +41,9 @@ module.exports = {
         ctx.session.state = undefined;
         const contents = await ContentModel.find();
         if (contents.length !== 0) {
-            ctx.reply(content_production_titles_list_message(contents))
+            contents.forEach((content) => {
+                ctx.reply(content_production_titles_list_message(content) , send_content_button )
+            });
         } else {
             ctx.reply(no_title_registered_recently_message, auth_button(ctx))
         }

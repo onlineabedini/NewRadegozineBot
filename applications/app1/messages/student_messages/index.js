@@ -90,5 +90,5 @@ module.exports.your_question_registrated_message = "✅ سوال شما ثبت �
 module.exports.your_question_answered_message = "✅ سوال شما پاسخ داده شد و در کانال رد گزینه قرار گرفت.";
 module.exports.see_plans_message = "🔹 برای دیدن طرح ها بر روی دکمه ی زیر کلیک کنید";
 module.exports.contact_with_admin_message = "🔹 برای ارتباط با مدیر بر روی کلید زیر کلیک کنید";
-module.exports.you_have_been_accepted_in_the_radegozine_pro_plan_message = "🔹 شما در طرح رد گزینه پرو پذیرفته شدید منتظر تماس مشاور باشید."
+module.exports.you_have_been_accepted_in_relevant_plan_message = "🟢 شما در طرح مربوطه پذیرفته شدید منتظر تماس مشاور باشید."
 module.exports.you_have_already_registered_once_message = "🔁 شما قبلا یکبار ثبت نام کرده اید امکان ثبت نام مجدد در این زمان فراهم نیست."

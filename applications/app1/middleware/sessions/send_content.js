@@ -100,10 +100,10 @@ module.exports = {
     }, [state_list.send_content_for_all_students]: async (ctx, next) => {
         ctx.session.state = undefined;
         if (ctx.message.text !== all_buttons_text.cancel) {
-            const users = await UserModel.find();
-            if (users.length !== 0) {
-                users.forEach((user) => {
-                    ctx.telegram.copyMessage(user.chat_id, ctx.chat.id, ctx.message.message_id);
+            const pro_students = await ProStudentModel.find({is_pro: true});
+            if (pro_students.length !== 0) {
+                pro_students.forEach((pro_student) => {
+                    ctx.telegram.copyMessage(pro_student.chat_id, ctx.chat.id, ctx.message.message_id);
                 });
                 ctx.session = undefined;
                 ctx.reply(content_sent_message, await auth_button(ctx));

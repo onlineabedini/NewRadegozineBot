@@ -88,8 +88,8 @@ module.exports = {
                     });
                     if (adviser) {
                         await AdviserModel.findOneAndDelete({username: adviser_username});
-                        ctx.session = undefined
                         ctx.reply(adviser_removed_message, manage_advisers_buttons);
+                        ctx.session = undefined;
                     } else {
                         ctx.session.state = state_list.remove_adviser;
                         ctx.reply(no_adviser_found_message);
@@ -119,9 +119,9 @@ module.exports = {
                             is_pro: true,
                         }, {new: true});
                         await adviser.save();
-                        ctx.session = undefined
                         adviser.chat_id ? await ctx.telegram.sendMessage(adviser.chat_id , you_have_been_promoted) : null
                         ctx.reply(The_adviser_was_promoted, manage_advisers_buttons);
+                        ctx.session = undefined;
                     } else {
                         ctx.session.state = state_list.promote_adviser
                         ctx.reply(no_adviser_found_with_this_username);
@@ -150,9 +150,9 @@ module.exports = {
                             is_pro: false,
                         }, {new: true});
                         await adviser.save();
-                        ctx.session = undefined;
                         adviser.chat_id ? await ctx.telegram.sendMessage(adviser.chat_id , you_have_been_demoted) : null
                         ctx.reply(The_adviser_was_demoted, manage_advisers_buttons);
+                        ctx.session = undefined;
                     } else {
                         ctx.session.state = state_list.demote_adviser
                         ctx.reply(no_adviser_found_with_this_username);
@@ -175,9 +175,9 @@ module.exports = {
                     is_accepted: true,
                 }, {new: true});
                 await adviser.save();
-                adviser.chat_id ? await UserModel.findOneAndDelete(adviser.chat_id) : null
+                await UserModel.findOneAndDelete(adviser.chat_id);
+                await ctx.reply(adviser_accepted_message, manage_advisers_buttons);
                 await ctx.telegram.sendMessage(adviser.chat_id, you_have_been_accepted_message);
-                ctx.reply(adviser_accepted_message, manage_advisers_buttons);
                 ctx.session = undefined;
             } else {
                 ctx.reply(adviser_not_found, manage_advisers_buttons);

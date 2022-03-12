@@ -41,10 +41,9 @@ const {
     no_email,
     no_city,
     information_updated_message,
-    error_updating_information_message,
     information_update_canceled_message
 } = require("../../messages/similar_messages");
-const {you_have_been_accepted_in_the_radegozine_pro_plan_message} = require("../../messages/student_messages");
+const {you_have_been_accepted_in_relevant_plan_message} = require("../../messages/student_messages");
 
 
 module.exports = {
@@ -430,11 +429,11 @@ module.exports = {
             let student = await ProStudentModel.findById(ctx.session.student_id);
             if (student) {
                 await ProStudentModel.findByIdAndDelete(student._id);
-                ctx.reply(the_student_was_successfully_accepted_message , admin_start_buttons);
-                await ctx.telegram.sendMessage(student.chat_id, you_have_been_accepted_in_the_radegozine_pro_plan_message );
+                ctx.reply(the_student_was_successfully_accepted_message, admin_start_buttons);
+                await ctx.telegram.sendMessage(student.chat_id, you_have_been_accepted_in_relevant_plan_message);
                 ctx.session = undefined;
             } else {
-                ctx.reply( this_student_is_currently_accepted_message , admin_start_buttons);
+                ctx.reply(this_student_is_currently_accepted_message, admin_start_buttons);
                 ctx.session = undefined;
             }
         } else if (ctx.message.text === all_buttons_text.no) {

@@ -15,6 +15,7 @@ module.exports = {
             confidence_buttons
         );
         ctx.session.adviser_id = adviser_id;
+        ctx.session.message_id = ctx.update.callback_query.message.message_id;
         ctx.session.state = state_list.accept_adviser;
     },
     REJECT_ADVISER: async (ctx, matches) => {
@@ -24,6 +25,7 @@ module.exports = {
             confidence_buttons
         );
         ctx.session.adviser_id = adviser_id;
+        ctx.session.message_id = ctx.update.callback_query.message.message_id;
         ctx.session.state = state_list.reject_adviser;
     },
 }

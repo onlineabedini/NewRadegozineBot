@@ -131,7 +131,7 @@ module.exports.The_adviser_was_promoted = "✅ مشاور مورد نظر ارت
 module.exports.The_adviser_was_demoted = "✅ مشاور مورد نظر تنزل رتبه پیدا کرد";
 module.exports.duplicate_adviser_message = "🔁 این مشاور قبلا ثبت شده است";
 module.exports.no_adviser_added_message = "🤷🏻‍♂️ مشاوری افزوده نشده است.";
-module.exports.no_adviser_found_message = "🤷🏻‍♂️ مشاور یافت نشد.";
+module.exports.no_adviser_found_message = "🤷🏻‍♂️ مشاوری یافت نشد.";
 module.exports.reg_advisers_list_title_message =
   "🔻 لیست مشاوران (ثبت نامی) 🔻";
 module.exports.show_advisers_questions_list_message =
@@ -155,7 +155,7 @@ module.exports.demote_adviser_message = `🔹 لطفا یوزر نیم مشاو�
 🔸 توجه : در صورت اشتباه وارد نمودن یوزر نیم ، مشاور تنزل رتبه نخواهد یافت.`;
 module.exports.enter_a_person_name_to_tag_message = "لطفا نام شخصی که چسباندن آن به این سوال را دارید وارد کنید : "
 module.exports.adviser_not_accepted_message = "🚫 مشاور پذیرفته نشد.",
-module.exports.your_request_to_register_as_a_adviser_has_been_denied_message = "با عرض تاسف درخواست شما برای ثبت نام به عنوان مشاور رد گردید.",
+module.exports.your_request_to_register_as_a_adviser_has_been_denied_message = "🔴 با عرض تاسف درخواست شما برای ثبت نام به عنوان مشاور رد گردید.",
 module.exports.the_name_was_successfully_tagged_to_the_question_message = "✅ نام مورد نظر شما با موفقیت به سوال چسبانده شد.",
 //************************************* end  adviser section *****************************************\\
 
@@ -202,7 +202,7 @@ module.exports.pro_student_caption = async (data) => {
 `;
 };
 
-module.exports.no_student_found_message = "🤷🏻‍♂️ دانش آموز یافت نشد.";
+module.exports.no_student_found_message = "🤷🏻‍♂️ دانش آموزی یافت نشد.";
 module.exports.your_message_has_been_sent_to_student_message = "✅ پیام شما برای دانش آموزان با موفقیت ارسال شد.";
 module.exports.enter_pro_student_user_name_message = `🔹 لطفا یوزر نیم دانش آموز را به فرم @nemoone وارد نمایید :  `;
 module.exports.enter_pro_student_field_message = "🔹 لطفا رشته ی تحصیلی دانش آموز را وارد کنید : ";

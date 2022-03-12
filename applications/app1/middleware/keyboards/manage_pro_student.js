@@ -9,6 +9,7 @@ const {
 } = require("../../messages/admin_messages");
 const {update_remove_student_buttons} = require("../../buttons/admin_buttons/update_remove_student_buttons");
 const {plans_buttons} = require("../../buttons/similar_buttons/plans_buttons");
+const {not_payed_students_buttons} = require("../../buttons/admin_buttons/not_payed_students_buttons");
 
 module.exports = {
     [all_buttons_text.manage_pro_students]: async (ctx) => {
@@ -23,6 +24,15 @@ module.exports = {
             ctx.session.chat_id = temp_message.chat.id;
             ctx.session.message_id = temp_message.message_id;
         } else await ctx.reply(no_plan_found_message, manage_pro_students_buttons);
+    },
+    [all_buttons_text.not_payed_students]: async (ctx) => {
+        ctx.session = undefined;
+        const students = await ProStudentModel.find({is_pro: false});
+        if (students.length !== 0) {
+            students.forEach(async (student) => {
+                ctx.reply(await pro_student_caption(student), not_payed_students_buttons(student._id));
+            });
+        } else await ctx.reply(no_student_found_message, manage_pro_students_buttons);
     },
     [all_buttons_text.show_update_remove_students]: async (ctx) => {
         ctx.session.state = undefined;

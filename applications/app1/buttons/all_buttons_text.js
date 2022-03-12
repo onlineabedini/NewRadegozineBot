@@ -16,8 +16,9 @@ module.exports.all_buttons_text = {
   demote_adviser: "⬇️ تنزل مشاور",
 
   // student
-  manage_pro_students: "🥇 دانش آموزان رد گزینه پرو",
+  manage_pro_students: "🎓 دانش آموزان رد گزینه پرو",
   add_student: "➕ افزودن دانش آموز ➕",
+  not_payed_students: "💵 دانش آموزان پرداخت نکرده 💵",
   show_update_remove_students: "✏️ نمایش | ویرایش | حذف (دانش آموز) ✂️",
 
   // plan
@@ -27,7 +28,7 @@ module.exports.all_buttons_text = {
 
   // content
   manage_content_production: "📋 تولید محتوا",
-  show_content_production_titles_list : "📜 نمایش لیست عناوین برای تولید محتوا",
+  show_content_production_titles_list : "📜 لیست عناوین برای تولید محتوا",
   add_content_title: "➕ افزودن عنوان محتوا ➕",
   show_update_remove_content: "✏️ نمایش | ویرایش | حذف (محتوا) ✂️",
 
@@ -51,7 +52,7 @@ module.exports.all_buttons_text = {
   // similar buttons text for admin and adviser
   show_users_questions_list: "⁉️ لیست سوالات دانش آموزان",
   send_content_for_students: "🗞 ارسال محتوا برای دانش آموزان",
-  send_content_for_pro_students: "🟡 ارسال محتوا برای دانش آموزان ویژه",
+  send_content_for_pro_students: "🟡 ارسال محتوا برای گروهی از دانش آموزان",
   send_content_for_all_students: "🔵 ارسال محتوا برای همه ی دانش آموزان",
 
   // similar buttons text for all
@@ -87,8 +88,8 @@ module.exports.all_buttons_text = {
   ask_question: "⁉️ سوال از مشاورین",
   show_plans: "🗂 نمایش طرح ها",
   contact_with_admin: "👤 ارتباط با مدیر",
-  contact_with_developer: "👨‍💻 ارتباط با پشتیبان",
-  register_as_pro_students: "🥇 ثبت نام در رد گزینه پرو",
+  contact_with_developer: "‍💻 ارتباط با پشتیبان",
+  register_in_plans: "📝 ثبت نام در طرح ها",
   register_as_adviser: "🗣 ثبت نام به عنوان مشاور",
   ask_question_from_pro_adviser: "💬 گفت و گو با مشاورین ویژه",
   my_info: "📁 اطلاعات من",

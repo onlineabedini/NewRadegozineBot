@@ -19,7 +19,7 @@ module.exports = {
     [all_buttons_text.register]: async (ctx) => {
         ctx.reply(select_an_item_message, register_buttons);
     },
-    [all_buttons_text.register_as_pro_students]: async (ctx) => {
+    [all_buttons_text.register_in_plans]: async (ctx) => {
         ctx.session = undefined;
         const plans = await PlanModel.find();
         if (plans.length !== 0) {

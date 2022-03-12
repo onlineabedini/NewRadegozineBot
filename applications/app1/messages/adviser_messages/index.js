@@ -13,19 +13,13 @@ module.exports.pro_adviser_start_message = `
  `
 
 module.exports.content_production_titles_list_message = (data) => {
-    let message = `
-    🔻 لیست عناوین تولید محتوا 🔻
-    `;
-    data.forEach((item) => {
-        message += `
-🟣   عنوان  :  ${item.title}
+    return `
+🟢   عنوان  :  ${data.title}
 
-🟡   توضیحات تکمیلی :  ${item.description}
+🔴   توضیحات تکمیلی :  ${data.description}
 
+@radegozine_bot
 `;
-    });
-    message += `@radegozine_bot`;
-    return message;
 }
-module.exports.you_have_been_promoted = "شما به مشاور ویژه ارتقای درجه پیدا کردید."
-module.exports.you_have_been_demoted = "درجه ی شما به مشاور عادی تنزل یافت."
+module.exports.you_have_been_promoted = `🟢 شما به مشاور ویژه ارتقای درجه پیدا کردید لطفا مجددا بات را /start نمایید.`
+module.exports.you_have_been_demoted = "🔴 درجه ی شما به مشاور عادی تنزل یافت."

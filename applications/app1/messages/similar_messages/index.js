@@ -32,15 +32,6 @@ module.exports.voice_caption = (question) => `
 ╰┄┅◇◇◇◇◇┅┄╯
 `
 
-module.exports.force_join_message = (channel_usernames) => {
-    let message = ``
-    channel_usernames.forEach((item) => {
-        message += ` @${item} `
-    })
-    return `برای استفاده از بات باید در کانال های زیر عضو شوید
-    ${message}`
-}
-
 module.exports.bot_developers_caption = `🌹✅  تیم توسعه دهندگان آی آر نود
 طراحی بات ( اختصاصی - خصوصی )
 
@@ -107,7 +98,7 @@ module.exports.select_field_for_sending_content_message = "🔹 لطفا رشت�
 module.exports.enter_content_message = "🔹 لطفا پیام حاوی محتوایی که قصد انتشار آنرا دارید برای بات ارسال کنید :  "
 module.exports.this_user_no_longer_exists_message = "این کاربر دیگر وجود ندارد. ❗️ "
 module.exports.please_enter_the_requested_information_message = "🔹 لطفا برای ثبت نام اطلاعات خواسته شده را وارد نمایید : ";
-module.exports.you_have_been_accepted_message = `🔹 ثبت نام شما تایید شد. برای استفاده از خدمات ویژه با را مجددا /start کنید`
+module.exports.you_have_been_accepted_message = `🟢 ثبت نام شما تایید شد. برای استفاده از خدمات ویژه با را مجددا /start کنید`
 module.exports.information_updated_message = "✅ اطلاعات شما بروزرسانی شد"
 module.exports.information_update_canceled_message = "✅ بروزرسانی اطلاعات لغو شد."
 module.exports.input_is_invalid_message = "ورودی نامعتبر میباشد. ❗️ "

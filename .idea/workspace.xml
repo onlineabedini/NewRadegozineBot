@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28578858-0295-43ec-a44b-0f546c953ed7" name="Changes" comment="">
+    <list default="true" id="28578858-0295-43ec-a44b-0f546c953ed7" name="Changes" comment="all parts updated">
+      <change afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/not_payed_students_buttons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/force_join_buttons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/send_content_button.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/applications/app1/buttons/student_buttons/pro_advisers_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/adviser_start_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/adviser_start_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/content_production_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/content_production_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/manage_admins_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/manage_admins_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/manage_pro_students_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/admin_buttons/manage_pro_students_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/pro_adviser_start_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/adviser_buttons/pro_adviser_start_buttons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/buttons/all_buttons_text.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/all_buttons_text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/plans_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/similar_buttons/plans_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/student_buttons/contact_with_pro_advisers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/buttons/user_buttons/register_buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/buttons/user_buttons/register_buttons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/messages/adviser_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/adviser_messages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/messages/similar_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/similar_messages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/messages/student_messages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/messages/student_messages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/middleware/force_Join_channel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/force_Join_channel/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_reject_adviser.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/inline_keyboards/accept_reject_adviser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/ask_question.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/ask_question.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_content.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_pro_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_pro_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/keyboards/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/keyboards/register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_advisers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_pro_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/manage_pro_student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_content.js" beforeDir="false" afterPath="$PROJECT_DIR$/applications/app1/middleware/sessions/send_content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/session.json" beforeDir="false" afterPath="$PROJECT_DIR$/session.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +55,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/applications/app1/middleware/keyboards/manage_pro_student.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/applications/app1/middleware/sessions/register_as_pro_student.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/applications/app1/messages/admin_messages/index.js" root0="SKIP_INSPECTION" />
   </component>
@@ -54,14 +77,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/applications/app1/buttons/similar_buttons" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/applications/app1/buttons/admin_buttons" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/applications/app1/buttons/admin_buttons" />
+      <recent name="$PROJECT_DIR$/applications/app1/buttons/similar_buttons" />
       <recent name="C:\Users\Ali\Desktop\Work Project\NewRadegozineBot\applications\app1\buttons\similar_buttons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -104,6 +129,9 @@
       <workItem from="1646493383983" duration="6928000" />
       <workItem from="1646479903296" duration="10590000" />
       <workItem from="1646632098636" duration="5983000" />
+      <workItem from="1647011489408" duration="5155000" />
+      <workItem from="1647016683067" duration="12419000" />
+      <workItem from="1647067654775" duration="5118000" />
     </task>
     <servers />
   </component>
@@ -120,5 +148,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="all parts updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="all parts updated" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/applications/app1/messages/adviser_messages/index.js</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

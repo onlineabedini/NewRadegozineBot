@@ -9,7 +9,7 @@ module.exports.student_info_message = (student) => `
 
 🔹 پایه ی تحصیلی  :  ${student.grade}
 
-🔹 یوزنیم دانش آموز  :  @${student.username}
+🔹 یوزنیم دانش آموز  :  ${ student.username ? "@" + student.username : 'فاقد یوزرنیم'}
 
 🔹 مسئول پاسخگویی به سوال  :  ${student.tag ? student.tag : "تعیین نشده" }
 

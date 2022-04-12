@@ -96,7 +96,7 @@ module.exports.reg_adviser_info_message = (data) => {
 🔻 ایمیل : ${data.email}
 🔻 شهر : ${data.city}
 🔻 کد کاربری : ${data.chat_id}
-🔻 نام کاربری : @${data.username}
+🔻 نام کاربری : ${data.username ? "@" + data.username : "فاقد یوزرنیم"}
 
  برای پذیرش این مشاور دکمه ی پذیرش مشاور و برای رد این مشاور دکمه رد مشاور را بزنید :
 
@@ -109,7 +109,7 @@ module.exports.advisers_list_message = (data) => {
   data.forEach((item) => {
     message += `      
 🔹 نام و نام خانوادگی مشاور : ${item.fullname}
-🔹 یوزرنیم مشاور : @${item.username}
+🔹 یوزرنیم مشاور : ${item.username ? "@" + item.username : "فاقد یوزرنیم"}
 🔹 رتبه ی مشاور : ${item.is_pro ? "ویژه" : "عادی"}
 
 `;
@@ -196,7 +196,7 @@ module.exports.pro_student_caption = async (data) => {
 🔻 شماره واتساب : ${data.whats_up_number}
 🔻 شهر : ${data.city}
 🔻 کد کاربری : ${data.chat_id}
-🔻 نام کاربری : @${data.username}
+🔻 نام کاربری : ${data.username ? "@" + data.username : "فاقد یوزرنیم" }
 
 @radegozine_bot
 `;

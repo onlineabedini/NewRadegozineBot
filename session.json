@@ -1,18 +1,3 @@
 {
-  "sessions": [
-    {
-      "id": "1760285743:1760285743",
-      "data": {
-        "state_data": {
-          "fullname": "adsfasdf",
-          "field": "adsfasdfadsf",
-          "grade": "adsfsadfsadf"
-        }
-      }
-    },
-    {
-      "id": "5017613242:5017613242",
-      "data": {}
-    }
-  ]
+  "sessions": []
 }

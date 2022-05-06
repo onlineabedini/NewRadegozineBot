@@ -15,7 +15,7 @@ const {
     reg_adviser_info_message,
     no_one_has_registered_recently,
     enter_new_adviser_username_message,
-    enter_adviser_username_for_remove_message,
+    enter_adviser_username_or_char_id_for_remove_message,
     promote_adviser_message,
     demote_adviser_message
 } = require("../../messages/admin_messages");
@@ -52,7 +52,7 @@ module.exports = {
     },
     [all_buttons_text.remove_adviser]: async (ctx) => {
         ctx.session.state = state_list.remove_adviser;
-        await ctx.reply(enter_adviser_username_for_remove_message, cancel_button);
+        await ctx.reply(enter_adviser_username_or_char_id_for_remove_message, cancel_button);
     },
     [all_buttons_text.promote_adviser]: async (ctx) => {
         ctx.session.state = state_list.promote_adviser;
